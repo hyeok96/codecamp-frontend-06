@@ -5,27 +5,27 @@ import { Wrapper, Title, Div1, InnerDiv,
          UploadDiv, CheckInput, Div4, Div5,
          Btn3} from "../../../styles/boaderRegister"
 
-export default function Home() {
+export default function register() {
   return (
     <Wrapper>
       <Title>게시물 등록</Title>
       <Div1>
         <InnerDiv>
           <MenuTitle>작성자</MenuTitle>
-          <Input />
+          <Input type="text" placeholder="이름을 적어주세요."/>
         </InnerDiv>
         <InnerDiv>
          <MenuTitle>비밀번호</MenuTitle>
-         <Input />
+         <Input type="password" placeholder="이름을 적어주세요." />
         </InnerDiv>
       </Div1>
       <Div2>
         <MenuTitle>제목</MenuTitle>
-        <TitleInput />
+        <TitleInput type="text" placeholder="제목을 작성해주세요."/>
       </Div2>
       <Div2>
        <MenuTitle>내용</MenuTitle>
-        <Text></Text>
+        <Text type="text" placeholder="내용을 작성해주세요."></Text>
       </Div2>
       <Div2>
         <MenuTitle>주소</MenuTitle>
@@ -40,14 +40,20 @@ export default function Home() {
       </Div2>
       <Div2>
         <MenuTitle>유튜브</MenuTitle>
-        <TitleInput />
+        <TitleInput type="text" placeholder="링크를 복사해주세요."/>
       </Div2>
       <Div2>
         <MenuTitle>사진 첨부</MenuTitle>
         <Div1>
-          <UploadDiv>Upload</UploadDiv>
-          <UploadDiv>Upload</UploadDiv>
-          <UploadDiv>Upload</UploadDiv>
+          <UploadDiv>
+             ✚<br/>Upload
+          </UploadDiv>
+          <UploadDiv>
+            ✚<br/>Upload
+          </UploadDiv>
+          <UploadDiv>
+            ✚<br/>Upload
+          </UploadDiv>
         </Div1>
       </Div2>
       <Div2>
