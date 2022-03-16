@@ -167,5 +167,9 @@ export const Text = styled.textarea`
     padding-top: 14px;
 `
 
-
-
+// 에러박스
+export const Error = styled.div`
+    width: 100%;
+    color: red;
+    font-size: 16px;
+`
