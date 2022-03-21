@@ -10,9 +10,6 @@ export const Wrapper = styled.div`
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 `
 
-
-
-
 // Div
 export const Div1 = styled.div`
     display: flex;
@@ -132,7 +129,7 @@ export const Btn3 = styled.button`
     padding: 14px 60px;
     width: 179px;
     height: 52px;
-    background: #FFD600;
+    background: ${(props) => props.isActive? '#FFD600' : "none"};
 `
 
 
