@@ -1,21 +1,29 @@
-import {useQuery} from "@apollo/client"
+import {useMutation, useQuery} from "@apollo/client"
 import { useRouter } from "next/router"
 import BoardIdPresenter from "./BoardId.presenter"
-import {FETCH_BOARD} from './BoardId.graph'
+import {FETCH_BOARD, DELETE_BOARD} from './BoardId.graph'
 
 export default function BoardIdContainer() {
 
     const router = useRouter()
 
+    const [deleteBoard] = useMutation(DELETE_BOARD)
     const {data} = useQuery(FETCH_BOARD, {
         variables: {boardId: router.query.id}
     })
 
-    console.log(data)
+    const onClickDelete = (event) => {
+        deleteBoard({
+            variables:{boardId: event.target.id}
+        })
+        alert("게시물이 삭제되었습니다.")
+        router.push("/boards")
+    }
 
     return (
        <BoardIdPresenter 
         data={data}
+        onClickDelete={onClickDelete}
        />
     )
 }

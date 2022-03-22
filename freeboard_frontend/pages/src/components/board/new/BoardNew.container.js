@@ -53,7 +53,8 @@ export default function BoardNewContainer() {
     function onChangeTitle(e) {
       setTitle(e.target.value)
 
-      if(name !== "" && pw !== "" && e.target.value !== "" && text !== "") {
+      // if(name !== "" && pw !== "" && e.target.value !== "" && text !== "") 
+      if(name && pw && e.target.value && text ){
         setIsActive(true)
       } else {
         setIsActive(false)

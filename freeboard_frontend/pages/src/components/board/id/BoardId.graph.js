@@ -8,6 +8,14 @@ export const FETCH_BOARD = gql`
            contents
            likeCount
            dislikeCount
+           _id
         }
     }
 `
+
+export const DELETE_BOARD = gql`
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
+  }
+`
+
