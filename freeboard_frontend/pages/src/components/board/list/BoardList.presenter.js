@@ -120,7 +120,7 @@ export default function BoardListPresenter(props) {
                             <img src="/list/next.png" />
                         </S.NextBtn>
                     </S.PageBox>
-                    <S.RegisteBtn>
+                    <S.RegisteBtn onClick={props.onClickBoardNewPage} >
                         <img src="/list/register.png" style={{paddingRight: "11px"}} />
                         게시물등록하기
                     </S.RegisteBtn>

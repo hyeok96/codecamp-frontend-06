@@ -10,11 +10,18 @@ export default function BoardListConatiner() {
     
 
     const onClickDetailPage = (e) => {
-        console.log(e.target.value)
         router.push(`/boards/${e.target.id}`)
     }
 
+    const onClickBoardNewPage = () => {
+        router.push(`/boards/new`)
+    }
+
     return(
-        <BoardListPresenter data={data} onClickDetailPage={onClickDetailPage}/>
+        <BoardListPresenter 
+            data={data} 
+            onClickDetailPage={onClickDetailPage}
+            onClickBoardNewPage={onClickBoardNewPage}
+        />
     )
 }

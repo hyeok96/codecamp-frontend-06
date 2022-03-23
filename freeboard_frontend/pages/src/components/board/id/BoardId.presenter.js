@@ -48,8 +48,8 @@ export default function BoardIdPresenter(props) {
             </s.Footer>
         </s.Wrapper>
         <s.UpdateMain>
-            <s.UpdateBox>목록으로</s.UpdateBox>
-            <s.UpdateBox>수정하기</s.UpdateBox>
+            <s.UpdateBox onClick={props.onClickBoardListMove}>목록으로</s.UpdateBox>
+            <s.UpdateBox onClick={props.onClickUpdateMove}>수정하기</s.UpdateBox>
             <s.UpdateBox id={props.data?.fetchBoard._id} onClick={props.onClickDelete}>삭제하기</s.UpdateBox>
         </s.UpdateMain>
         <s.Comment>

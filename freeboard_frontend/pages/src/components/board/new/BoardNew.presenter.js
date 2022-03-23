@@ -4,7 +4,7 @@ export default function BoardNewPresenter(props) {
     //랜더되는 부분
     return (
         <s.Wrapper>
-        <s.Title>게시물 등록</s.Title>
+        <s.Title>게시물 {props.isEdit? "수정":"등록"}</s.Title>
         <s.Div1>
           <s.InnerDiv>
             <s.MenuTitle>작성자</s.MenuTitle>
@@ -71,7 +71,9 @@ export default function BoardNewPresenter(props) {
           <s.Error></s.Error>
         </s.Div2>
         <s.Div5>
-          <s.Btn3 onClick={props.onCilckRegister} isActive={props.isActive}>등록하기</s.Btn3>
+          <s.Btn3 onClick={props.isEdit? props.onClickUpdate :props.onCilckRegister} isActive={props.isActive}>
+          {props.isEdit? "수정":"등록"}하기
+          </s.Btn3>
         </s.Div5>
         </s.Wrapper>
     )

@@ -2,9 +2,9 @@ import { useState} from "react"
 import {useRouter} from "next/router"
 import {useMutation}from "@apollo/client"
 import BoardNewPresenter from "./BoardNew.presenter"
-import {createBoard} from "./BoarderNew.graph"
+import {createBoard, UPDATE_BOARD} from "./BoarderNew.graph"
  
-export default function BoardNewContainer() {
+export default function BoardNewContainer(props) {
   
     const router = useRouter()
 
@@ -28,6 +28,7 @@ export default function BoardNewContainer() {
     const[errorRadio, setErrorRadio] = useState("")
   
     const [create] = useMutation(createBoard)
+    const [updateBoard] = useMutation(UPDATE_BOARD)
   
     function onChangeName(e) {
       setName(e.target.value)
@@ -110,7 +111,6 @@ export default function BoardNewContainer() {
          title !== "" &&
          text !== "" ) {
            try{
-  
             const result = await create({
               variables: {
                createBoardInput: {
@@ -137,6 +137,59 @@ export default function BoardNewContainer() {
          }
     }
 
+    const onClickUpdate = async () => {
+      if(name === "") {
+        setErrorName("이름을 적어주세요")
+      } else {
+        setErrorName("")
+      }
+      if(pw === "") {
+        setErrorPw("비밀번호을 적어주세요")
+      } else {
+        setErrorPw("")
+      }
+      if(title === "") {
+        setErrorTitle("제목을 적어주세요")
+      }else {
+        setErrorTitle("")
+      }
+      if(text === "") {
+        setErrorText("내용을 적어주세요")
+      }else{
+        setErrorText("")
+      }
+      if(name !== "" &&
+         pw !== "" &&
+         title !== "" &&
+         text !== "" ) {
+           try{
+  
+            const result = await updateBoard({
+              variables:{
+                updateBoardInput:{
+                  title: title,
+                  contents: text,
+                  youtubeUrl: youtube,
+                  boardAddress: {
+                    address: address
+                  },
+                  images:[]
+                },
+                password: pw,
+                boardId: router.query.id
+              }
+            })
+            alert("수정되었습니다")
+   
+            router.push(`/boards/${router.query.id}`)
+  
+           } catch (error) {
+              alert(error.message)
+           }
+          
+         }
+    }
+
     //랜더되는 부분
     return (
         <BoardNewPresenter 
@@ -153,6 +206,8 @@ export default function BoardNewContainer() {
             errorTitle={errorTitle}
             errorText={errorText}
             isActive={isActive}
+            isEdit={props.isEdit}
+            onClickUpdate={onClickUpdate}
         />
     )
   }

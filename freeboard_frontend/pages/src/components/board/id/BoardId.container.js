@@ -20,10 +20,20 @@ export default function BoardIdContainer() {
         router.push("/boards")
     }
 
+    const onClickUpdateMove = () => {
+        router.push(`/boards/${router.query.id}/edit`)
+    }
+
+    const onClickBoardListMove = () => {
+        router.push(`/boards`)
+    }
+
     return (
        <BoardIdPresenter 
         data={data}
         onClickDelete={onClickDelete}
+        onClickUpdateMove={onClickUpdateMove}
+        onClickBoardListMove={onClickBoardListMove}
        />
     )
 }

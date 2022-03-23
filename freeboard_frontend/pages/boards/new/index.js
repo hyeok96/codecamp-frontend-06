@@ -4,6 +4,6 @@ export default function register() {
   
   //랜더되는 부분
   return (
-    <BoardNewContainer />
+    <BoardNewContainer isEdit={false}/>
   )
 }
