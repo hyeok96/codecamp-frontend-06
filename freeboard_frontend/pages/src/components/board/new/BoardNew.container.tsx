@@ -1,10 +1,13 @@
-import { useState} from "react" 
+import {useState, ChangeEvent} from "react" 
 import {useRouter} from "next/router"
 import {useMutation}from "@apollo/client"
 import BoardNewPresenter from "./BoardNew.presenter"
 import {createBoard, UPDATE_BOARD} from "./BoarderNew.graph"
- 
-export default function BoardNewContainer(props) {
+import {IBoardNewContainerProps, IMyVariables} from "./BoardNew.types"
+
+
+
+export default function BoardNewContainer(props:IBoardNewContainerProps) {
   
     const router = useRouter()
 
@@ -17,6 +20,7 @@ export default function BoardNewContainer(props) {
     const[youtube, setYoutube] = useState("")
     const[radio, setRadio] = useState("")
     const[isActive, setIsActive] =useState(false)
+    const[isEditActive, setIsEditActive] = useState(false)
   
     //에러 state
     const[errorName, setErrorName] = useState("")
@@ -30,7 +34,7 @@ export default function BoardNewContainer(props) {
     const [create] = useMutation(createBoard)
     const [updateBoard] = useMutation(UPDATE_BOARD)
   
-    function onChangeName(e) {
+    function onChangeName(e:ChangeEvent<HTMLInputElement>) {
       setName(e.target.value)
 
       if(e.target.value !== "" && pw !== "" && title !== "" && text !== "") {
@@ -41,7 +45,7 @@ export default function BoardNewContainer(props) {
 
     }
   
-    function onChangePw(e) {
+    function onChangePw(e:ChangeEvent<HTMLInputElement>) {
       setPw(e.target.value)
 
       if(name !== "" && e.target.value !== "" && title !== "" && text !== "") {
@@ -49,9 +53,12 @@ export default function BoardNewContainer(props) {
       } else {
         setIsActive(false)
       }
+
+      {props.isEdit? setIsEditActive(true): setIsEditActive(false)}
+    
     }
   
-    function onChangeTitle(e) {
+    function onChangeTitle(e:ChangeEvent<HTMLInputElement>) {
       setTitle(e.target.value)
 
       // if(name !== "" && pw !== "" && e.target.value !== "" && text !== "") 
@@ -62,25 +69,25 @@ export default function BoardNewContainer(props) {
       }
     }
   
-    function onChangeText(e) {
+    function onChangeText(e:ChangeEvent<HTMLTextAreaElement>) {
       setText(e.target.value)
 
-      if(name !== "" && pw !== "" && title !== "" &&  e.target.value !== "") {
+      if(pw !== "" && title !== "" &&  e.target.value !== "") {
         setIsActive(true)
       } else {
         setIsActive(false)
       }
     }
   
-    function onChangeAddress(e) {
+    function onChangeAddress(e:ChangeEvent<HTMLInputElement>) {
       setAddress(e.target.value)
     }
   
-    function onChangeYoutube(e) {
+    function onChangeYoutube(e:ChangeEvent<HTMLInputElement>) {
       setYoutube(e.target.value)
     }
   
-    function onChangeRadio(e) {
+    function onChangeRadio(e:ChangeEvent<HTMLInputElement>) {
       setRadio(e.target.value)
     }
   
@@ -138,47 +145,39 @@ export default function BoardNewContainer(props) {
     }
 
     const onClickUpdate = async () => {
-      if(name === "") {
-        setErrorName("이름을 적어주세요")
-      } else {
-        setErrorName("")
-      }
       if(pw === "") {
         setErrorPw("비밀번호을 적어주세요")
       } else {
         setErrorPw("")
       }
-      if(title === "") {
-        setErrorTitle("제목을 적어주세요")
-      }else {
-        setErrorTitle("")
-      }
-      if(text === "") {
-        setErrorText("내용을 적어주세요")
-      }else{
-        setErrorText("")
-      }
-      if(name !== "" &&
-         pw !== "" &&
-         title !== "" &&
-         text !== "" ) {
+      if(pw !== "") {
            try{
-  
+
+            const myVariables:IMyVariables = {
+              boardId: String(router.query.id),
+              password: pw,
+              updateBoardInput: {},
+            }
+
+            if(title !== "") myVariables.updateBoardInput.title = title
+            if(text !== "" ) myVariables.updateBoardInput.contents = text
+            
+            
             const result = await updateBoard({
-              variables:{
-                updateBoardInput:{
-                  title: title,
-                  contents: text,
-                  youtubeUrl: youtube,
-                  boardAddress: {
-                    address: address
-                  },
-                  images:[]
-                },
-                password: pw,
-                boardId: router.query.id
-              }
-            })
+              // variables:{
+              //   updateBoardInput:{
+              //     title: title,
+              //     contents: text,
+              //     youtubeUrl: youtube,
+              //     boardAddress: {
+              //       address: address
+              //     },
+              //     images:[]
+              //   },
+              //   password: pw,
+              //   boardId: router.query.id
+              // }
+              variables: myVariables})
             alert("수정되었습니다")
    
             router.push(`/boards/${router.query.id}`)
@@ -205,9 +204,11 @@ export default function BoardNewContainer(props) {
             errorPw={errorPw}
             errorTitle={errorTitle}
             errorText={errorText}
-            isActive={isActive}
             isEdit={props.isEdit}
             onClickUpdate={onClickUpdate}
+            data={props.data}
+            isEditActive={isEditActive}
+            isActive={isActive}
         />
     )
   }

@@ -1,6 +1,9 @@
 import * as s from "./BoardId.styled"
+import {IBoardIdPresenterProps} from "./BoardId.types"
 
-export default function BoardIdPresenter(props) {
+
+
+export default function BoardIdPresenter(props:IBoardIdPresenterProps) {
 
     return (
     <s.Main>

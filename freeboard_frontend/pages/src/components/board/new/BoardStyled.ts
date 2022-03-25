@@ -1,4 +1,7 @@
 import styled from '@emotion/styled'
+import {IStyled} from "./BoardNew.types"
+
+
 
 // Wrapper
 
@@ -129,7 +132,7 @@ export const Btn3 = styled.button`
     padding: 14px 60px;
     width: 179px;
     height: 52px;
-    background: ${(props) => props.isActive? '#FFD600' : "none"};
+    background: ${(props: IStyled) => props.isEdit? (props:IStyled) => props.isEditActive? '#FFD600' : "none" : (props:IStyled) => props.isActive? '#FFD600' : "none"}
 `
 
 

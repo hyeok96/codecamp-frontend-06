@@ -1,7 +1,8 @@
+import { MouseEventHandler } from "react"
 import * as S from "./BoardList.styled"
+import {IBoardListPresenterPros} from "./BoardList.types"
 
-
-export default function BoardListPresenter(props) {
+export default function BoardListPresenter(props:IBoardListPresenterPros) {
     return(
         <S.Wrapper>
             <S.Best>
@@ -100,7 +101,7 @@ export default function BoardListPresenter(props) {
                         <S.HeadColWriter>작성자</S.HeadColWriter>
                         <S.HeadColDate>날짜</S.HeadColDate>
                     </S.RowTitle>
-                    {props.data?.fetchBoards.map((el, index) =>
+                    {props.data?.fetchBoards.map((el:any, index:number) =>
                         <S.RowTitle key={el._id}>
                             <S.ColNum>{index+1}</S.ColNum>
                             <S.ColTitle  id={el._id} onClick={props.onClickDetailPage} >{el.title}</S.ColTitle>

@@ -1,6 +1,9 @@
 import *  as s from "./BoardStyled"
+import {ChangeEvent} from "react"
+import {IBoardNewPresenterProps} from "./BoardNew.types"
 
-export default function BoardNewPresenter(props) {
+
+export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
     //랜더되는 부분
     return (
         <s.Wrapper>
@@ -8,7 +11,7 @@ export default function BoardNewPresenter(props) {
         <s.Div1>
           <s.InnerDiv>
             <s.MenuTitle>작성자</s.MenuTitle>
-            <s.Input type="text" placeholder="이름을 적어주세요." onChange={props.onChangeName}/>
+            <s.Input type="text" placeholder="이름을 적어주세요." onChange={props.onChangeName} defaultValue={props.data?.fetchBoard.writer}/>
             <s.Error>{props.errorName}</s.Error>
           </s.InnerDiv>
           <s.InnerDiv>
@@ -19,12 +22,12 @@ export default function BoardNewPresenter(props) {
         </s.Div1>
         <s.Div2>
           <s.MenuTitle>제목</s.MenuTitle>
-          <s.TitleInput type="text" placeholder="제목을 작성해주세요." onChange={props.onChangeTitle}/>
+          <s.TitleInput type="text" placeholder="제목을 작성해주세요." onChange={props.onChangeTitle} defaultValue={props.data?.fetchBoard.title}/>
           <s.Error>{props.errorTitle}</s.Error>
         </s.Div2>
         <s.Div2>
          <s.MenuTitle>내용</s.MenuTitle>
-          <s.Text type="text" placeholder="내용을 작성해주세요." onChange={props.onChangeText}></s.Text>
+          <s.Text placeholder="내용을 작성해주세요." onChange={props.onChangeText} defaultValue={props.data?.fetchBoard.contents}></s.Text>
           <s.Error>{props.errorText}</s.Error>
         </s.Div2>
         <s.Div2>
@@ -71,7 +74,7 @@ export default function BoardNewPresenter(props) {
           <s.Error></s.Error>
         </s.Div2>
         <s.Div5>
-          <s.Btn3 onClick={props.isEdit? props.onClickUpdate :props.onCilckRegister} isActive={props.isActive}>
+          <s.Btn3 onClick={props.isEdit? props.onClickUpdate :props.onCilckRegister} isActive={props.isActive} isEdit={props.isEdit} isEditActive={props.isEditActive}>
           {props.isEdit? "수정":"등록"}하기
           </s.Btn3>
         </s.Div5>
