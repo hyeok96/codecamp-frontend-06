@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+import { yellow } from "@material-ui/core/colors";
+import { Input } from "antd";
+import { IStyledProps } from "./BoardId.types";
 
 export const Main = styled.div`
   margin-top: 50px;
@@ -246,6 +249,51 @@ export const CommentBodyInfoRating = styled.div`
   height: 52px;
 `;
 
+export const CommentBodyInfoRatingStar1 = styled.div`
+  margin-right: 4px;
+  width: 20px;
+  height: 20px;
+  background-color: ${(props: IStyledProps) =>
+    props.sellect1 ? "yellow" : "#bdbdbd"};
+  border-radius: 50%;
+`;
+
+export const CommentBodyInfoRatingStar2 = styled.div`
+  margin-right: 4px;
+  width: 20px;
+  height: 20px;
+  background-color: ${(props: IStyledProps) =>
+    props.sellect2 ? "yellow" : "#bdbdbd"};
+  border-radius: 50%;
+`;
+
+export const CommentBodyInfoRatingStar3 = styled.div`
+  margin-right: 4px;
+  width: 20px;
+  height: 20px;
+  background-color: ${(props: IStyledProps) =>
+    props.sellect3 ? "yellow" : "#bdbdbd"};
+  border-radius: 50%;
+`;
+
+export const CommentBodyInfoRatingStar4 = styled.div`
+  margin-right: 4px;
+  width: 20px;
+  height: 20px;
+  background-color: ${(props: IStyledProps) =>
+    props.sellect4 ? "yellow" : "#bdbdbd"};
+  border-radius: 50%;
+`;
+
+export const CommentBodyInfoRatingStar5 = styled.div`
+  margin-right: 4px;
+  width: 20px;
+  height: 20px;
+  background-color: ${(props: IStyledProps) =>
+    props.sellect5 ? "yellow" : "#bdbdbd"};
+  border-radius: 50%;
+`;
+
 export const CommentBodyInfoRatingStar = styled.div`
   margin-right: 4px;
   width: 20px;
@@ -277,7 +325,8 @@ export const CommentWriteInput = styled.input`
 export const CommentBodyWriteSubmitBox = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 52px;
   border: 1px solid #f2f2f2;
@@ -384,4 +433,23 @@ export const CommentFooterDate = styled.div`
   font-weight: 400;
   font-size: 12px;
   color: #bdbdbd;
+`;
+
+//기타
+
+export const CommentInputBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 10px;
+  height: 100%;
+`;
+
+export const CommentInput = styled.input`
+  margin-right: 20px;
+  padding: 0 4px;
+  width: 300px;
+  height: 30px;
+  border: none;
+  outline: none;
 `;

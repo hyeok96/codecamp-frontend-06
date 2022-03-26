@@ -9,6 +9,7 @@ export const FETCH_BOARD = gql`
       likeCount
       dislikeCount
       _id
+      createdAt
     }
   }
 `;
@@ -30,6 +31,7 @@ export const CRETAE_BOARD_COMMENT = gql`
     ) {
       writer
       contents
+      createdAt
     }
   }
 `;
@@ -41,6 +43,7 @@ export const FETCH_BOARD_COMMENTS = gql`
       contents
       _id
       rating
+      createdAt
     }
   }
 `;

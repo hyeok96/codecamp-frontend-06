@@ -1,5 +1,6 @@
 import * as s from "./BoardId.styled";
 import { IBoardIdPresenterProps } from "./BoardId.types";
+import { getDate } from "../../../common/utils/utils";
 
 export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
   return (
@@ -14,7 +15,11 @@ export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
               <s.HeadName>
                 {props.data ? props.data.fetchBoard.writer : "loading"}
               </s.HeadName>
-              <s.HeadDate></s.HeadDate>
+              <s.HeadDate>
+                {getDate(
+                  props.data ? props.data.fetchBoard.createdAt : "loading"
+                )}
+              </s.HeadDate>
             </s.HeadNameBox>
           </s.HeadBox>
           <s.HeadBox>
@@ -77,21 +82,31 @@ export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
         <s.CommentBody>
           <s.CommentBodyInfo>
             <s.CommentBodyInfoRating>
-              <s.CommentBodyInfoRatingStar>
-                <img src="/borad/Star.png" />
-              </s.CommentBodyInfoRatingStar>
-              <s.CommentBodyInfoRatingStar>
-                <img src="/borad/Star.png" />
-              </s.CommentBodyInfoRatingStar>
-              <s.CommentBodyInfoRatingStar>
-                <img src="/borad/Star.png" />
-              </s.CommentBodyInfoRatingStar>
-              <s.CommentBodyInfoRatingStar>
-                <img src="/borad/Star.png" />
-              </s.CommentBodyInfoRatingStar>
-              <s.CommentBodyInfoRatingStar>
-                <img src="/borad/Star.png" />
-              </s.CommentBodyInfoRatingStar>
+              <s.CommentBodyInfoRatingStar1
+                onClick={props.onClickRating1}
+                sellect1={props.sellect1}
+                id="star1"
+              ></s.CommentBodyInfoRatingStar1>
+              <s.CommentBodyInfoRatingStar2
+                onClick={props.onClickRating2}
+                sellect2={props.sellect2}
+                id="star2"
+              ></s.CommentBodyInfoRatingStar2>
+              <s.CommentBodyInfoRatingStar3
+                onClick={props.onClickRating3}
+                sellect3={props.sellect3}
+                id="star3"
+              ></s.CommentBodyInfoRatingStar3>
+              <s.CommentBodyInfoRatingStar4
+                onClick={props.onClickRating4}
+                sellect4={props.sellect4}
+                id="star4"
+              ></s.CommentBodyInfoRatingStar4>
+              <s.CommentBodyInfoRatingStar5
+                onClick={props.onClickRating5}
+                sellect5={props.sellect5}
+                id="star5"
+              ></s.CommentBodyInfoRatingStar5>
             </s.CommentBodyInfoRating>
           </s.CommentBodyInfo>
           <s.CommentBodyWriteBox>
@@ -102,11 +117,17 @@ export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
               ></s.CommentWriteInput>
             </s.CommentBodyWrite>
             <s.CommentBodyWriteSubmitBox>
-              작성자:
-              <input onChange={props.onChangeWriter} />
-              비밀번호:
-              <input type="password" onChange={props.onChangePw} />
-              평점: <input onChange={props.onChangeRating} />
+              <s.CommentInputBox>
+                <s.CommentInput
+                  onChange={props.onChangeWriter}
+                  placeholder="직성자"
+                />
+                <s.CommentInput
+                  type="password"
+                  onChange={props.onChangePw}
+                  placeholder="비밀번호"
+                />
+              </s.CommentInputBox>
               <s.CommentBodyWriteSubmit onClick={props.onClickCreateComment}>
                 등록하기
               </s.CommentBodyWriteSubmit>
@@ -155,7 +176,9 @@ export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
                   </s.CommentFooterNameUpdate>
                 </s.CommentFooterNameBox>
                 <s.CommentFooterText>{el.contents}</s.CommentFooterText>
-                <s.CommentFooterDate>2022.03.22</s.CommentFooterDate>
+                <s.CommentFooterDate>
+                  {getDate(el.createdAt)}
+                </s.CommentFooterDate>
               </s.CommentFooterMultiBox>
             </s.CommentFooterBox>
           </s.CommentFooter>
