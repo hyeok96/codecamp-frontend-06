@@ -159,6 +159,7 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
 
         if (title !== "") myVariables.updateBoardInput.title = title;
         if (text !== "") myVariables.updateBoardInput.contents = text;
+        if (youtube !== "") myVariables.updateBoardInput.youtubeUrl = youtube;
 
         await updateBoard({
           // variables:{

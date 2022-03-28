@@ -1,13 +1,20 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import BoardIdPresenter from "./BoardId.presenter";
-import { FETCH_BOARD, DELETE_BOARD } from "./BoardId.graph";
+import {
+  FETCH_BOARD,
+  DELETE_BOARD,
+  LIKE_BOARD,
+  DISLIKE_BOARD,
+} from "./BoardId.graph";
 import { MouseEvent } from "react";
 import {
   IMutation,
   IMutationDeleteBoardArgs,
   IQuery,
   IQueryFetchBoardArgs,
+  IMutationLikeBoardArgs,
+  IMutationDislikeBoardArgs,
 } from "../../../common/types/generated/types";
 
 export default function BoardIdContainer() {
@@ -25,6 +32,16 @@ export default function BoardIdContainer() {
     }
   );
 
+  const [likeBoard] = useMutation<
+    Pick<IMutation, "likeBoard">,
+    IMutationLikeBoardArgs
+  >(LIKE_BOARD);
+
+  const [dislikeBoard] = useMutation<
+    Pick<IMutation, "dislikeBoard">,
+    IMutationDislikeBoardArgs
+  >(DISLIKE_BOARD);
+
   const onClickDelete = (event: MouseEvent<HTMLDivElement>) => {
     deleteBoard({
       variables: { boardId: (event.target as HTMLButtonElement).id },
@@ -41,12 +58,46 @@ export default function BoardIdContainer() {
     router.push(`/boards`);
   };
 
+  const onClickLikeBoard = () => {
+    likeBoard({
+      variables: {
+        boardId: String(router.query.id),
+      },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD,
+          variables: {
+            boardId: String(router.query.id),
+          },
+        },
+      ],
+    });
+  };
+
+  const onClickDisLikeBoard = () => {
+    dislikeBoard({
+      variables: {
+        boardId: String(router.query.id),
+      },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD,
+          variables: {
+            boardId: String(router.query.id),
+          },
+        },
+      ],
+    });
+  };
+
   return (
     <BoardIdPresenter
       data={data}
       onClickDelete={onClickDelete}
       onClickUpdateMove={onClickUpdateMove}
       onClickBoardListMove={onClickBoardListMove}
+      onClickLikeBoard={onClickLikeBoard}
+      onClickDisLikeBoard={onClickDisLikeBoard}
     />
   );
 }

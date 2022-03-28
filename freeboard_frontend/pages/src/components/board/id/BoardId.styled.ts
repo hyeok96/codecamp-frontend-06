@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
-import { yellow } from "@material-ui/core/colors";
-import { Input } from "antd";
+import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
 
 export const Main = styled.div`
   margin-top: 50px;
   margin-left: 50px;
 `;
 
-//개시물 내용
+// 개시물 내용
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -174,7 +173,7 @@ export const FooterDisLikeCount = styled.div`
   color: #828282;
 `;
 
-//게시물 업데이트
+// 게시물 업데이트
 
 export const UpdateMain = styled.div`
   display: flex;
@@ -198,4 +197,12 @@ export const UpdateBox = styled.div`
   box-sizing: border-box;
 `;
 
-//댓글
+// 좋아요, 싫어요
+
+export const Like = styled(LikeOutlined)`
+  font-size: 20px;
+`;
+
+export const DisLike = styled(DislikeOutlined)`
+  font-size: 20px;
+`;

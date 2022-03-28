@@ -1,10 +1,16 @@
 import { getDate } from "../../../common/utils/utils";
 import * as s from "./BoardComment.Styled";
 import { IBoardCommentPresenterProps } from "./BoardComment.types";
+import { MouseEvent } from "react";
+import { Rate } from "antd";
 
 export default function BoardCommentPresenter(
   props: IBoardCommentPresenterProps
 ) {
+  const aaa = (e: MouseEvent<HTMLDivElement>) => {
+    alert(`${e.currentTarget.id}님의 게시글입니다`);
+  };
+
   return (
     <s.Main>
       <s.Comment>
@@ -17,31 +23,7 @@ export default function BoardCommentPresenter(
         <s.CommentBody>
           <s.CommentBodyInfo>
             <s.CommentBodyInfoRating>
-              <s.CommentBodyInfoRatingStar1
-                onClick={props.onClickRating1}
-                sellect1={props.sellect1}
-                id="star1"
-              ></s.CommentBodyInfoRatingStar1>
-              <s.CommentBodyInfoRatingStar2
-                onClick={props.onClickRating2}
-                sellect2={props.sellect2}
-                id="star2"
-              ></s.CommentBodyInfoRatingStar2>
-              <s.CommentBodyInfoRatingStar3
-                onClick={props.onClickRating3}
-                sellect3={props.sellect3}
-                id="star3"
-              ></s.CommentBodyInfoRatingStar3>
-              <s.CommentBodyInfoRatingStar4
-                onClick={props.onClickRating4}
-                sellect4={props.sellect4}
-                id="star4"
-              ></s.CommentBodyInfoRatingStar4>
-              <s.CommentBodyInfoRatingStar5
-                onClick={props.onClickRating5}
-                sellect5={props.sellect5}
-                id="star5"
-              ></s.CommentBodyInfoRatingStar5>
+              <Rate onChange={props.handleChange} value={props.rating} />
             </s.CommentBodyInfoRating>
           </s.CommentBodyInfo>
           <s.CommentBodyWriteBox>
@@ -49,6 +31,7 @@ export default function BoardCommentPresenter(
               <s.CommentWriteInput
                 placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
                 onChange={props.onChangeComment}
+                value={props.contents}
               ></s.CommentWriteInput>
             </s.CommentBodyWrite>
             <s.CommentBodyWriteSubmitBox>
@@ -56,11 +39,13 @@ export default function BoardCommentPresenter(
                 <s.CommentInput
                   onChange={props.onChangeWriter}
                   placeholder="직성자"
+                  value={props.writer}
                 />
                 <s.CommentInput
                   type="password"
                   onChange={props.onChangePw}
                   placeholder="비밀번호"
+                  value={props.pw}
                 />
               </s.CommentInputBox>
               <s.CommentBodyWriteSubmit onClick={props.onClickCreateComment}>
@@ -70,7 +55,7 @@ export default function BoardCommentPresenter(
           </s.CommentBodyWriteBox>
         </s.CommentBody>
         {props.commentData?.fetchBoardComments.map((el: any, index: number) => (
-          <s.CommentFooter key={el._id}>
+          <s.CommentFooter key={el._id} id={el.writer} onClick={aaa}>
             <s.CommentFooterBox>
               <s.CommentFooterProfileBox>
                 <s.CommentFooterProfile>
@@ -84,30 +69,20 @@ export default function BoardCommentPresenter(
                       {el.writer}
                     </s.CommentFooterNameRatingName>
                     <s.CommentFooterNameRatingBox>
-                      <s.CommentBodyInfoRatingStar>
-                        <img src="/borad/Star.png" />
-                      </s.CommentBodyInfoRatingStar>
-                      <s.CommentBodyInfoRatingStar>
-                        <img src="/borad/Star.png" />
-                      </s.CommentBodyInfoRatingStar>
-                      <s.CommentBodyInfoRatingStar>
-                        <img src="/borad/Star.png" />
-                      </s.CommentBodyInfoRatingStar>
-                      <s.CommentBodyInfoRatingStar>
-                        <img src="/borad/Star.png" />
-                      </s.CommentBodyInfoRatingStar>
-                      <s.CommentBodyInfoRatingStar>
-                        <img src="/borad/Star.png" />
-                      </s.CommentBodyInfoRatingStar>
+                      <Rate value={el.rating} disabled />
                     </s.CommentFooterNameRatingBox>
                   </s.CommentFooterNameRating>
                   <s.CommentFooterNameUpdate>
                     <s.CommentFooterNameUpdateIcon>
                       <img src="/borad/update.png" />
                     </s.CommentFooterNameUpdateIcon>
-                    <s.CommentFooterNameUpdateIcon id={el._id}>
-                      <img src="/borad/delete.png" />
-                    </s.CommentFooterNameUpdateIcon>
+                    <s.CommentFooterNameDeleteIcon>
+                      <img
+                        src="/borad/delete.png"
+                        id={el._id}
+                        onClick={props.onClickDeleteBoardComment}
+                      />
+                    </s.CommentFooterNameDeleteIcon>
                   </s.CommentFooterNameUpdate>
                 </s.CommentFooterNameBox>
                 <s.CommentFooterText>{el.contents}</s.CommentFooterText>

@@ -7,16 +7,12 @@ export interface IBoardCommentPresenterProps {
   onChangeRating: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeWriter: (e: ChangeEvent<HTMLInputElement>) => void;
   commentData: any;
-  sellect1: boolean;
-  sellect2: boolean;
-  sellect3: boolean;
-  sellect4: boolean;
-  sellect5: boolean;
-  onClickRating1: (e: MouseEvent<HTMLDivElement>) => void;
-  onClickRating2: (e: MouseEvent<HTMLDivElement>) => void;
-  onClickRating3: (e: MouseEvent<HTMLDivElement>) => void;
-  onClickRating4: (e: MouseEvent<HTMLDivElement>) => void;
-  onClickRating5: (e: MouseEvent<HTMLDivElement>) => void;
+  onClickDeleteBoardComment: (e: MouseEvent<HTMLDivElement>) => void;
+  writer: string;
+  pw: string;
+  contents: string;
+  handleChange: (value: number) => void;
+  rating: number;
 }
 
 export interface IStyledProps {
@@ -25,4 +21,5 @@ export interface IStyledProps {
   sellect3?: boolean;
   sellect4?: boolean;
   sellect5?: boolean;
+  aaa?: number;
 }

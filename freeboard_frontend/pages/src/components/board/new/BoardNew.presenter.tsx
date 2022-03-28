@@ -64,6 +64,7 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
           type="text"
           placeholder="링크를 복사해주세요."
           onChange={props.onChangeYoutube}
+          defaultValue={props.data?.fetchBoard.youtubeUrl}
         />
         <s.Error></s.Error>
       </s.Div2>

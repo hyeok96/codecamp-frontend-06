@@ -1,6 +1,8 @@
 import * as s from "./BoardId.styled";
 import { IBoardIdPresenterProps } from "./BoardId.types";
 import { getDate } from "../../../common/utils/utils";
+import React from "react";
+import ReactPlayer from "react-player";
 
 export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
   return (
@@ -40,21 +42,27 @@ export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
             {props.data ? props.data.fetchBoard.contents : "loading"}
           </s.BodyText>
           <s.BodyVideoBox>
-            <s.BodyVideo></s.BodyVideo>
+            <s.BodyVideo>
+              <ReactPlayer
+                url={`${props.data?.fetchBoard.youtubeUrl}`}
+                width={486}
+                height={240}
+              />
+            </s.BodyVideo>
           </s.BodyVideoBox>
         </s.Body>
         <s.Footer>
           <s.FooterLikeBox>
-            <s.FooterLikeIcon>
-              <img src="/borad/like.png" />
+            <s.FooterLikeIcon onClick={props.onClickLikeBoard}>
+              <s.Like />
             </s.FooterLikeIcon>
             <s.FooterLikeCount>
               {props.data ? props.data.fetchBoard.likeCount : "loading"}
             </s.FooterLikeCount>
           </s.FooterLikeBox>
           <s.FooterDisLikeBox>
-            <s.FooterDisLikeIcon>
-              <img src="/borad/dislike.png" />
+            <s.FooterDisLikeIcon onClick={props.onClickDisLikeBoard}>
+              <s.DisLike />
             </s.FooterDisLikeIcon>
             <s.FooterDisLikeCount>
               {props.data ? props.data.fetchBoard.dislikeCount : "loading"}

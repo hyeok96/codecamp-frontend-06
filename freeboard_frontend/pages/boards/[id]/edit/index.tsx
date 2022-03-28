@@ -1,28 +1,27 @@
 import BoardNewContainer from "../../../src/components/board/new/BoardNew.container";
-import {gql, useQuery} from "@apollo/client"
-import {useRouter} from "next/router"
+import { gql, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const FETCH_BOARD = gql`
-    query fetchBoard ($boardId: ID!) {
-        fetchBoard(boardId: $boardId) {
-            writer
-            title
-            contents
-        }
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      writer
+      title
+      contents
+      youtubeUrl
     }
-`
+  }
+`;
 
+export default function UpadteBoardPage() {
+  const router = useRouter();
 
-export default function UpadteBoardPage () {
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: {
+      boardId: router.query.id,
+    },
+  });
 
-    const router = useRouter()
-
-    const {data} = useQuery(FETCH_BOARD, {
-        variables:{
-            boardId: router.query.id
-        }
-    })
-    
-    console.log(data)
-    return <BoardNewContainer isEdit={true} data={data}/>
+  console.log(data);
+  return <BoardNewContainer isEdit={true} data={data} />;
 }

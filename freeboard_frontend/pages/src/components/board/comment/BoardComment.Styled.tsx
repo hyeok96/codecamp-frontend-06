@@ -99,12 +99,6 @@ export const CommentBodyInfoRatingStar5 = styled.div`
   border-radius: 50%;
 `;
 
-export const CommentBodyInfoRatingStar = styled.div`
-  margin-right: 4px;
-  width: 20px;
-  height: 20px;
-`;
-
 export const CommentBodyWriteBox = styled.div`
   width: 100%;
   border: 1px solid #bdbdbd;
@@ -219,6 +213,12 @@ export const CommentFooterNameUpdate = styled.div`
 `;
 
 export const CommentFooterNameUpdateIcon = styled.div`
+  margin-left: 8px;
+  width: 24px;
+  height: 24px;
+`;
+
+export const CommentFooterNameDeleteIcon = styled.div`
   margin-left: 8px;
   width: 24px;
   height: 24px;
