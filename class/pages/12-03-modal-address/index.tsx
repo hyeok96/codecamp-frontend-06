@@ -17,7 +17,7 @@ function ModalCustomPage() {
     setIsOpen(false);
   };
 
-  const handleComplete = (data) => {
+  const handleComplete = (data: any) => {
     console.log(data);
     setIsOpen(false);
   };

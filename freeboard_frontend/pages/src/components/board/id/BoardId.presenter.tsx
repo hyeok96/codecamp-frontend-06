@@ -47,6 +47,8 @@ export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
                 url={`${props.data?.fetchBoard.youtubeUrl}`}
                 width={486}
                 height={240}
+                playing={true}
+                loop={true}
               />
             </s.BodyVideo>
           </s.BodyVideoBox>
