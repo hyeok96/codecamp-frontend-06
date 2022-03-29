@@ -65,7 +65,7 @@ export default function BoardCommentContainer() {
         ],
       });
       Modal.success({
-        content: `댓글을 삭제했습니다.`,
+        content: `댓글이 삭제되었습니다.`,
       });
     } catch (error) {
       Modal.error({
