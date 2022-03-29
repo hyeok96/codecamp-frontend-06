@@ -105,3 +105,8 @@ export const CommentFooterDate = styled.div`
 `;
 
 // 기타
+export const Input2 = styled.input`
+  width: 200px;
+  border: none;
+  outline: none;
+`;

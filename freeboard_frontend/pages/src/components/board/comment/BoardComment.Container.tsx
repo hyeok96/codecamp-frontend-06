@@ -4,7 +4,7 @@ import {
   FETCH_BOARD_COMMENTS,
   DELETE_BOARD_COMMENT,
 } from "./BoardComment.query";
-import { MouseEvent } from "react";
+import { useState } from "react";
 import {
   IMutation,
   IQuery,
@@ -12,9 +12,13 @@ import {
   IMutationDeleteBoardCommentArgs,
 } from "../../../common/types/generated/types";
 import { useRouter } from "next/router";
+import { Modal } from "antd";
 
 export default function BoardCommentContainer() {
   const router = useRouter();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [password, setPassword] = useState("");
 
   const { data: commentData } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
@@ -30,14 +34,26 @@ export default function BoardCommentContainer() {
     IMutationDeleteBoardCommentArgs
   >(DELETE_BOARD_COMMENT);
 
-  const onClickDeleteBoardComment = async (e: MouseEvent<HTMLDivElement>) => {
-    try {
-      const password = prompt("비밀번호");
+  const onchangeCommentPassword = (e: any) => {
+    setPassword(e.target.value);
+  };
 
+  const onToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onClickModal = async () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onClickDeleteBoardComment = async (a: any) => {
+    try {
+      console.log(a);
+      setIsOpen(!isOpen);
       await deleteBoardComment({
         variables: {
           password,
-          boardCommentId: String((e.currentTarget as HTMLDivElement).id),
+          boardCommentId: String(a),
         },
         refetchQueries: [
           {
@@ -48,16 +64,26 @@ export default function BoardCommentContainer() {
           },
         ],
       });
-      alert("댓글이 삭제되었습니다.");
+      Modal.success({
+        content: `댓글을 삭제했습니다.`,
+      });
     } catch (error) {
-      alert(error.message);
+      Modal.error({
+        content: `${error.message}`,
+      });
     }
   };
 
   return (
-    <BoardCommentPresenter
-      commentData={commentData}
-      onClickDeleteBoardComment={onClickDeleteBoardComment}
-    />
+    <>
+      <BoardCommentPresenter
+        commentData={commentData}
+        onClickDeleteBoardComment={onClickDeleteBoardComment}
+        onToggle={onToggle}
+        onchangeCommentPassword={onchangeCommentPassword}
+        isOpen={isOpen}
+        onClickModal={onClickModal}
+      />
+    </>
   );
 }

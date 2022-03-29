@@ -17,6 +17,8 @@ import {
   IMutationDislikeBoardArgs,
 } from "../../../common/types/generated/types";
 
+import { Modal } from "antd";
+
 export default function BoardIdContainer() {
   const router = useRouter();
 
@@ -46,7 +48,9 @@ export default function BoardIdContainer() {
     deleteBoard({
       variables: { boardId: (event.target as HTMLButtonElement).id },
     });
-    alert("게시물이 삭제되었습니다.");
+    Modal.success({
+      content: "게시글이 삭제되었습니다.",
+    });
     router.push("/boards");
   };
 

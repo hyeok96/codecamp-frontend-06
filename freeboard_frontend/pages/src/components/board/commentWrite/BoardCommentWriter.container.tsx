@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import { CRETAE_BOARD_COMMENT } from "./BoardCommentWrite.qurey";
 import { FETCH_BOARD_COMMENTS } from "../comment/BoardComment.query";
+import { Modal } from "antd";
 
 export default function BoardCommentWriterContainer() {
   const router = useRouter();
@@ -63,7 +64,9 @@ export default function BoardCommentWriterContainer() {
       setWriter("");
       setComment("");
     } catch (error) {
-      alert(error.message);
+      Modal.error({
+        content: `${error.message}`,
+      });
     }
   };
 

@@ -9,6 +9,7 @@ import {
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
 } from "../../../common/types/generated/types";
+import { Modal } from "antd";
 
 export default function BoardNewContainer(props: IBoardNewContainerProps) {
   const router = useRouter();
@@ -19,10 +20,12 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [address, setAddress] = useState("");
+  const [addressZone, setAdressZone] = useState("");
   const [youtube, setYoutube] = useState("");
 
   const [isActive, setIsActive] = useState(false);
   const [isEditActive, setIsEditActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   // 에러 state
   const [errorName, setErrorName] = useState("");
@@ -134,11 +137,15 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
             },
           },
         });
-        alert("등록되었습니다.");
+        Modal.success({
+          content: "게시글이 등록되었습니다.",
+        });
 
         router.push(`/boards/${result.data.createBoard._id}`);
       } catch (error) {
-        alert(error.message);
+        Modal.error({
+          content: `${error.message}`,
+        });
       }
     }
   }
@@ -162,28 +169,35 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
         if (youtube !== "") myVariables.updateBoardInput.youtubeUrl = youtube;
 
         await updateBoard({
-          // variables:{
-          //   updateBoardInput:{
-          //     title: title,
-          //     contents: text,
-          //     youtubeUrl: youtube,
-          //     boardAddress: {
-          //       address: address
-          //     },
-          //     images:[]
-          //   },
-          //   password: pw,
-          //   boardId: router.query.id
-          // }
           variables: myVariables,
         });
-        alert("수정되었습니다");
+
+        Modal.success({
+          content: "게시글이 수정되었습니다.",
+        });
 
         router.push(`/boards/${router.query.id}`);
       } catch (error) {
-        alert(error.message);
+        Modal.error({
+          content: `${error.message}`,
+        });
       }
     }
+  };
+
+  const showModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onClickAddressModal = () => {
+    showModal();
+  };
+
+  const handleComplete = (data: any) => {
+    console.log(data);
+    setIsOpen(!isOpen);
+    setAddress(String(data.address));
+    setAdressZone(String(data.zonecode));
   };
 
   // 랜더되는 부분
@@ -205,6 +219,12 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
       data={props.data}
       isEditActive={isEditActive}
       isActive={isActive}
+      showModal={showModal}
+      onClickAddressModal={onClickAddressModal}
+      isOpen={isOpen}
+      handleComplete={handleComplete}
+      address={address}
+      addressZone={addressZone}
     />
   );
 }

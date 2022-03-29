@@ -22,6 +22,12 @@ export interface IBoardNewPresenterProps {
   isEditActive: boolean;
   isActive: boolean;
   isEdit: boolean;
+  showModal: () => void;
+  onClickAddressModal: () => void;
+  isOpen: boolean;
+  handleComplete: (data: any) => void;
+  address: string;
+  addressZone: string;
 }
 
 interface IupdateBoardInput {

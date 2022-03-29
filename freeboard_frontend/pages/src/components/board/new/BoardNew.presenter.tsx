@@ -1,5 +1,7 @@
 import * as s from "./BoardStyled";
 import { IBoardNewPresenterProps } from "./BoardNew.types";
+import { Modal } from "antd";
+import DaumPostcode from "react-daum-postcode";
 
 export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
   // 랜더되는 부분
@@ -49,14 +51,27 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
       <s.Div2>
         <s.MenuTitle>주소</s.MenuTitle>
         <s.Div3>
-          <s.Btn1>070250</s.Btn1>
-          <s.Btn2>우편번호 감색</s.Btn2>
+          <s.Input7 value={props.addressZone}></s.Input7>
+          <s.Btn2 onClick={props.onClickAddressModal}>우편번호 감색</s.Btn2>
         </s.Div3>
         <s.Div3>
-          <s.AddressInput onChange={props.onChangeAddress} />
+          <s.AddressInput
+            onChange={props.onChangeAddress}
+            value={props.address}
+            defaultValue={props.data?.fetchBoard.boardAddress}
+          />
         </s.Div3>
-        <s.TitleInput onChange={props.onChangeAddress} />
         <s.Error></s.Error>
+        {props.isOpen && (
+          <Modal
+            title="주소 찾기"
+            visible={props.isOpen}
+            onOk={props.showModal}
+            onCancel={props.showModal}
+          >
+            <DaumPostcode onComplete={props.handleComplete} />
+          </Modal>
+        )}
       </s.Div2>
       <s.Div2>
         <s.MenuTitle>유튜브</s.MenuTitle>
