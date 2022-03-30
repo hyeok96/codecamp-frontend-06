@@ -5,6 +5,8 @@ import DaumPostcode from "react-daum-postcode";
 
 export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
   // 랜더되는 부분
+  console.log(props.data);
+
   return (
     <s.Wrapper>
       <s.Title>게시물 {props.isEdit ? "수정" : "등록"}</s.Title>
@@ -51,16 +53,26 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
       <s.Div2>
         <s.MenuTitle>주소</s.MenuTitle>
         <s.Div3>
-          <s.Input7 value={props.addressZone}></s.Input7>
+          <s.Input7
+            value={
+              props.addressZone || props.data?.fetchBoard.boardAddress.zipcode
+            }
+            readOnly
+          ></s.Input7>
           <s.Btn2 onClick={props.onClickAddressModal}>우편번호 감색</s.Btn2>
         </s.Div3>
-        <s.Div3>
+        <s.Div2>
           <s.AddressInput
             onChange={props.onChangeAddress}
-            value={props.address}
-            defaultValue={props.data?.fetchBoard.boardAddress}
+            value={props.address || props.data?.fetchBoard.boardAddress.address}
+            readOnly
           />
-        </s.Div3>
+          <s.AddressInput
+            onChange={props.onChangeAddressDetail}
+            defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
+            placeholder="상세주소를 입력하세요"
+          />
+        </s.Div2>
         <s.Error></s.Error>
         {props.isOpen && (
           <Modal

@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
 
-export const Main = styled.div`
-  margin-left: 50px;
-`;
+export const Main = styled.div``;
 
 export const Comment = styled.div`
   padding-top: 40px;
+  margin: 80px auto 0 auto;
   width: 1200px;
   border-top: 1px solid #bdbdbd;
 `;

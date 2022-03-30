@@ -28,6 +28,7 @@ export interface IBoardNewPresenterProps {
   handleComplete: (data: any) => void;
   address: string;
   addressZone: string;
+  onChangeAddressDetail: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface IupdateBoardInput {

@@ -20,6 +20,7 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
   const [addressZone, setAdressZone] = useState("");
   const [youtube, setYoutube] = useState("");
 
@@ -95,6 +96,10 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
     setAddress(e.target.value);
   }
 
+  function onChangeAddressDetail(e: ChangeEvent<HTMLInputElement>) {
+    setAddressDetail(e.target.value);
+  }
+
   function onChangeYoutube(e: ChangeEvent<HTMLInputElement>) {
     setYoutube(e.target.value);
   }
@@ -132,6 +137,8 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
               youtubeUrl: youtube,
               boardAddress: {
                 address: address,
+                addressDetail,
+                zipcode: addressZone,
               },
               images: [],
             },
@@ -167,6 +174,15 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
         if (title !== "") myVariables.updateBoardInput.title = title;
         if (text !== "") myVariables.updateBoardInput.contents = text;
         if (youtube !== "") myVariables.updateBoardInput.youtubeUrl = youtube;
+        if (address !== "" || addressDetail !== "" || addressZone !== "")
+          myVariables.updateBoardInput.boardAddress = {};
+        if (address !== "")
+          myVariables.updateBoardInput.boardAddress.address = address;
+        if (addressDetail !== "")
+          myVariables.updateBoardInput.boardAddress.addressDetail =
+            addressDetail;
+        if (addressZone !== "")
+          myVariables.updateBoardInput.boardAddress.zipcode = addressZone;
 
         await updateBoard({
           variables: myVariables,
@@ -225,6 +241,7 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
       handleComplete={handleComplete}
       address={address}
       addressZone={addressZone}
+      onChangeAddressDetail={onChangeAddressDetail}
     />
   );
 }

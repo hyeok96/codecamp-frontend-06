@@ -9,7 +9,12 @@ const FETCH_BOARD = gql`
       title
       contents
       youtubeUrl
-      boardAddress
+      _id
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
@@ -19,7 +24,7 @@ export default function UpadteBoardPage() {
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
-      boardId: router.query.id,
+      boardId: String(router.query.id),
     },
   });
 

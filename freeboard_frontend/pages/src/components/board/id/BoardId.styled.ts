@@ -1,10 +1,7 @@
 import styled from "@emotion/styled";
 import { LikeOutlined, DislikeOutlined } from "@ant-design/icons";
 
-export const Main = styled.div`
-  margin-top: 50px;
-  margin-left: 50px;
-`;
+export const Main = styled.div``;
 
 // 개시물 내용
 export const Wrapper = styled.div`
@@ -13,6 +10,7 @@ export const Wrapper = styled.div`
   align-items: center;
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  margin: 80px auto 0 auto;
   width: 1200px;
   padding: 80px 120px;
   box-sizing: border-box;
@@ -179,6 +177,7 @@ export const UpdateMain = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin: 80px auto 0 auto;
   padding-bottom: 87px;
   margin-top: 110px;
   width: 1200px;

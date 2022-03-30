@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 
 export const Main = styled.div`
-  margin-left: 50px;
+  width: 1200px;
+  margin: 0 auto 0;
 `;
 
 export const CommentHeader = styled.div`
@@ -9,7 +10,8 @@ export const CommentHeader = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  margin: 80px auto 0 auto;
+  width: 1200px;
   padding-bottom: 40px;
 `;
 

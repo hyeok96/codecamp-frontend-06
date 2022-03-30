@@ -1,4 +1,3 @@
-import { MouseEventHandler } from "react";
 import * as S from "./BoardList.styled";
 import { IBoardListPresenterPros } from "./BoardList.types";
 import { getDate } from "../../../common/utils/utils";
