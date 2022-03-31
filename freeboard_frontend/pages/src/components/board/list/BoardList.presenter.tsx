@@ -1,8 +1,6 @@
 import * as S from "./BoardList.styled";
-import { IBoardListPresenterPros } from "./BoardList.types";
-import { getDate } from "../../../common/utils/utils";
 
-export default function BoardListPresenter(props: IBoardListPresenterPros) {
+export default function BoardListPresenter() {
   return (
     <S.Wrapper>
       <S.Best>
@@ -93,42 +91,6 @@ export default function BoardListPresenter(props: IBoardListPresenterPros) {
         </S.SearchDate>
         <S.SearchBtn>검색하기</S.SearchBtn>
       </S.Search>
-      <S.ListBox>
-        <S.List>
-          <S.RowTitle>
-            <S.HeadColNum>번호</S.HeadColNum>
-            <S.HeadColTitle>제목</S.HeadColTitle>
-            <S.HeadColWriter>작성자</S.HeadColWriter>
-            <S.HeadColDate>날짜</S.HeadColDate>
-          </S.RowTitle>
-          {props.data?.fetchBoards.map((el: any, index: number) => (
-            <S.RowTitle key={el._id}>
-              <S.ColNum>{index + 1}</S.ColNum>
-              <S.ColTitle id={el._id} onClick={props.onClickDetailPage}>
-                {el.title}
-              </S.ColTitle>
-              <S.ColWriter>{el.writer}</S.ColWriter>
-              <S.ColDate>{getDate(el.createdAt)}</S.ColDate>
-            </S.RowTitle>
-          ))}
-        </S.List>
-        <S.ListPage>
-          <S.PageBox>
-            <S.PrevBtn>
-              <img src="/list/prev.png" />
-            </S.PrevBtn>
-            <S.PageNum>1</S.PageNum>
-            <S.PageNum2>2</S.PageNum2>
-            <S.NextBtn>
-              <img src="/list/next.png" />
-            </S.NextBtn>
-          </S.PageBox>
-          <S.RegisteBtn onClick={props.onClickBoardNewPage}>
-            <img src="/list/register.png" style={{ paddingRight: "11px" }} />
-            게시물등록하기
-          </S.RegisteBtn>
-        </S.ListPage>
-      </S.ListBox>
     </S.Wrapper>
   );
 }
