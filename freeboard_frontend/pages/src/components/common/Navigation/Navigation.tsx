@@ -12,28 +12,28 @@ export default function NavigationPage(props: INavigationPros) {
   };
 
   const onClickPageNext = () => {
-    if (startPage + 10 > props.lastPage) {
+    if (startPage + 5 > props.lastPage) {
       return;
     }
-    setStartPage((prev) => prev + 10);
-    props.refetch({ page: startPage + 10 });
+    setStartPage((prev) => prev + 5);
+    props.refetch({ page: startPage + 5 });
   };
 
   const onClickPagePrev = () => {
     if (startPage === 1) {
       return;
     }
-    setStartPage((prev) => prev - 10);
-    props.refetch({ page: startPage - 10 });
+    setStartPage((prev) => prev - 5);
+    props.refetch({ page: startPage - 5 });
   };
 
   return (
     <div>
       <s.Div>
         <s.Btn1 onClick={onClickPagePrev} disabled={startPage === 1 && true}>
-          이전페이지
+          <img src="/list/prev.png" />
         </s.Btn1>
-        {new Array(10).fill(1).map(
+        {new Array(5).fill(1).map(
           (_, index) =>
             index + startPage <= props.lastPage && (
               <>
@@ -50,9 +50,9 @@ export default function NavigationPage(props: INavigationPros) {
 
         <s.Btn2
           onClick={onClickPageNext}
-          disabled={startPage + 10 > props.lastPage === true}
+          disabled={startPage + 5 > props.lastPage === true}
         >
-          다음페이지
+          <img src="/list/next.png" />
         </s.Btn2>
       </s.Div>
     </div>

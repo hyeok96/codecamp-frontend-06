@@ -6,7 +6,11 @@ export interface IBoardListPresenterPros {
 }
 
 export interface INavigationPros {
-  onClickBoardNewPage: () => void;
   lastPage: number;
   refetch: any;
+}
+
+export interface IBestBoardDataProps {
+  bestBoardData: any;
+  onClickBoardNewPage: () => void;
 }

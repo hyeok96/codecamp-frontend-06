@@ -2,14 +2,13 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   margin: auto;
-  margin-top: 80px;
   width: 1200px;
 `;
 
 export const ListBox = styled.div``;
 
 export const List = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   width: 100%;
   border-bottom: 1px solid black;
   border-top: 1px solid black;

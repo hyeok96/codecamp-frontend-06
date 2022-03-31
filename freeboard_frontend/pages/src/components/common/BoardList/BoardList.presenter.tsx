@@ -19,7 +19,7 @@ export default function BoardListPage(props: IBoardListPresenterPros) {
                 {el.title}
               </S.ColTitle>
               <S.ColWriter>{el.writer}</S.ColWriter>
-              <S.ColDate>{el.createdAt}</S.ColDate>
+              <S.ColDate>{el.createdAt.slice(0, 10)}</S.ColDate>
             </S.RowTitle>
           ))}
         </S.List>

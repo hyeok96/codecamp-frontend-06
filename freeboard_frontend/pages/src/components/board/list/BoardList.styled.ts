@@ -26,7 +26,7 @@ export const BestList = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 `;
 
 export const BestListBox = styled.div`
@@ -105,7 +105,7 @@ export const LikeIcon = styled.div``;
 export const LikeCount = styled.div``;
 
 export const Search = styled.div`
-  padding-bottom: 40px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -116,7 +116,7 @@ export const SearchBox = styled.div`
   display: flex;
   flex-direction: row;
   padding: 14px 19px;
-  width: 776px;
+  width: 600px;
   height: 52px;
   background: #f2f2f2;
   border-radius: 10px;
@@ -179,4 +179,26 @@ export const SearchBtn = styled.button`
   background: #000000;
   border-radius: 10px;
   color: white;
+`;
+
+export const RegisteBtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px;
+  margin-bottom: 30px;
+  width: 171px;
+  height: 52px;
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  border-radius: 10px;
+`;
+
+export const Div2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 1200px;
 `;

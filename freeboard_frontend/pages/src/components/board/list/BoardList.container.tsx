@@ -1,6 +1,10 @@
 import BoardListPresenter from "./BoardList.presenter";
 import { useQuery } from "@apollo/client";
-import { FETCH_BOARDS, FETCH_BOARDS_COUNT } from "./BoardList.graph";
+import {
+  FETCH_BOARDS,
+  FETCH_BOARDS_COUNT,
+  FETCH_BOARDS_OF_THE_BEST,
+} from "./BoardList.graph";
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
 import {
@@ -17,6 +21,8 @@ export default function BoardListConatiner() {
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
 
+  const { data: bestBoardData } = useQuery(FETCH_BOARDS_OF_THE_BEST);
+  console.log(bestBoardData);
   const { data: countData } = useQuery(FETCH_BOARDS_COUNT);
 
   const lastPage = Math.ceil(countData?.fetchBoardsCount / 10);
@@ -31,13 +37,12 @@ export default function BoardListConatiner() {
 
   return (
     <>
-      <BoardListPresenter />
-      <BoardListPage data={data} onClickDetailPage={onClickDetailPage} />
-      <NavigationPage
+      <BoardListPresenter
+        bestBoardData={bestBoardData}
         onClickBoardNewPage={onClickBoardNewPage}
-        lastPage={lastPage}
-        refetch={refetch}
       />
+      <BoardListPage data={data} onClickDetailPage={onClickDetailPage} />
+      <NavigationPage lastPage={lastPage} refetch={refetch} />
     </>
   );
 }
