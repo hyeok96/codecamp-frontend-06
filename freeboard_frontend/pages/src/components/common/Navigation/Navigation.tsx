@@ -7,7 +7,9 @@ export default function NavigationPage(props: INavigationPros) {
   const [current, setCurrent] = useState(1);
 
   const onClickPage = (e: MouseEvent<HTMLDivElement>) => {
-    props.refetch({ page: Number((e.target as HTMLDivElement).id) });
+    props.refetch({
+      page: Number((e.target as HTMLDivElement).id),
+    });
     setCurrent(Number((e.target as HTMLDivElement).id));
   };
 
@@ -17,6 +19,7 @@ export default function NavigationPage(props: INavigationPros) {
     }
     setStartPage((prev) => prev + 5);
     props.refetch({ page: startPage + 5 });
+    setCurrent(startPage + 5);
   };
 
   const onClickPagePrev = () => {
@@ -25,36 +28,35 @@ export default function NavigationPage(props: INavigationPros) {
     }
     setStartPage((prev) => prev - 5);
     props.refetch({ page: startPage - 5 });
+    setCurrent(startPage - 5);
   };
 
   return (
-    <div>
-      <s.Div>
-        <s.Btn1 onClick={onClickPagePrev} disabled={startPage === 1 && true}>
-          <img src="/list/prev.png" />
-        </s.Btn1>
-        {new Array(5).fill(1).map(
-          (_, index) =>
-            index + startPage <= props.lastPage && (
-              <>
-                <s.Span
-                  onClick={onClickPage}
-                  id={String(index + 1)}
-                  current={Number(current)}
-                >
-                  {startPage + index}
-                </s.Span>
-              </>
-            )
-        )}
+    <s.Div>
+      <s.Btn1 onClick={onClickPagePrev} disabled={startPage === 1 && true}>
+        <img src="/list/prev.png" />
+      </s.Btn1>
+      {new Array(5).fill(1).map(
+        (_, index) =>
+          index + startPage <= props.lastPage && (
+            <>
+              <s.Span
+                onClick={onClickPage}
+                id={String(index + startPage)}
+                current={Number(current)}
+              >
+                {startPage + index}
+              </s.Span>
+            </>
+          )
+      )}
 
-        <s.Btn2
-          onClick={onClickPageNext}
-          disabled={startPage + 5 > props.lastPage === true}
-        >
-          <img src="/list/next.png" />
-        </s.Btn2>
-      </s.Div>
-    </div>
+      <s.Btn2
+        onClick={onClickPageNext}
+        disabled={startPage + 5 > props.lastPage === true}
+      >
+        <img src="/list/next.png" />
+      </s.Btn2>
+    </s.Div>
   );
 }

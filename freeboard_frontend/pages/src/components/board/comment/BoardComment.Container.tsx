@@ -4,7 +4,7 @@ import {
   FETCH_BOARD_COMMENTS,
   DELETE_BOARD_COMMENT,
 } from "./BoardComment.query";
-import { useState } from "react";
+import { useState, ChangeEvent, MouseEvent } from "react";
 import {
   IMutation,
   IQuery,
@@ -13,14 +13,17 @@ import {
 } from "../../../common/types/generated/types";
 import { useRouter } from "next/router";
 import { Modal } from "antd";
+import InfiniteScroll from "react-infinite-scroller";
+import { InfiniteScroller } from "./BoardComment.Styled";
 
 export default function BoardCommentContainer() {
   const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [password, setPassword] = useState("");
+  const [pw, setPw] = useState("");
+  const [deleteId, setDeleteId] = useState("");
 
-  const { data: commentData } = useQuery<
+  const { data: commentData, fetchMore } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
@@ -34,26 +37,25 @@ export default function BoardCommentContainer() {
     IMutationDeleteBoardCommentArgs
   >(DELETE_BOARD_COMMENT);
 
-  const onchangeCommentPassword = (e: any) => {
-    setPassword(e.target.value);
+  const onChangePw = (event: ChangeEvent<HTMLInputElement>) => {
+    setPw(event.target.value);
   };
 
   const onToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const onClickModal = async () => {
+  const onClickModal = async (e: MouseEvent<HTMLDivElement>) => {
     setIsOpen(!isOpen);
+    setDeleteId(String(e.currentTarget.id));
   };
 
-  const onClickDeleteBoardComment = async (a: any) => {
+  const onClickDeleteBoardComment = async () => {
     try {
-      console.log(a);
-      setIsOpen(!isOpen);
       await deleteBoardComment({
         variables: {
-          password,
-          boardCommentId: String(a),
+          password: pw,
+          boardCommentId: deleteId,
         },
         refetchQueries: [
           {
@@ -67,23 +69,58 @@ export default function BoardCommentContainer() {
       Modal.success({
         content: `댓글이 삭제되었습니다.`,
       });
+      setIsOpen(!isOpen);
     } catch (error) {
       Modal.error({
         content: `${error.message}`,
       });
+      setIsOpen(!isOpen);
     }
   };
 
+  const loadMore = () => {
+    if (!commentData) return;
+
+    fetchMore({
+      variables: {
+        page: Math.ceil(commentData?.fetchBoardComments.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments) {
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+        }
+
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
+
   return (
-    <>
-      <BoardCommentPresenter
-        commentData={commentData}
-        onClickDeleteBoardComment={onClickDeleteBoardComment}
-        onToggle={onToggle}
-        onchangeCommentPassword={onchangeCommentPassword}
-        isOpen={isOpen}
-        onClickModal={onClickModal}
-      />
-    </>
+    <InfiniteScroller>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={loadMore}
+        hasMore={true}
+        useWindow={false}
+      >
+        {commentData?.fetchBoardComments.map((el) => (
+          <BoardCommentPresenter
+            commentData={commentData}
+            onClickDeleteBoardComment={onClickDeleteBoardComment}
+            onToggle={onToggle}
+            isOpen={isOpen}
+            onClickModal={onClickModal}
+            onChangePw={onChangePw}
+            el={el}
+            key={el._id}
+          />
+        ))}
+      </InfiniteScroll>
+    </InfiniteScroller>
   );
 }

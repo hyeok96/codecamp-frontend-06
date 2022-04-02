@@ -18,6 +18,7 @@ module.exports = {
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/prop-types": "off",
+    // "no-unneeded-ternary": "off",
   },
   settings: {
     react: {

@@ -3,8 +3,18 @@ import { IBoardIdPresenterProps } from "./BoardId.types";
 import { getDate } from "../../../common/utils/utils";
 import React from "react";
 import ReactPlayer from "react-player";
+import { Tooltip } from "antd";
 
 export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
+  const addresssInfo = (
+    <span>
+      우편번호 : {props.data?.fetchBoard.boardAddress?.zipcode}
+      <br />
+      {props.data?.fetchBoard.boardAddress?.address}
+      {props.data?.fetchBoard.boardAddress?.addressDetail}
+    </span>
+  );
+
   return (
     <s.Main>
       <s.Wrapper>
@@ -25,9 +35,11 @@ export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
             </s.HeadNameBox>
           </s.HeadBox>
           <s.HeadBox>
-            <s.HeadIcon>
-              <img src="/borad/file.png" />
-            </s.HeadIcon>
+            <Tooltip placement="top" title={addresssInfo}>
+              <s.HeadIcon>
+                <img src="/borad/file.png" />
+              </s.HeadIcon>
+            </Tooltip>
             <s.HeadIcon>
               <img src="/borad/map.png" />
             </s.HeadIcon>
@@ -37,21 +49,23 @@ export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
           <s.BodyTitle>
             {props.data ? props.data.fetchBoard.title : "loading"}
           </s.BodyTitle>
-          <s.BodyImage></s.BodyImage>
+          {props.data?.fetchBoard.image && <s.BodyImage></s.BodyImage>}
           <s.BodyText>
             {props.data ? props.data.fetchBoard.contents : "loading"}
           </s.BodyText>
-          <s.BodyVideoBox>
-            <s.BodyVideo>
-              <ReactPlayer
-                url={`${props.data?.fetchBoard.youtubeUrl}`}
-                width={486}
-                height={240}
-                playing={true}
-                loop={true}
-              />
-            </s.BodyVideo>
-          </s.BodyVideoBox>
+          {props.data?.fetchBoard.youtubeUrl && (
+            <s.BodyVideoBox>
+              <s.BodyVideo>
+                <ReactPlayer
+                  url={`${props.data?.fetchBoard.youtubeUrl}`}
+                  width={486}
+                  height={240}
+                  playing={true}
+                  loop={true}
+                />
+              </s.BodyVideo>
+            </s.BodyVideoBox>
+          )}
         </s.Body>
         <s.Footer>
           <s.FooterLikeBox>
