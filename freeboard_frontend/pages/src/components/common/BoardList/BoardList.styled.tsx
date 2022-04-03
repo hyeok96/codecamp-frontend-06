@@ -22,7 +22,7 @@ export const RowTitle = styled.div`
   padding: 11px 40px 14px;
   width: 100%;
   height: 52px;
-  border-bottom: 1px solid #bdbdbd; ;
+  border-bottom: 1px solid #bdbdbd;
 `;
 
 export const RowBody = styled.div`
@@ -88,6 +88,12 @@ export const ColTitle = styled.div`
   font-weight: 400;
   font-size: 16px;
   color: #4f4f4f;
+  &:hover {
+    color: #ffd600;
+  }
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const ColWriter = styled.div`

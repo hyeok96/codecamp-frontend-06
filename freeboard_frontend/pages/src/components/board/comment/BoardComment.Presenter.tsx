@@ -153,6 +153,7 @@ export default function BoardCommentPresenter(
                     disabled
                     placeholder="직성자"
                     value={props.el.writer}
+                    readOnly
                   />
                   <s.CommentInput
                     type="password"

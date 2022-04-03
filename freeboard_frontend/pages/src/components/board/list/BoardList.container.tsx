@@ -6,33 +6,78 @@ import {
   FETCH_BOARDS_OF_THE_BEST,
 } from "./BoardList.graph";
 import { useRouter } from "next/router";
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
+  IQueryFetchBoardsCountArgs,
 } from "../../../common/types/generated/types";
 import NavigationPage from "../../common/Navigation/Navigation";
 import BoardListPage from "../../common/BoardList/BoardList.presenter";
 
 export default function BoardListConatiner() {
   const router = useRouter();
+
+  const [mySearch, setMySearch] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
 
   const { data: bestBoardData } = useQuery(FETCH_BOARDS_OF_THE_BEST);
-  console.log(bestBoardData);
-  const { data: countData } = useQuery(FETCH_BOARDS_COUNT);
+  const { data: countData, refetch: countRefetch } =
+    useQuery(FETCH_BOARDS_COUNT);
 
   const lastPage = Math.ceil(countData?.fetchBoardsCount / 10);
 
   const onClickDetailPage = (e: MouseEvent<HTMLDivElement>) => {
-    router.push(`/boards/${(e.target as HTMLDivElement).id}`);
+    router.push(`/boards/${(e.currentTarget as HTMLDivElement).id}`);
   };
 
   const onClickBoardNewPage = () => {
     router.push(`/boards/new`);
+  };
+
+  const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setMySearch(e.target.value);
+  };
+
+  const onChangeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
+    setStartDate(e.target.value);
+  };
+
+  const onChangeEndDate = (e: ChangeEvent<HTMLInputElement>) => {
+    setEndDate(e.target.value);
+  };
+
+  const onClickSearchBoard = () => {
+    const searchBoards: IQueryFetchBoardsArgs = {};
+
+    if (mySearch !== "" || mySearch === "") searchBoards.search = mySearch;
+    if (startDate !== "" || startDate === "")
+      searchBoards.startDate = new Date(startDate);
+    if (endDate !== "" || endDate === "")
+      searchBoards.endDate = new Date(endDate);
+
+    const searchBoardCount: IQueryFetchBoardsCountArgs = {};
+
+    if (mySearch !== "" || mySearch === "") {
+      searchBoardCount.search = mySearch;
+    }
+    if (startDate !== "" || startDate === "")
+      searchBoardCount.startDate = new Date(startDate);
+    if (endDate !== "" || startDate === "")
+      searchBoardCount.endDate = new Date(endDate);
+
+    refetch(searchBoards);
+    countRefetch(searchBoardCount);
+  };
+
+  const onClickMoveBestPage = (e: MouseEvent<HTMLDivElement>) => {
+    router.push(`/boards/${(e.currentTarget as HTMLDivElement).id}`);
   };
 
   return (
@@ -40,6 +85,11 @@ export default function BoardListConatiner() {
       <BoardListPresenter
         bestBoardData={bestBoardData}
         onClickBoardNewPage={onClickBoardNewPage}
+        onChangeSearch={onChangeSearch}
+        onClickSearchBoard={onClickSearchBoard}
+        onClickMoveBestPage={onClickMoveBestPage}
+        onChangeStartDate={onChangeStartDate}
+        onChangeEndDate={onChangeEndDate}
       />
       <BoardListPage data={data} onClickDetailPage={onClickDetailPage} />
       <NavigationPage lastPage={lastPage} refetch={refetch} />

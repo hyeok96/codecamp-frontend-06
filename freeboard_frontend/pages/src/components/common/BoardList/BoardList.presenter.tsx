@@ -13,11 +13,13 @@ export default function BoardListPage(props: IBoardListPresenterPros) {
             <S.HeadColDate>날짜</S.HeadColDate>
           </S.RowTitle>
           {props.data?.fetchBoards.map((el: any, index: number) => (
-            <S.RowTitle key={el._id}>
+            <S.RowTitle
+              key={el._id}
+              onClick={props.onClickDetailPage}
+              id={el._id}
+            >
               <S.ColNum>{index + 1}</S.ColNum>
-              <S.ColTitle id={el._id} onClick={props.onClickDetailPage}>
-                {el.title}
-              </S.ColTitle>
+              <S.ColTitle>{el.title}</S.ColTitle>
               <S.ColWriter>{el.writer}</S.ColWriter>
               <S.ColDate>{el.createdAt.slice(0, 10)}</S.ColDate>
             </S.RowTitle>

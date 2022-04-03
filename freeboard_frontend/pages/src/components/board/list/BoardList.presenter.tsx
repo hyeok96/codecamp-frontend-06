@@ -9,7 +9,11 @@ export default function BoardListPresenter(props: IBestBoardDataProps) {
         <S.BestList>
           {props.bestBoardData?.fetchBoardsOfTheBest.map(
             (el: any, index: number) => (
-              <S.BestListBox key={el._id}>
+              <S.BestListBox
+                key={el._id}
+                onClick={props.onClickMoveBestPage}
+                id={el._id}
+              >
                 <S.BoardListBoxImage></S.BoardListBoxImage>
                 <S.BoardListBoxTitle>{el.title}</S.BoardListBoxTitle>
                 <S.BoardListBoxBody>
@@ -41,13 +45,23 @@ export default function BoardListPresenter(props: IBestBoardDataProps) {
         </S.RegisteBtn>
         <S.SearchBox>
           <S.SearchBoxIcon></S.SearchBoxIcon>
-          <S.SearchBoxInput placeholder="제목을 검색하세요"></S.SearchBoxInput>
+          <S.SearchBoxInput
+            placeholder="제목을 검색하세요"
+            onChange={props.onChangeSearch}
+          />
         </S.SearchBox>
         <S.SearchDate>
-          <S.SearchDateStart placeholder="YYYY.MM.DD" /> ~
-          <S.SearchDateEnd placeholder="YYYY.MM.DD" />
+          <S.SearchDateStart
+            placeholder="YYYY.MM.DD"
+            onChange={props.onChangeStartDate}
+          />{" "}
+          ~
+          <S.SearchDateEnd
+            placeholder="YYYY.MM.DD"
+            onChange={props.onChangeEndDate}
+          />
         </S.SearchDate>
-        <S.SearchBtn>검색하기</S.SearchBtn>
+        <S.SearchBtn onClick={props.onClickSearchBoard}>검색하기</S.SearchBtn>
       </S.Search>
     </S.Wrapper>
   );

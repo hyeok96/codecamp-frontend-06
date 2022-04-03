@@ -55,6 +55,9 @@ export const BoardListBoxTitle = styled.div`
   font-weight: 500;
   font-size: 18px;
   color: #000000;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const BoardListBoxBody = styled.div`
@@ -153,7 +156,7 @@ export const SearchDate = styled.div`
 `;
 export const SearchDateStart = styled.input`
   padding-right: 8px;
-  width: 93px;
+  width: 97px;
   height: 24px;
   color: #bdbdbd;
   border: none;
@@ -161,7 +164,7 @@ export const SearchDateStart = styled.input`
 `;
 export const SearchDateEnd = styled.input`
   padding-left: 8px;
-  width: 93px;
+  width: 97px;
   height: 24px;
   color: #bdbdbd;
   border: none;

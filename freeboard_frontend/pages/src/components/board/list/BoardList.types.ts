@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { MouseEvent, ChangeEvent } from "react";
 
 export interface IBoardListPresenterPros {
   data: any;
@@ -13,4 +13,9 @@ export interface INavigationPros {
 export interface IBestBoardDataProps {
   bestBoardData: any;
   onClickBoardNewPage: () => void;
+  onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickSearchBoard: () => void;
+  onClickMoveBestPage: (e: MouseEvent<HTMLDivElement>) => void;
+  onChangeStartDate: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeEndDate: (e: ChangeEvent<HTMLInputElement>) => void;
 }
