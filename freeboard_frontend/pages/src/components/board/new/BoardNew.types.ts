@@ -6,12 +6,7 @@ export interface IBoardNewContainerProps {
 }
 
 export interface IBoardNewPresenterProps {
-  onChangeName: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangePw: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeTitle: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeText: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  onChangeAddress: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeYoutube: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeInput: (e: ChangeEvent<any>) => void;
   onCilckRegister: () => void;
   errorName: string;
   errorPw: string;
@@ -26,9 +21,7 @@ export interface IBoardNewPresenterProps {
   onClickAddressModal: () => void;
   isOpen: boolean;
   handleComplete: (data: any) => void;
-  address: string;
-  addressZone: string;
-  onChangeAddressDetail: (e: ChangeEvent<HTMLInputElement>) => void;
+  input: any;
 }
 
 interface IupdateBoardInput {

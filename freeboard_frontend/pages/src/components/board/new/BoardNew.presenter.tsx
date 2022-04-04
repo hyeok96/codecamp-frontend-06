@@ -16,8 +16,10 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
           <s.Input
             type="text"
             placeholder="이름을 적어주세요."
-            onChange={props.onChangeName}
-            defaultValue={props.data?.fetchBoard.writer}
+            onChange={props.onChangeInput}
+            value={props.data?.fetchBoard.writer}
+            id="name"
+            readOnly={props.isEdit && true}
           />
           <s.Error>{props.errorName}</s.Error>
         </s.InnerDiv>
@@ -26,7 +28,8 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
           <s.Input
             type="password"
             placeholder="비밀번호을 적어주세요."
-            onChange={props.onChangePw}
+            onChange={props.onChangeInput}
+            id="pw"
           />
           <s.Error>{props.errorPw}</s.Error>
         </s.InnerDiv>
@@ -36,8 +39,9 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
         <s.TitleInput
           type="text"
           placeholder="제목을 작성해주세요."
-          onChange={props.onChangeTitle}
+          onChange={props.onChangeInput}
           defaultValue={props.data?.fetchBoard.title}
+          id="title"
         />
         <s.Error>{props.errorTitle}</s.Error>
       </s.Div2>
@@ -45,8 +49,9 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
         <s.MenuTitle>내용</s.MenuTitle>
         <s.Text
           placeholder="내용을 작성해주세요."
-          onChange={props.onChangeText}
+          onChange={props.onChangeInput}
           defaultValue={props.data?.fetchBoard.contents}
+          id="text"
         ></s.Text>
         <s.Error>{props.errorText}</s.Error>
       </s.Div2>
@@ -55,22 +60,28 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
         <s.Div3>
           <s.Input7
             value={
-              props.addressZone || props.data?.fetchBoard.boardAddress.zipcode
+              props.input.addressZone ||
+              props.data?.fetchBoard.boardAddress.zipcode
             }
+            id="addressZone"
             readOnly
           ></s.Input7>
           <s.Btn2 onClick={props.onClickAddressModal}>우편번호 감색</s.Btn2>
         </s.Div3>
         <s.Div2>
           <s.AddressInput
-            onChange={props.onChangeAddress}
-            value={props.address || props.data?.fetchBoard.boardAddress.address}
+            onChange={props.onChangeInput}
+            value={
+              props.input.address || props.data?.fetchBoard.boardAddress.address
+            }
             readOnly
+            id="address"
           />
           <s.AddressInput
-            onChange={props.onChangeAddressDetail}
+            onChange={props.onChangeInput}
             defaultValue={props.data?.fetchBoard.boardAddress.addressDetail}
             placeholder="상세주소를 입력하세요"
+            id="adresssDetail"
           />
         </s.Div2>
         <s.Error></s.Error>
@@ -90,8 +101,9 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
         <s.TitleInput
           type="text"
           placeholder="링크를 복사해주세요."
-          onChange={props.onChangeYoutube}
+          onChange={props.onChangeInput}
           defaultValue={props.data?.fetchBoard.youtubeUrl}
+          id="youtube"
         />
         <s.Error></s.Error>
       </s.Div2>

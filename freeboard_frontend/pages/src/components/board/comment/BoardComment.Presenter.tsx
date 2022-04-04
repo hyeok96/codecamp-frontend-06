@@ -2,16 +2,22 @@ import * as s from "./BoardComment.Styled";
 import { IBoardCommentPresenterProps } from "./BoardComment.types";
 import { Fragment, useState, MouseEvent, ChangeEvent } from "react";
 import { Rate, Modal } from "antd";
-import { UPDATE_BOARD_COMMENT } from "./BoardComment.query";
+import {
+  UPDATE_BOARD_COMMENT,
+  FETCH_BOARD_COMMENTS,
+} from "./BoardComment.query";
 import {
   IMutation,
   IMutationUpdateBoardCommentArgs,
 } from "../../../common/types/generated/types";
 import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 
 export default function BoardCommentPresenter(
   props: IBoardCommentPresenterProps
 ) {
+  const router = useRouter();
+
   const [isEdit, setIsEdit] = useState(false);
   const [upDatePw, setUpDatePw] = useState("");
   const [upDateContents, setUpdateContents] = useState("");
@@ -57,6 +63,12 @@ export default function BoardCommentPresenter(
 
       await updateBoardComment({
         variables: myVariables,
+        refetchQueries: [
+          {
+            query: FETCH_BOARD_COMMENTS,
+            variables: { boardId: router.query.id },
+          },
+        ],
       });
 
       Modal.success({

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import BoardNewPresenter from "./BoardNew.presenter";
@@ -14,19 +14,52 @@ import { Modal } from "antd";
 export default function BoardNewContainer(props: IBoardNewContainerProps) {
   const router = useRouter();
 
-  // state
-  const [name, setName] = useState("");
-  const [pw, setPw] = useState("");
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [address, setAddress] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
-  const [addressZone, setAdressZone] = useState("");
-  const [youtube, setYoutube] = useState("");
+  const [input, setInput] = useState({
+    name: "",
+    pw: "",
+    title: "",
+    text: "",
+    address: "",
+    adresssDetail: "",
+    addressZone: "",
+    youtube: "",
+  });
 
   const [isActive, setIsActive] = useState(false);
   const [isEditActive, setIsEditActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const onChangeColor = () => {
+    if (
+      input.name !== "" &&
+      input.pw !== "" &&
+      input.text !== "" &&
+      input.title
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+
+    if (props.isEdit === true) {
+      if (input.pw !== "") {
+        setIsEditActive(true);
+      } else {
+        setIsEditActive(false);
+      }
+    }
+  };
+
+  const onChangeInput = (e: ChangeEvent<any>) => {
+    setInput({
+      ...input,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  useEffect(() => {
+    onChangeColor();
+  }, [input.name, input.pw, input.text, input.title]);
 
   // 에러 state
   const [errorName, setErrorName] = useState("");
@@ -43,102 +76,46 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
 
-  function onChangeName(e: ChangeEvent<HTMLInputElement>) {
-    setName(e.target.value);
-
-    if (e.target.value !== "" && pw !== "" && title !== "" && text !== "") {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  }
-
-  function onChangePw(e: ChangeEvent<HTMLInputElement>) {
-    setPw(e.target.value);
-
-    if (name !== "" && e.target.value !== "" && title !== "" && text !== "") {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-
-    if (props.isEdit === true) {
-      if (e.target.value !== "") {
-        setIsEditActive(true);
-      } else {
-        setIsEditActive(false);
-      }
-    }
-  }
-
-  function onChangeTitle(e: ChangeEvent<HTMLInputElement>) {
-    setTitle(e.target.value);
-
-    // if(name !== "" && pw !== "" && e.target.value !== "" && text !== "")
-    if (name && pw && e.target.value && text) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  }
-
-  function onChangeText(e: ChangeEvent<HTMLTextAreaElement>) {
-    setText(e.target.value);
-
-    if (pw !== "" && title !== "" && e.target.value !== "") {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  }
-
-  function onChangeAddress(e: ChangeEvent<HTMLInputElement>) {
-    setAddress(e.target.value);
-  }
-
-  function onChangeAddressDetail(e: ChangeEvent<HTMLInputElement>) {
-    setAddressDetail(e.target.value);
-  }
-
-  function onChangeYoutube(e: ChangeEvent<HTMLInputElement>) {
-    setYoutube(e.target.value);
-  }
-
   async function onCilckRegister() {
-    if (name === "") {
+    if (input.name === "") {
       setErrorName("이름을 적어주세요");
     } else {
       setErrorName("");
     }
-    if (pw === "") {
+    if (input.pw === "") {
       setErrorPw("비밀번호을 적어주세요");
     } else {
       setErrorPw("");
     }
-    if (title === "") {
+    if (input.title === "") {
       setErrorTitle("제목을 적어주세요");
     } else {
       setErrorTitle("");
     }
-    if (text === "") {
+    if (input.text === "") {
       setErrorText("내용을 적어주세요");
     } else {
       setErrorText("");
     }
-    if (name !== "" && pw !== "" && title !== "" && text !== "") {
+    if (
+      input.name !== "" &&
+      input.pw !== "" &&
+      input.title !== "" &&
+      input.text !== ""
+    ) {
       try {
         const result = await create({
           variables: {
             createBoardInput: {
-              writer: name,
-              password: pw,
-              title: title,
-              contents: text,
-              youtubeUrl: youtube,
+              writer: input.name,
+              password: input.pw,
+              title: input.title,
+              contents: input.text,
+              youtubeUrl: input.youtube,
               boardAddress: {
-                address: address,
-                addressDetail,
-                zipcode: addressZone,
+                address: input.address,
+                addressDetail: input.adresssDetail,
+                zipcode: input.addressZone,
               },
               images: [],
             },
@@ -158,31 +135,38 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
   }
 
   const onClickUpdate = async () => {
-    if (pw === "") {
+    if (input.pw === "") {
       setErrorPw("비밀번호을 적어주세요");
     } else {
       setErrorPw("");
     }
-    if (pw !== "") {
+    if (input.pw !== "") {
       try {
         const myVariables: IMutationUpdateBoardArgs = {
           boardId: String(router.query.id),
-          password: pw,
+          password: input.pw,
           updateBoardInput: {},
         };
 
-        if (title !== "") myVariables.updateBoardInput.title = title;
-        if (text !== "") myVariables.updateBoardInput.contents = text;
-        if (youtube !== "") myVariables.updateBoardInput.youtubeUrl = youtube;
-        if (address !== "" || addressDetail !== "" || addressZone !== "")
+        if (input.title !== "")
+          myVariables.updateBoardInput.title = input.title;
+        if (input.text !== "")
+          myVariables.updateBoardInput.contents = input.text;
+        if (input.youtube !== "")
+          myVariables.updateBoardInput.youtubeUrl = input.youtube;
+        if (
+          input.address !== "" ||
+          input.adresssDetail !== "" ||
+          input.addressZone !== ""
+        )
           myVariables.updateBoardInput.boardAddress = {};
-        if (address !== "")
-          myVariables.updateBoardInput.boardAddress.address = address;
-        if (addressDetail !== "")
+        if (input.address !== "")
+          myVariables.updateBoardInput.boardAddress.address = input.address;
+        if (input.adresssDetail !== "")
           myVariables.updateBoardInput.boardAddress.addressDetail =
-            addressDetail;
-        if (addressZone !== "")
-          myVariables.updateBoardInput.boardAddress.zipcode = addressZone;
+            input.adresssDetail;
+        if (input.addressZone !== "")
+          myVariables.updateBoardInput.boardAddress.zipcode = input.addressZone;
 
         await updateBoard({
           variables: myVariables,
@@ -212,19 +196,17 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
   const handleComplete = (data: any) => {
     console.log(data);
     setIsOpen(!isOpen);
-    setAddress(String(data.address));
-    setAdressZone(String(data.zonecode));
+    setInput({
+      ...input,
+      address: String(data.address),
+      addressZone: String(data.zonecode),
+    });
   };
 
   // 랜더되는 부분
   return (
     <BoardNewPresenter
-      onChangeName={onChangeName}
-      onChangePw={onChangePw}
-      onChangeTitle={onChangeTitle}
-      onChangeText={onChangeText}
-      onChangeAddress={onChangeAddress}
-      onChangeYoutube={onChangeYoutube}
+      onChangeInput={onChangeInput}
       onCilckRegister={onCilckRegister}
       errorName={errorName}
       errorPw={errorPw}
@@ -239,9 +221,7 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
       onClickAddressModal={onClickAddressModal}
       isOpen={isOpen}
       handleComplete={handleComplete}
-      address={address}
-      addressZone={addressZone}
-      onChangeAddressDetail={onChangeAddressDetail}
+      input={input}
     />
   );
 }

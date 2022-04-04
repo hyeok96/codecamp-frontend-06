@@ -28,6 +28,7 @@ export default function BoardListConatiner() {
   >(FETCH_BOARDS);
 
   const { data: bestBoardData } = useQuery(FETCH_BOARDS_OF_THE_BEST);
+
   const { data: countData, refetch: countRefetch } =
     useQuery(FETCH_BOARDS_COUNT);
 
@@ -57,11 +58,8 @@ export default function BoardListConatiner() {
     const searchBoards: IQueryFetchBoardsArgs = {};
 
     if (mySearch !== "" || mySearch === "") searchBoards.search = mySearch;
-    if (startDate !== "" || startDate === "")
-      searchBoards.startDate = new Date(startDate);
-    if (endDate !== "" || endDate === "")
-      searchBoards.endDate = new Date(endDate);
-
+    if (startDate !== "") searchBoards.startDate = new Date(startDate);
+    if (endDate !== "") searchBoards.endDate = new Date(endDate);
     const searchBoardCount: IQueryFetchBoardsCountArgs = {};
 
     if (mySearch !== "" || mySearch === "") {
