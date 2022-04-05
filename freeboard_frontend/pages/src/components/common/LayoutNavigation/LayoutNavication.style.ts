@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 84px;
-  background-color: #ffd600;
+  background-color: white;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
 `;
 

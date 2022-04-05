@@ -1,10 +1,13 @@
 import * as s from "./styles";
 import { useRouter } from "next/router";
+import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
   const router = useRouter();
 
   const meun = [
+    { name: "축구순위", url: "MyApi" },
     { name: "자유게시판", url: "boards" },
     { name: "중고마켓", url: "boards" },
     { name: "마이페이지", url: "boards" },
@@ -14,10 +17,30 @@ export default function Home() {
     router.push(`/${page}`);
   };
 
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(imgRef.current, { opacity: 0 }, { opacity: 1, duration: 3 });
+  });
+
   return (
     <>
+      <s.Body>
+        <s.Text>Arsenal F.C.</s.Text>
+        <s.SmallText>
+          They called themselves Dial Square as a reference to the sundial atop
+          the entrance to the factory. On December 11, 1886, Dial Square romped
+          to a 6-0 victory over Eastern Wanderers; the first game in their
+          initial guise. Shortly afterwards the name ‘Royal Arsenal’ was
+          adopted. A group of players from Nottingham Forest joined the Club and
+          this connection with the future European Cup winners would spawn
+          Arsenal’s famous red shirts. The group approached their former club,
+          who had been formed some 20 years earlier, for spare kit. Forest duly
+          obliged and Arsenal, dipped in red, never looked back.
+        </s.SmallText>
+      </s.Body>
       <s.Head>
-        <img src="/logo/arsenal2.svg" />
+        <s.Logo src="/logo/arsenal2.svg" ref={imgRef} />
       </s.Head>
       <s.Div>
         <s.ButtonBox>

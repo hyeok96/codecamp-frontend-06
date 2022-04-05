@@ -1,10 +1,16 @@
 import * as s from "./LayoutHeader.styled";
+import { ILayoutHeaderProps } from "./LayoutHeader.types";
 
-export default function HeaderPresenter() {
+export default function HeaderPresenter(props: ILayoutHeaderProps) {
   return (
     <s.Wrapper>
       <s.Box>
-        <s.Logo></s.Logo>
+        <s.Logo>
+          <s.LogoImag
+            src="/logo/arsenal2.svg"
+            onClick={props.onClickMoveHome}
+          />
+        </s.Logo>
         <s.ProfileBox>
           <s.ProfileImg>
             <img src="/layout/Vector.png" />

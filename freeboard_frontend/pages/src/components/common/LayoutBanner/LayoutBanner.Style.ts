@@ -6,8 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   height: 400px;
-  background-color: black;
-  opacity: 0.7;
+  background-color: #c92a1f;
 `;
 
 export const Div = styled.div`
@@ -17,6 +16,7 @@ export const Div = styled.div`
   align-items: center;
   text-align: center;
   color: white;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
 `;
 
 export const Slider1 = styled(Slider)`
@@ -25,7 +25,7 @@ export const Slider1 = styled(Slider)`
   justify-content: center;
   align-items: center;
   width: 1100px;
-  height: 100%;
+  height: 90%;
 `;
 
 export const H3 = styled.h3`
@@ -37,4 +37,9 @@ export const Text = styled.div`
   color: white;
   font-weight: 500;
   font-size: 12px;
+`;
+
+export const BannerImg = styled.img`
+  width: 1100px;
+  height: 350px;
 `;

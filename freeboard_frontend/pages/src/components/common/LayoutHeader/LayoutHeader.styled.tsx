@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   padding: 52px 360px;
   width: 100%;
-  background-color: white;
+  background-color: #0d1c4a;
 `;
 
 export const Box = styled.div`
@@ -20,6 +20,13 @@ export const Box = styled.div`
 export const Logo = styled.div`
   width: 200px;
   height: 48px;
+`;
+
+export const LogoImag = styled.img`
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+  position: absolute;
 `;
 
 export const ProfileBox = styled.div`
