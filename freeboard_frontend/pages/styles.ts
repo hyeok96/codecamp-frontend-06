@@ -13,6 +13,7 @@ export const Body = styled.div`
 export const Text = styled.div`
   color: white;
   font-size: 100px;
+  opacity: 0;
 `;
 
 export const SmallText = styled.div`
@@ -23,6 +24,7 @@ export const SmallText = styled.div`
   margin: 0 auto;
   width: 1000px;
   color: white;
+  opacity: 0;
 `;
 
 export const Head = styled.div`
@@ -35,7 +37,9 @@ export const Head = styled.div`
   height: 100px;
 `;
 
-export const Logo = styled.img``;
+export const Logo = styled.img`
+  opacity: 0;
+`;
 
 export const Button = styled.button`
   border-radius: 15px;
@@ -62,4 +66,5 @@ export const ButtonBox = styled.div`
   padding-top: 100px;
   margin: auto;
   width: 1200px;
+  opacity: 0;
 `;

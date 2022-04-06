@@ -18,16 +18,42 @@ export default function Home() {
   };
 
   const imgRef = useRef(null);
+  const textRef = useRef(null);
+  const smallTextRef = useRef(null);
+  const btnRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(imgRef.current, { opacity: 0 }, { opacity: 1, duration: 3 });
+    const animation = async () => {
+      await gsap.fromTo(
+        textRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 1 }
+      );
+      await gsap.fromTo(
+        smallTextRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 1 }
+      );
+      await gsap.fromTo(
+        imgRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 1 }
+      );
+      await gsap.fromTo(
+        btnRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 1 }
+      );
+    };
+
+    animation();
   });
 
   return (
     <>
       <s.Body>
-        <s.Text>Arsenal F.C.</s.Text>
-        <s.SmallText>
+        <s.Text ref={textRef}>Arsenal F.C.</s.Text>
+        <s.SmallText ref={smallTextRef}>
           They called themselves Dial Square as a reference to the sundial atop
           the entrance to the factory. On December 11, 1886, Dial Square romped
           to a 6-0 victory over Eastern Wanderers; the first game in their
@@ -43,7 +69,7 @@ export default function Home() {
         <s.Logo src="/logo/arsenal2.svg" ref={imgRef} />
       </s.Head>
       <s.Div>
-        <s.ButtonBox>
+        <s.ButtonBox ref={btnRef}>
           {meun.map((el) => (
             <>
               <s.Button onClick={() => onClickMove(el.url)}>{el.name}</s.Button>

@@ -1,11 +1,15 @@
 import * as s from "./LayoutNavication.style";
 
 export default function NavigationPresenter() {
+  const name = ["축구순위", "자유 게시판", "중고마켓", "마이 페이지"];
+
   return (
     <s.Wrapper>
-      <s.MenuBox1>자유게시판</s.MenuBox1>
-      <s.MenuBox2>중고마켓</s.MenuBox2>
-      <s.MenuBox1>마이페이지</s.MenuBox1>
+      {name.map((el) => (
+        <>
+          <s.MenuBox1 key={el}>{el}</s.MenuBox1>;
+        </>
+      ))}
     </s.Wrapper>
   );
 }

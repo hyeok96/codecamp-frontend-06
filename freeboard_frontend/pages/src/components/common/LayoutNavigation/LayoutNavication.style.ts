@@ -19,15 +19,3 @@ export const MenuBox1 = styled.div`
   height: 100%;
   color: #ab9000;
 `;
-
-export const MenuBox2 = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 140px;
-  height: 20px;
-  border-right: 1px solid white;
-  border-left: 1px solid white;
-  color: #ab9000;
-`;
