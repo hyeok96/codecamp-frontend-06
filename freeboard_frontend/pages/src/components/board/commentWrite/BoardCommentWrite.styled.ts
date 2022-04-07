@@ -70,6 +70,7 @@ export const CommentWriteInput = styled.textarea`
   height: 100%;
   border: none;
   outline: none;
+  color: black;
 `;
 
 export const CommentBodyWriteSubmitBox = styled.div`

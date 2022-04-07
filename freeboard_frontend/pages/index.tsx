@@ -27,22 +27,22 @@ export default function Home() {
       await gsap.fromTo(
         textRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 1 }
+        { opacity: 1, duration: 0.8 }
       );
       await gsap.fromTo(
         smallTextRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 1 }
+        { opacity: 1, duration: 0.8 }
       );
       await gsap.fromTo(
         imgRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 1 }
+        { opacity: 1, duration: 0.8 }
       );
       await gsap.fromTo(
         btnRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 1 }
+        { opacity: 1, duration: 0.8 }
       );
     };
 

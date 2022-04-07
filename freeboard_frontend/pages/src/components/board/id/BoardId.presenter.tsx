@@ -49,7 +49,13 @@ export default function BoardIdPresenter(props: IBoardIdPresenterProps) {
           <s.BodyTitle>
             {props.data ? props.data.fetchBoard.title : "loading"}
           </s.BodyTitle>
-          {props.data?.fetchBoard.image && <s.BodyImage></s.BodyImage>}
+          {props.data?.fetchBoard.images.map((el) => (
+            <>
+              <s.BodyImage>
+                <s.Img src={`https://storage.googleapis.com/${el}`} />
+              </s.BodyImage>
+            </>
+          ))}
           <s.BodyText>
             {props.data ? props.data.fetchBoard.contents : "loading"}
           </s.BodyText>

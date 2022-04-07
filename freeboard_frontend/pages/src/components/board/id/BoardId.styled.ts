@@ -90,6 +90,12 @@ export const BodyImage = styled.div`
   margin-bottom: 40px;
   background: #f2f2f2;
 `;
+
+export const Img = styled.img`
+  width: 100%;
+  height: 480px;
+`;
+
 export const BodyText = styled.div`
   width: 100%;
   padding-bottom: 120px;

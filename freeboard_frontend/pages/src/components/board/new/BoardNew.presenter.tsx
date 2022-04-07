@@ -2,6 +2,7 @@ import * as s from "./BoardStyled";
 import { IBoardNewPresenterProps } from "./BoardNew.types";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
+import ImagePresenterPage from "../../common/Image/Image.presenter";
 
 export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
   // 랜더되는 부분
@@ -107,23 +108,12 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
         />
         <s.Error></s.Error>
       </s.Div2>
-      <s.Div2>
-        <s.MenuTitle>사진 첨부</s.MenuTitle>
-        <s.Div1>
-          <s.UploadDiv>
-            ✚<br />
-            Upload
-          </s.UploadDiv>
-          <s.UploadDiv>
-            ✚<br />
-            Upload
-          </s.UploadDiv>
-          <s.UploadDiv>
-            ✚<br />
-            Upload
-          </s.UploadDiv>
-        </s.Div1>
-      </s.Div2>
+      <ImagePresenterPage
+        onChangeImg={props.onChangeImg}
+        imgUrl={props.images}
+        isEdit={props.isEdit}
+        data={props.data}
+      />
       <s.Div2>
         <s.MenuTitle>메인 설정</s.MenuTitle>
         <s.Div1>

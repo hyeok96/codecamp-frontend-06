@@ -8,6 +8,7 @@ export const createBoard = gql`
       title
       contents
       youtubeUrl
+      images
     }
   }
 `;
@@ -28,6 +29,14 @@ export const UPDATE_BOARD = gql`
       title
       contents
       youtubeUrl
+    }
+  }
+`;
+
+export const UPLOADFILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
     }
   }
 `;

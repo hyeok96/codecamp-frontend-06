@@ -21,7 +21,9 @@ export interface IBoardNewPresenterProps {
   onClickAddressModal: () => void;
   isOpen: boolean;
   handleComplete: (data: any) => void;
+  onChangeImg: (e: ChangeEvent<HTMLInputElement>) => void;
   input: any;
+  images: any;
 }
 
 interface IupdateBoardInput {

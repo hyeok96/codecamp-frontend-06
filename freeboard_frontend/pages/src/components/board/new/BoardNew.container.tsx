@@ -2,12 +2,13 @@ import { useState, ChangeEvent, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import BoardNewPresenter from "./BoardNew.presenter";
-import { createBoard, UPDATE_BOARD } from "./BoarderNew.graph";
+import { createBoard, UPDATE_BOARD, UPLOADFILE } from "./BoarderNew.graph";
 import { IBoardNewContainerProps } from "./BoardNew.types";
 import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
+  IMutationUploadFileArgs,
 } from "../../../common/types/generated/types";
 import { Modal } from "antd";
 
@@ -24,6 +25,10 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
     addressZone: "",
     youtube: "",
   });
+
+  const [images, setImages] = useState([]);
+
+  // const [imgUrl, setImgUrl] = useState<string | undefined>("");
 
   const [isActive, setIsActive] = useState(false);
   const [isEditActive, setIsEditActive] = useState(false);
@@ -75,6 +80,10 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
     Pick<IMutation, "updateBoard">,
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOADFILE);
 
   async function onCilckRegister() {
     if (input.name === "") {
@@ -117,10 +126,12 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
                 addressDetail: input.adresssDetail,
                 zipcode: input.addressZone,
               },
-              images: [],
+              images,
             },
           },
         });
+
+        console.log(result);
         Modal.success({
           content: "게시글이 등록되었습니다.",
         });
@@ -133,6 +144,23 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
       }
     }
   }
+
+  const onChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    // const isVali = validation(file);
+    // if (!isVali) return;
+
+    try {
+      const result = await uploadFile({
+        variables: { file },
+      });
+
+      setImages((prev) => [...prev, result.data.uploadFile.url]);
+    } catch (error) {
+      Modal.error({ content: error.message });
+    }
+  };
 
   const onClickUpdate = async () => {
     if (input.pw === "") {
@@ -154,6 +182,7 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
           myVariables.updateBoardInput.contents = input.text;
         if (input.youtube !== "")
           myVariables.updateBoardInput.youtubeUrl = input.youtube;
+        if (images !== []) myVariables.updateBoardInput.images = images;
         if (
           input.address !== "" ||
           input.adresssDetail !== "" ||
@@ -221,7 +250,9 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
       onClickAddressModal={onClickAddressModal}
       isOpen={isOpen}
       handleComplete={handleComplete}
+      onChangeImg={onChangeImg}
       input={input}
+      images={images}
     />
   );
 }
