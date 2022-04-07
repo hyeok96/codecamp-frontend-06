@@ -41,8 +41,7 @@ const resolvers = {
 
   Mutation: {
     createBoard: async (_: any, args: any) => {
-      //데이터베이스에 접속해서 게시물 등록하기
-
+      //데이터베이스에 접
       await Board.insert({
         ...args.createBoardInput,
         // writer: args.createBoardInput.writer,
