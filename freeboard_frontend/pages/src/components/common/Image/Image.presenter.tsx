@@ -1,6 +1,7 @@
 import * as s from "./Image.style";
 import { useRef } from "react";
 import { IImageProps } from "./Image.types";
+// import { v4 as uuid } from "uuid";
 
 export default function ImagePresenterPage(props: IImageProps) {
   const imgRef = useRef<HTMLInputElement>(null);
@@ -20,7 +21,6 @@ export default function ImagePresenterPage(props: IImageProps) {
             onChange={props.onChangeImg}
             multiple
           />
-
           <s.UploadDiv onClick={onClickMoveImg}>
             ✚<br />
             Upload
@@ -31,7 +31,11 @@ export default function ImagePresenterPage(props: IImageProps) {
         props.data?.fetchBoard.images.map((el: any) => (
           <>
             <s.ImageBox>
-              <s.Img src={`https://storage.googleapis.com/${el}`} />
+              <s.Img
+                src={`https://storage.googleapis.com/${el}`}
+                onClick={onClickMoveImg}
+                id={el}
+              />
             </s.ImageBox>
           </>
         ))}

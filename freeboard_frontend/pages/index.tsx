@@ -11,6 +11,7 @@ export default function Home() {
     { name: "자유게시판", url: "boards" },
     { name: "중고마켓", url: "boards" },
     { name: "마이페이지", url: "boards" },
+    { name: "아무말 대잔치", url: "firebase" },
   ];
 
   const onClickMove = (page: string) => {

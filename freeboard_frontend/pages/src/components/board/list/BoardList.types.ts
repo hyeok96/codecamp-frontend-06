@@ -3,6 +3,7 @@ import { MouseEvent, ChangeEvent } from "react";
 export interface IBoardListPresenterPros {
   data: any;
   onClickDetailPage: (e: MouseEvent<HTMLDivElement>) => void;
+  mySearch: string;
 }
 
 export interface INavigationPros {

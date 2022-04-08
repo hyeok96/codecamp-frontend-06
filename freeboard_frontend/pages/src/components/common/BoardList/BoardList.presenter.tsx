@@ -1,7 +1,10 @@
 import * as S from "./BoardList.styled";
 import { IBoardListPresenterPros } from "../../../components/board/list/BoardList.types";
+import { v4 as uuid } from "uuid";
 
 export default function BoardListPage(props: IBoardListPresenterPros) {
+  console.log();
+
   return (
     <S.Wrapper>
       <S.ListBox>
@@ -19,7 +22,16 @@ export default function BoardListPage(props: IBoardListPresenterPros) {
               id={el._id}
             >
               <S.ColNum>{index + 1}</S.ColNum>
-              <S.ColTitle>{el.title}</S.ColTitle>
+              <S.ColTitle>
+                {el.title
+                  .replaceAll(props.mySearch, `#$%${props.mySearch}#$%`)
+                  .split("#$%")
+                  .map((el: string) => (
+                    <S.Word key={uuid()} isMatched={props.mySearch === el}>
+                      {el}
+                    </S.Word>
+                  ))}
+              </S.ColTitle>
               <S.ColWriter>{el.writer}</S.ColWriter>
               <S.ColDate>{el.createdAt.slice(0, 10)}</S.ColDate>
             </S.RowTitle>

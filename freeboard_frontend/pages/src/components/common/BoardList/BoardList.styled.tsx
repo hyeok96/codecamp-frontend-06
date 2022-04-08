@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { IProps } from "./BoardList.types";
 
 export const Wrapper = styled.div`
   margin: auto;
@@ -120,4 +121,8 @@ export const ColDate = styled.div`
   font-weight: 400;
   font-size: 16px;
   color: #4f4f4f;
+`;
+
+export const Word = styled.span`
+  color: ${(props: IProps) => (props.isMatched ? "#dc2f21" : "black")};
 `;

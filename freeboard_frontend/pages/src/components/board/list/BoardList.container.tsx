@@ -14,6 +14,7 @@ import {
 } from "../../../common/types/generated/types";
 import NavigationPage from "../../common/Navigation/Navigation";
 import BoardListPage from "../../common/BoardList/BoardList.presenter";
+import _ from "lodash";
 
 export default function BoardListConatiner() {
   const router = useRouter();
@@ -42,8 +43,14 @@ export default function BoardListConatiner() {
     router.push(`/boards/new`);
   };
 
+  const getDebounce = _.debounce((value) => {
+    refetch({ search: value });
+    countRefetch({ search: value });
+    setMySearch(value);
+  }, 200);
+
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setMySearch(e.target.value);
+    getDebounce(e.target.value);
   };
 
   const onChangeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,14 +64,10 @@ export default function BoardListConatiner() {
   const onClickSearchBoard = () => {
     const searchBoards: IQueryFetchBoardsArgs = {};
 
-    if (mySearch !== "" || mySearch === "") searchBoards.search = mySearch;
     if (startDate !== "") searchBoards.startDate = new Date(startDate);
     if (endDate !== "") searchBoards.endDate = new Date(endDate);
     const searchBoardCount: IQueryFetchBoardsCountArgs = {};
 
-    if (mySearch !== "" || mySearch === "") {
-      searchBoardCount.search = mySearch;
-    }
     if (startDate !== "" || startDate === "")
       searchBoardCount.startDate = new Date(startDate);
     if (endDate !== "" || startDate === "")
@@ -89,7 +92,11 @@ export default function BoardListConatiner() {
         onChangeStartDate={onChangeStartDate}
         onChangeEndDate={onChangeEndDate}
       />
-      <BoardListPage data={data} onClickDetailPage={onClickDetailPage} />
+      <BoardListPage
+        data={data}
+        onClickDetailPage={onClickDetailPage}
+        mySearch={mySearch}
+      />
       <NavigationPage lastPage={lastPage} refetch={refetch} />
     </>
   );
