@@ -13,7 +13,7 @@ export const Div = styled.div`
 
 export const Span = styled.div`
   color: ${(props: IPagination) =>
-    Number(props.id) === props.current ? "#FFD600" : "gray"};
+    Number(props.id) === props.current ? "#c92a1f" : "gray"};
   font-size: medium;
   width: 48px;
   height: 48px;

@@ -51,7 +51,14 @@ export const Img = styled.img`
 export const ImageBox = styled.div`
   width: 100%;
   height: 480px;
-  padding-bottom: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   background: #f2f2f2;
+`;
+
+export const DeleteBtn = styled.button`
+  border: none;
+  background-color: #d3d3d3;
+  margin-bottom: 30px;
+  width: 60px;
+  height: 30px;
 `;

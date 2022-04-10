@@ -16,7 +16,7 @@ export default function BoardListPage(props: IBoardListPresenterPros) {
             <S.HeadColDate>날짜</S.HeadColDate>
           </S.RowTitle>
           {props.data?.fetchBoards.map((el: any, index: number) => (
-            <S.RowTitle
+            <S.RowListTitle
               key={el._id}
               onClick={props.onClickDetailPage}
               id={el._id}
@@ -34,7 +34,7 @@ export default function BoardListPage(props: IBoardListPresenterPros) {
               </S.ColTitle>
               <S.ColWriter>{el.writer}</S.ColWriter>
               <S.ColDate>{el.createdAt.slice(0, 10)}</S.ColDate>
-            </S.RowTitle>
+            </S.RowListTitle>
           ))}
         </S.List>
       </S.ListBox>

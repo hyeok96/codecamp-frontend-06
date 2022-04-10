@@ -27,7 +27,8 @@ export default function ImagePresenterPage(props: IImageProps) {
           </s.UploadDiv>
         </s.Div1>
       </s.Div2>
-      {props.isEdit === true &&
+      {props.isEdit &&
+        props.isShowImage &&
         props.data?.fetchBoard.images.map((el: any) => (
           <>
             <s.ImageBox>
@@ -37,6 +38,9 @@ export default function ImagePresenterPage(props: IImageProps) {
                 id={el}
               />
             </s.ImageBox>
+            <s.DeleteBtn id={el} onClick={props.onClickDeleteImg}>
+              삭제
+            </s.DeleteBtn>
           </>
         ))}
       {props.imgUrl.map((el: any) => (

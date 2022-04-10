@@ -6,8 +6,6 @@ import ImagePresenterPage from "../../common/Image/Image.presenter";
 
 export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
   // 랜더되는 부분
-  console.log(props.data);
-
   return (
     <s.Wrapper>
       <s.Title>게시물 {props.isEdit ? "수정" : "등록"}</s.Title>
@@ -113,6 +111,8 @@ export default function BoardNewPresenter(props: IBoardNewPresenterProps) {
         imgUrl={props.images}
         isEdit={props.isEdit}
         data={props.data}
+        onClickDeleteImg={props.onClickDeleteImg}
+        isShowImage={props.isShowImage}
       />
       <s.Div2>
         <s.MenuTitle>메인 설정</s.MenuTitle>

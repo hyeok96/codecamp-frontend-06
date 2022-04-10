@@ -1,8 +1,8 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 
 export interface IBoardNewContainerProps {
   isEdit: boolean;
-  data?: any;
+  data: any;
 }
 
 export interface IBoardNewPresenterProps {
@@ -13,7 +13,6 @@ export interface IBoardNewPresenterProps {
   errorTitle: string;
   errorText: string;
   onClickUpdate: () => {};
-  data?: any;
   isEditActive: boolean;
   isActive: boolean;
   isEdit: boolean;
@@ -24,6 +23,9 @@ export interface IBoardNewPresenterProps {
   onChangeImg: (e: ChangeEvent<HTMLInputElement>) => void;
   input: any;
   images: any;
+  onClickDeleteImg: (e: MouseEvent<HTMLButtonElement>) => void;
+  data?: any;
+  isShowImage?: boolean;
 }
 
 interface IupdateBoardInput {

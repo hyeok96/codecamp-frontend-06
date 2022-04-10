@@ -1,5 +1,4 @@
-import { useState, ChangeEvent, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useState, ChangeEvent, useEffect, MouseEvent } from "react";
 import { useMutation } from "@apollo/client";
 import BoardNewPresenter from "./BoardNew.presenter";
 import { createBoard, UPDATE_BOARD, UPLOADFILE } from "./BoarderNew.graph";
@@ -11,6 +10,7 @@ import {
   IMutationUploadFileArgs,
 } from "../../../common/types/generated/types";
 import { Modal } from "antd";
+import { useRouter } from "next/router";
 
 export default function BoardNewContainer(props: IBoardNewContainerProps) {
   const router = useRouter();
@@ -27,6 +27,7 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
   });
 
   const [images, setImages] = useState([]);
+  const [isShowImage, setIsShowImage] = useState(true);
 
   // const [imgUrl, setImgUrl] = useState<string | undefined>("");
 
@@ -232,6 +233,15 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
     });
   };
 
+  const onClickDeleteImg = (e: MouseEvent<HTMLButtonElement>) => {
+    const img = props.data?.fetchBoard.images;
+    const newImg = img.filter(
+      (el: any) => el !== (e.target as HTMLButtonElement).id
+    );
+    setImages(newImg);
+    setIsShowImage(false);
+  };
+
   // 랜더되는 부분
   return (
     <BoardNewPresenter
@@ -253,6 +263,8 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
       onChangeImg={onChangeImg}
       input={input}
       images={images}
+      onClickDeleteImg={onClickDeleteImg}
+      isShowImage={isShowImage}
     />
   );
 }

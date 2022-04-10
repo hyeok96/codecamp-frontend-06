@@ -200,6 +200,10 @@ export const UpdateBox = styled.div`
   background: #ffffff;
   border: 1px solid #bdbdbd;
   box-sizing: border-box;
+  &:hover {
+    background-color: #c92a1f;
+    color: #ffffff;
+  }
 `;
 
 // 좋아요, 싫어요

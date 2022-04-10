@@ -17,5 +17,5 @@ export const MenuBox1 = styled.div`
   align-items: center;
   width: 140px;
   height: 100%;
-  color: #ab9000;
+  color: #c92a1f;
 `;

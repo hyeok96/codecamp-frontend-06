@@ -81,6 +81,8 @@ export default function BoardListConatiner() {
     router.push(`/boards/${(e.currentTarget as HTMLDivElement).id}`);
   };
 
+  console.log(bestBoardData);
+
   return (
     <>
       <BoardListPresenter

@@ -26,6 +26,17 @@ export const RowTitle = styled.div`
   border-bottom: 1px solid #bdbdbd;
 `;
 
+export const RowListTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 40px 14px;
+  width: 100%;
+  height: 52px;
+  border-bottom: 1px solid #bdbdbd;
+`;
+
 export const RowBody = styled.div`
   width: 100%;
   height: 24px;
@@ -88,10 +99,6 @@ export const ColTitle = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  color: #4f4f4f;
-  &:hover {
-    color: #ffd600;
-  }
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
