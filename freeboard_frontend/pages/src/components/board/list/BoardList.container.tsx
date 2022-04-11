@@ -44,7 +44,7 @@ export default function BoardListConatiner() {
   };
 
   const getDebounce = _.debounce((value) => {
-    refetch({ search: value });
+    refetch({ search: value, page: 1 });
     countRefetch({ search: value });
     setMySearch(value);
   }, 200);

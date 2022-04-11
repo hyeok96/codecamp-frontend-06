@@ -13,6 +13,7 @@ import { globalStyles } from "./src/commons/styles/golbalStyles";
 import { initializeApp } from "firebase/app";
 // apollo-upload-client를 설치 후 createUpliadLink 불러오기
 import { createUploadLink } from "apollo-upload-client";
+import { RecoilRoot } from "recoil";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBV8FHEs7-kVjcM5HAKdlo96kp55jDDemQ",
@@ -39,12 +40,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <ApolloProvider client={client}>
-      <Global styles={globalStyles} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <RecoilRoot>
+      <ApolloProvider client={client}>
+        <Global styles={globalStyles} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
+    </RecoilRoot>
   );
 }
 
