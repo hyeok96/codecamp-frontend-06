@@ -6,7 +6,7 @@ import { ILayout } from "./layout.tyoes";
 
 export default function Layout(props: ILayout) {
   const router = useRouter();
-  const HIDDEN_LAYOUT = ["/"];
+  const HIDDEN_LAYOUT = ["/", "/login", "/signUp"];
 
   const isHidden = HIDDEN_LAYOUT.includes(router.asPath);
   return (

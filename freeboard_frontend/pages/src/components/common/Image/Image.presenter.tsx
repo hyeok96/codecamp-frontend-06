@@ -43,7 +43,7 @@ export default function ImagePresenterPage(props: IImageProps) {
             </s.DeleteBtn>
           </>
         ))}
-      {props.imgUrl.map((el: any) => (
+      {props.imgUrl?.map((el: any) => (
         <>
           <s.ImageBox>
             <s.Img src={`https://storage.googleapis.com/${el}`} />

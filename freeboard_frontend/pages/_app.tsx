@@ -11,6 +11,7 @@ import Layout from "./src/components/common/layout";
 import { createUploadLink } from "apollo-upload-client";
 
 import { initializeApp } from "firebase/app";
+import { RecoilRoot } from "recoil";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCnQufwMKna4tDIG7b7k49Nq2BftnPfpZw",
@@ -34,11 +35,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <ApolloProvider client={client}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <RecoilRoot>
+      <ApolloProvider client={client}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
+    </RecoilRoot>
   );
 }
 
