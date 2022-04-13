@@ -1,6 +1,8 @@
+import { withAuth } from "../src/common/hocs/withAuth";
 import BoardListConatiner from "../src/components/board/list/BoardList.container";
 
-export default function BoardListPage() {
-    return <BoardListConatiner />
-    
+function BoardListPage() {
+  return <BoardListConatiner />;
 }
+
+export default withAuth(BoardListPage);

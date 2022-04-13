@@ -1,18 +1,27 @@
 import { ChangeEvent } from "react";
 import { useRecoilState } from "recoil";
 import LoginPresenterPage from "./login.presenter";
-import { LoginInputState, LoginErrorState } from "../../common/store/index";
+import {
+  LoginInputState,
+  LoginErrorState,
+  AccessToken,
+} from "../../common/store/index";
 import { useRouter } from "next/router";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "./login.query";
+import { Modal } from "antd";
 
 export default function LoginContainerPage() {
   const router = useRouter();
 
-  const [loingInput, setLoginInput] = useRecoilState(LoginInputState);
-  const [_, setLoginError] = useRecoilState(LoginErrorState);
+  const [loginUser] = useMutation(LOGIN_USER);
+  const [loginInput, setLoginInput] = useRecoilState(LoginInputState);
+  const [, setLoginError] = useRecoilState(LoginErrorState);
+  const [, setAccessToken] = useRecoilState(AccessToken);
 
   const onChangeLoginInput = (e: ChangeEvent<HTMLInputElement>) => {
     setLoginInput({
-      ...loingInput,
+      ...loginInput,
       [e.target.name]: e.target.value,
     });
 
@@ -30,33 +39,51 @@ export default function LoginContainerPage() {
     }
   };
 
-  const onClickLoginBtn = () => {
-    if (loingInput.email !== "") {
+  const onClickLoginBtn = async () => {
+    if (loginInput.email !== "") {
       setLoginError((prev) => ({
         ...prev,
         emailerror: "",
       }));
     }
 
-    console.log(loingInput);
-    if (loingInput.email === "") {
+    console.log(loginInput);
+    if (loginInput.email === "") {
       setLoginError((prev) => ({
         ...prev,
         emailerror: "이메일 필수입력입니다.",
       }));
     }
 
-    if (loingInput.password === "") {
+    if (loginInput.password === "") {
       setLoginError((prev) => ({
         ...prev,
         passworderror: "비밀번호는 필수입력입니다.",
       }));
     }
-    if (loingInput.password !== "") {
+    if (loginInput.password !== "") {
       setLoginError((prev) => ({
         ...prev,
         passworderror: "",
       }));
+    }
+
+    if (loginInput.password !== "" && loginInput.email !== "") {
+      try {
+        const result = await loginUser({
+          variables: {
+            ...loginInput,
+          },
+        });
+
+        const loginToken = result.data?.loginUser.accessToken;
+        setAccessToken(loginToken);
+        localStorage.setItem("accessToken", loginToken);
+
+        router.push("/boards");
+      } catch (error) {
+        Modal.error({ content: error.message });
+      }
     }
   };
 

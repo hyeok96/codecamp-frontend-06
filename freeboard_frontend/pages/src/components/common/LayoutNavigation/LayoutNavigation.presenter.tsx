@@ -12,7 +12,7 @@ export default function NavigationPresenter() {
     { name: "홈", router: () => onClickMovePage("/") },
     { name: "축구순위", router: () => onClickMovePage("/MyApi") },
     { name: "지유게시판", router: () => onClickMovePage("/boards") },
-    { name: "중고마켓", router: () => onClickMovePage("/boards") },
+    { name: "중고마켓", router: () => onClickMovePage("/market") },
     { name: "마이 페이지", router: () => onClickMovePage("/boards") },
   ];
 

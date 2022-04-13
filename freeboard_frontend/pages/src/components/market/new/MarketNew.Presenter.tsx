@@ -47,7 +47,10 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
             </s.AddressDiv>
           </s.Div3>
         </s.Div2>
-        <ImagePresenterPage />
+        <ImagePresenterPage
+          onChangeUseditemImage={props.onChangeUseditemImage}
+          isUseditem={true}
+        />
         <s.Div5>
           <s.Btn3 onClick={props.onClickCreateUseditem}>등록하기</s.Btn3>
         </s.Div5>

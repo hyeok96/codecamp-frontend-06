@@ -1,11 +1,20 @@
 import { useRecoilState } from "recoil";
 import SignUpPresenterPage from "./siginUp.presenter";
 import { SignUpInputState, LoginErrorState } from "../../common/store/index";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
+import { useRouter } from "next/router";
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "./signUp.Query";
+import { Modal } from "antd";
 
 export default function SignUpContainerPage() {
+  const router = useRouter();
+
   const [signUpInput, setSignUpInput] = useRecoilState(SignUpInputState);
   const [error, setError] = useRecoilState(LoginErrorState);
+  const [checkedPw, setCheckedPw] = useState("");
+
+  const [createUser] = useMutation(CREATE_USER);
 
   const onChangeSingUpInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSignUpInput((prev) => ({
@@ -27,7 +36,11 @@ export default function SignUpContainerPage() {
     }
   };
 
-  const onClickSignUpBtn = () => {
+  const onChangeCheckedPw = (e: ChangeEvent<HTMLInputElement>) => {
+    setCheckedPw(e.target.value);
+  };
+
+  const onClickSignUpBtn = async () => {
     if (signUpInput.email === "") {
       setError((prev) => ({
         ...prev,
@@ -64,16 +77,44 @@ export default function SignUpContainerPage() {
       }));
     }
 
-    if (signUpInput.checkpassword === "") {
+    if (checkedPw === "") {
       setError((prev) => ({
         ...prev,
         checkpassworderror: "필수 값입니다.",
       }));
     } else {
-      setError((prev) => ({
-        ...prev,
-        checkpassworderror: "",
-      }));
+      if (signUpInput.password !== checkedPw) {
+        setError((prev) => ({
+          ...prev,
+          checkpassworderror: "비밀번호가 다릅니다.",
+        }));
+      } else {
+        setError((prev) => ({
+          ...prev,
+          checkpassworderror: "",
+        }));
+      }
+    }
+
+    if (
+      signUpInput.email !== "" &&
+      signUpInput.name !== "" &&
+      signUpInput.password !== "" &&
+      checkedPw !== ""
+    ) {
+      try {
+        const result = await createUser({
+          variables: {
+            createUserInput: {
+              ...signUpInput,
+            },
+          },
+        });
+        console.log(result);
+        router.push("/login");
+      } catch (error) {
+        Modal.error({ content: error.message });
+      }
     }
   };
 
@@ -81,6 +122,7 @@ export default function SignUpContainerPage() {
     <SignUpPresenterPage
       onChangeSingUpInput={onChangeSingUpInput}
       onClickSignUpBtn={onClickSignUpBtn}
+      onChangeCheckedPw={onChangeCheckedPw}
     />
   );
 }

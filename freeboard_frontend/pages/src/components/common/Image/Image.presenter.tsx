@@ -1,9 +1,12 @@
 import * as s from "./Image.style";
 import { useRef } from "react";
 import { IImageProps } from "./Image.types";
+import { useRecoilState } from "recoil";
+import { ProductInputState } from "../../../common/store";
 // import { v4 as uuid } from "uuid";
 
 export default function ImagePresenterPage(props: IImageProps) {
+  const [productInput] = useRecoilState(ProductInputState);
   const imgRef = useRef<HTMLInputElement>(null);
 
   const onClickMoveImg = () => {
@@ -18,7 +21,9 @@ export default function ImagePresenterPage(props: IImageProps) {
           <s.Input
             type="file"
             ref={imgRef}
-            onChange={props.onChangeImg}
+            onChange={
+              props.isUseditem ? props.onChangeUseditemImage : props.onChangeImg
+            }
             multiple
           />
           <s.UploadDiv onClick={onClickMoveImg}>
@@ -44,6 +49,13 @@ export default function ImagePresenterPage(props: IImageProps) {
           </>
         ))}
       {props.imgUrl?.map((el: any) => (
+        <>
+          <s.ImageBox>
+            <s.Img src={`https://storage.googleapis.com/${el}`} />
+          </s.ImageBox>
+        </>
+      ))}
+      {productInput.images?.map((el: string) => (
         <>
           <s.ImageBox>
             <s.Img src={`https://storage.googleapis.com/${el}`} />

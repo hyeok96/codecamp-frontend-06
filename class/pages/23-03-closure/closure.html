@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>클로저 연습</title>
+    <script>
+      function aaa() {
+        const apple = 10;
+
+        function bbb() {
+          const banana = 20;
+
+          console.log(apple);
+          console.log(banana);
+        }
+        bbb();
+
+        const qqq = 30;
+      }
+
+      aaa();
+    </script>
+  </head>
+  <body></body>
+</html>

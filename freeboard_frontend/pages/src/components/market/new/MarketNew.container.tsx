@@ -3,15 +3,23 @@ import MarketPresenterPage from "./MarketNew.Presenter";
 import { useRecoilState } from "recoil";
 import { ProductInputState } from "../../../common/store";
 import { useMutation } from "@apollo/client";
-import { CREATE_USEDITEM } from "../MarketQurey/index";
+import { CREATE_USEDITEM, UPLOAD_FILE } from "../MarketQurey/index";
 import {
   IMutation,
   IMutationCreateUseditemArgs,
+  IMutationUploadFileArgs,
 } from "../../../common/types/generated/types";
 import { Modal } from "antd";
+import { useRouter } from "next/router";
 
 export default function MarketNewContainerpage() {
+  const router = useRouter();
   const [productInput, setProductInput] = useRecoilState(ProductInputState);
+
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
 
   const onChangeProcutInput = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -67,11 +75,28 @@ export default function MarketNewContainerpage() {
           },
         },
       });
-      console.log(result);
+      router.push(`/market/${result.data.createUseditem._id}`);
     } catch (error) {
       Modal.error({
         content: error.message,
       });
+    }
+  };
+
+  const onChangeUseditemImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    try {
+      const result = await uploadFile({
+        variables: { file },
+      });
+
+      setProductInput((prev) => ({
+        ...prev,
+        images: [...prev.images, result.data.uploadFile.url],
+      }));
+    } catch (error) {
+      Modal.error({ content: error.message });
     }
   };
 
@@ -82,6 +107,7 @@ export default function MarketNewContainerpage() {
       onChangeProductTag={onChangeProductTag}
       onChangeProductImage={onChangeProductImage}
       onClickCreateUseditem={onClickCreateUseditem}
+      onChangeUseditemImage={onChangeUseditemImage}
     />
   );
 }

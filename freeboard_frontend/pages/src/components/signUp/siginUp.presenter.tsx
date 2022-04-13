@@ -43,7 +43,7 @@ export default function SignUpPresenterPage(props: ISigUpPresenterProps) {
             <s.Input
               placeholder="비밀번호을 입력하세요"
               name="checkpassword"
-              onChange={props.onChangeSingUpInput}
+              onChange={props.onChangeCheckedPw}
             />
             <s.SignUpError>{error.checkpassworderror}</s.SignUpError>
           </s.InputBox>

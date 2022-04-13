@@ -8,4 +8,5 @@ export interface IMarketNewPresenterProps {
   onChangeProductTag?: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeProductImage?: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickCreateUseditem?: () => void;
+  onChangeUseditemImage?: (e: ChangeEvent<HTMLInputElement>) => void;
 }

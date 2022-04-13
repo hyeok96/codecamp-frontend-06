@@ -46,6 +46,10 @@ export const SignUpInputState = atom({
     email: "",
     name: "",
     password: "",
-    checkpassword: "",
   },
+});
+
+export const AccessToken = atom({
+  key: "AccessToken",
+  default: "",
 });

@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { identity } from "lodash";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -35,8 +36,10 @@ export default function LoignPage() {
           password,
         },
       });
+
       const accessToken = result.data.loginUser.accessToken;
       setAccessToken(accessToken);
+
       router.push("/Quiz5/2day/loginsuccess");
     } catch (error) {
       alert("로그인 먼저 해주세요");

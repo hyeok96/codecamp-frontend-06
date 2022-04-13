@@ -5,6 +5,7 @@ import {
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../src/common/types/generated/types";
+import { withAuth } from "../../../src/common/hocs/withAuth";
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -24,7 +25,7 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function UpadteBoardPage() {
+function UpadteBoardPage() {
   const router = useRouter();
 
   const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
@@ -38,3 +39,5 @@ export default function UpadteBoardPage() {
 
   return <BoardNewContainer isEdit={true} data={data} />;
 }
+
+export default withAuth(UpadteBoardPage);

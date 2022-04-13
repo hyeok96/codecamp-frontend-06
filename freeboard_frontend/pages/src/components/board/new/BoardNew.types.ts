@@ -2,7 +2,7 @@ import { ChangeEvent, MouseEvent } from "react";
 
 export interface IBoardNewContainerProps {
   isEdit: boolean;
-  data: any;
+  data?: any;
 }
 
 export interface IBoardNewPresenterProps {

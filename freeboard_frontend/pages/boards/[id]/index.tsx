@@ -2,8 +2,9 @@ import { Fragment } from "react";
 import BoardCommentContainer from "../../src/components/board/comment/BoardComment.Container";
 import BoardIdContainer from "../../src/components/board/id/BoardId.container";
 import BoardCommentWriterContainer from "../../src/components/board/commentWrite/BoardCommentWriter.container";
+import { withAuth } from "../../src/common/hocs/withAuth";
 
-export default function FetchBoardPage() {
+function FetchBoardPage() {
   return (
     <Fragment>
       <BoardIdContainer />
@@ -12,3 +13,5 @@ export default function FetchBoardPage() {
     </Fragment>
   );
 }
+
+export default withAuth(FetchBoardPage);

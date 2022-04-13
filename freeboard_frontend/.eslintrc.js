@@ -19,6 +19,7 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/prop-types": "off",
     "no-unused-vars": "off",
+    "react/display-name": "off",
     // "no-unneeded-ternary": "off",
   },
   settings: {
