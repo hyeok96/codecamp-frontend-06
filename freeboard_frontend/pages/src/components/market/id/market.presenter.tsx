@@ -1,8 +1,18 @@
 import * as s from "./market.style";
 import { IMarketIdPresenterProps } from "./market.type";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { v4 as uuidv4 } from "uuid";
 
 export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
-  console.log(props.data);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
     <>
       <s.Wrapper>
@@ -30,13 +40,16 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
         <s.Body>
           <s.BodyTitle>{props.data?.fetchUseditem.name}</s.BodyTitle>
           <s.BodyPrice>{props.data?.fetchUseditem.price}</s.BodyPrice>
-          {props.data?.fetchUseditem.images.map((el: string) => (
-            <>
-              <s.BodyImage>
-                <s.Img src={`https://storage.googleapis.com/${el}`} />
-              </s.BodyImage>
-            </>
-          ))}
+          <s.BodyImage>
+            <s.Slider1 {...settings}>
+              {props.data?.fetchUseditem.images.map((el: string) => (
+                <div key={uuidv4()}>
+                  <img src={`https://storage.googleapis.com/${el}`} />
+                </div>
+              ))}
+            </s.Slider1>
+          </s.BodyImage>
+
           <s.BodyText>{props.data?.fetchUseditem.contents}</s.BodyText>
           <s.BodyTag>{props.data?.fetchUseditem.tags[0]}</s.BodyTag>
           <s.BodyMap></s.BodyMap>

@@ -6,12 +6,17 @@ import {
 } from "@apollo/client";
 // apollo-upload-client를 설치 후 createUpliadLink 불러오기
 import { createUploadLink } from "apollo-upload-client";
-import { accessTokenState } from "../../../../src/commons/store/index";
+import {
+  accessTokenState,
+  userInfoState,
+} from "../../../../src/commons/store/index";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 
 export default function ApolloSetting(props: any) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [, setUserInfo] = useRecoilState(userInfoState);
+
   // uploadLink라는 변수에 createUploadLink를 통해서 백엔드 주소를 uri를 통해서 연결하고
 
   // 여기는 prerendering시 문제가 된다.
@@ -36,8 +41,10 @@ export default function ApolloSetting(props: any) {
 
   // 해결방법3
   useEffect(() => {
-    const myLoaclStorageAcessToken = localStorage.getItem("accessToken");
-    setAccessToken(myLoaclStorageAcessToken || "");
+    const acessToken = localStorage.getItem("accessToken");
+    const userInfo = JSON.parse(localStorage.getItem("userInfo") || "{}");
+    setAccessToken(acessToken || "");
+    setUserInfo(userInfo);
   }, []);
 
   const uploadLink = createUploadLink({

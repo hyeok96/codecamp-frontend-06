@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Slider from "react-slick";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -89,6 +90,11 @@ export const BodyPrice = styled.div`
 `;
 
 export const BodyImage = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+
   width: 100%;
   height: 480px;
   padding-bottom: 40px;
@@ -217,4 +223,11 @@ export const UpdateBox = styled.div`
   }
 `;
 
-// 좋아요, 싫어요
+export const Slider1 = styled(Slider)`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 120%;
+`;

@@ -75,8 +75,9 @@ export default function LoginContainerPage() {
             ...loginInput,
           },
         });
-
-        const loginToken = result.data?.loginUser.accessToken;
+        console.log(result);
+        const loginToken = result.data.loginUser.accessToken;
+        console.log(loginToken);
         setAccessToken(loginToken);
         localStorage.setItem("accessToken", loginToken);
 
