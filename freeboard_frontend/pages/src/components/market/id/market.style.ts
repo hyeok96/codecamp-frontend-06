@@ -94,17 +94,15 @@ export const BodyImage = styled.div`
   flex-direction: row;
   align-items: center;
   justify-items: center;
-
   width: 100%;
-  height: 480px;
+  height: 415px;
   padding-bottom: 40px;
   margin-bottom: 40px;
-  background: #f2f2f2;
 `;
 
 export const Img = styled.img`
   width: 100%;
-  height: 480px;
+  height: 100%;
 `;
 
 export const BodyText = styled.div`
@@ -118,6 +116,8 @@ export const BodyText = styled.div`
 `;
 
 export const BodyTag = styled.div`
+  display: flex;
+  flex-direction: row;
   width: 100%;
   padding-bottom: 40px;
   font-family: "Noto Sans CJK KR";
@@ -127,6 +127,8 @@ export const BodyTag = styled.div`
   color: #bdbdbd;
   border-bottom: 1px solid #bdbdbd;
 `;
+
+export const TagSpan = styled.span``;
 
 export const BodyMap = styled.div`
   width: 100%;
@@ -228,6 +230,9 @@ export const Slider1 = styled(Slider)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
   width: 100%;
-  height: 120%;
+  height: 100%;
 `;
+
+export const ImageBox = styled.div``;

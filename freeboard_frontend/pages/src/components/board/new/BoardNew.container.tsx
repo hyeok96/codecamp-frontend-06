@@ -179,11 +179,15 @@ export default function BoardNewContainer(props: IBoardNewContainerProps) {
 
         if (input.title !== "")
           myVariables.updateBoardInput.title = input.title;
+
         if (input.text !== "")
           myVariables.updateBoardInput.contents = input.text;
+
         if (input.youtube !== "")
           myVariables.updateBoardInput.youtubeUrl = input.youtube;
+
         if (images !== []) myVariables.updateBoardInput.images = images;
+
         if (
           input.address !== "" ||
           input.adresssDetail !== "" ||

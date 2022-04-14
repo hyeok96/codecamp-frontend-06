@@ -27,6 +27,7 @@ export const FETCH_USED_ITEM = gql`
         name
         picture
       }
+
       images
     }
   }

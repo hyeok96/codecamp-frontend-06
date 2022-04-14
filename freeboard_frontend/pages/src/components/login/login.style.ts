@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ILoginStyleProps } from "./login.types";
 
 export const Wrapper = styled.div`
   padding-top: 240px;
@@ -69,8 +70,9 @@ export const LoginStateText = styled.div`
 export const LoginBtn = styled.button`
   width: 384px;
   height: 64px;
-  background: #4f4f4f;
   border-radius: 16px;
+  background-color: ${(props: ILoginStyleProps) =>
+    props.isActive ? "#0d1c4a" : "none"};
 `;
 
 export const LoginSubBox = styled.div`
