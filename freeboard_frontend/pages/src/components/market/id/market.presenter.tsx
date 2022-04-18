@@ -43,25 +43,22 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
           <s.BodyTitle>{props.data?.fetchUseditem.name}</s.BodyTitle>
           <s.BodyPrice>{props.data?.fetchUseditem.price}</s.BodyPrice>
           <s.BodyImage>
-            <s.Slider1 {...settings}>
-              {props.data?.fetchUseditem.images?.map((el: any) => (
+            {/* <s.Slider1 {...settings}> */}
+            {/* {props.data?.fetchUseditem.images?.map((el: any) => (
                 <>
                   <div key={el}>
                     <s.Img src={`https://storage.googleapis.com/${el}`} />
                   </div>
                 </>
-              ))}
-              {/* <s.ImageBox>
+              ))} */}
+            {/* </s.Slider1> */}
+            {props.data?.fetchUseditem.images?.map((el: string) => (
+              <s.ImageBox key={el}>
                 <s.Img
                   src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[0]}`}
                 />
               </s.ImageBox>
-              <s.ImageBox>
-                <s.Img
-                  src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[1]}`}
-                />
-              </s.ImageBox> */}
-            </s.Slider1>
+            ))}
           </s.BodyImage>
           <s.BodyText>{props.data?.fetchUseditem.contents}</s.BodyText>
           <s.BodyTag>

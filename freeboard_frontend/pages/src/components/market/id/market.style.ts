@@ -101,6 +101,7 @@ export const BodyImage = styled.div`
 `;
 
 export const Img = styled.img`
+  margin-right: 10px;
   width: 100%;
   height: 100%;
 `;
@@ -235,4 +236,9 @@ export const Slider1 = styled(Slider)`
   height: 100%;
 `;
 
-export const ImageBox = styled.div``;
+export const ImageBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-right: 10px;
+`;

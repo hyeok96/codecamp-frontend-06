@@ -9,4 +9,9 @@ export interface IMarketNewPresenterProps {
   onChangeProductImage?: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickCreateUseditem?: () => void;
   onChangeUseditemImage?: (e: ChangeEvent<HTMLInputElement>) => void;
+  activeBtn: boolean;
+}
+
+export interface IMarketStyleProps {
+  activeBtn?: boolean;
 }

@@ -52,7 +52,12 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
           isUseditem={true}
         />
         <s.Div5>
-          <s.Btn3 onClick={props.onClickCreateUseditem}>등록하기</s.Btn3>
+          <s.Btn3
+            onClick={props.onClickCreateUseditem}
+            activeBtn={props.activeBtn}
+          >
+            등록하기
+          </s.Btn3>
         </s.Div5>
       </s.Wrapper>
     </>

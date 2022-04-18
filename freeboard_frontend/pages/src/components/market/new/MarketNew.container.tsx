@@ -1,7 +1,7 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import MarketPresenterPage from "./MarketNew.Presenter";
 import { useRecoilState } from "recoil";
-import { ProductInputState } from "../../../common/store";
+import { ActiveBtnState, ProductInputState } from "../../../common/store";
 import { useMutation } from "@apollo/client";
 import { CREATE_USEDITEM, UPLOAD_FILE } from "../MarketQurey/index";
 import {
@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 export default function MarketNewContainerpage() {
   const router = useRouter();
   const [productInput, setProductInput] = useRecoilState(ProductInputState);
+  const [activeBtn, setActiveBtn] = useState(false);
 
   const [uploadFile] = useMutation<
     Pick<IMutation, "uploadFile">,
@@ -34,6 +35,12 @@ export default function MarketNewContainerpage() {
         ...productInput,
         [e.target.name]: e.target.value,
       });
+    }
+
+    if (e.target.value !== "" && e.target.name === "name") {
+      setActiveBtn(true);
+    } else if (e.target.value === "" && e.target.name === "name") {
+      setActiveBtn(false);
     }
   };
 
@@ -108,6 +115,7 @@ export default function MarketNewContainerpage() {
       onChangeProductImage={onChangeProductImage}
       onClickCreateUseditem={onClickCreateUseditem}
       onChangeUseditemImage={onChangeUseditemImage}
+      activeBtn={activeBtn}
     />
   );
 }

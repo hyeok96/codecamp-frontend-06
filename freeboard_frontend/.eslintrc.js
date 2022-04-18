@@ -20,6 +20,7 @@ module.exports = {
     "react/prop-types": "off",
     "no-unused-vars": "off",
     "react/display-name": "off",
+    "no-useless-return": "off",
     // "no-unneeded-ternary": "off",
   },
   settings: {

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { IMarketStyleProps } from "./MarketNew.type";
 
 export const Wrapper = styled.div`
   box-sizing: border-box;
@@ -89,14 +90,6 @@ export const Input7 = styled.input`
   color: #bdbdbd;
 `;
 
-// Input
-// export const Input = styled.input`
-//   border: 1px solid #bdbdbd;
-//   width: 486px;
-//   height: 52px;
-//   padding-left: 10px;
-// `;
-
 export const ProductInput = styled.input`
   border: 1px solid #bdbdbd;
   width: 100%;
@@ -146,7 +139,8 @@ export const Btn3 = styled.button`
   padding: 14px 60px;
   width: 179px;
   height: 52px;
-  background-color: #ffd600;
+  background-color: ${(props: IMarketStyleProps) =>
+    props.activeBtn ? "#c92a1f" : "none"};
 `;
 
 // 기타
