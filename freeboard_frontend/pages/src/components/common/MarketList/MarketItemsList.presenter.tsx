@@ -32,7 +32,7 @@ export default function MarketItemsListPresenterPage(
             <s.ListBox
               key={el._id}
               id={el._id}
-              onClick={props.onClickMoveDetailPage}
+              onClick={props.onClickMoveDetailPage(el)}
             >
               <s.ListImageBox>
                 <s.ProductImage

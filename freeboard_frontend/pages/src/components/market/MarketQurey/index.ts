@@ -89,3 +89,23 @@ export const UPDATE_USED_ITEM = gql`
     }
   }
 `;
+
+export const DELETE_USED_ITEM = gql`
+  mutation deleteUseditem($useditemId: ID!) {
+    deleteUseditem(useditemId: $useditemId)
+  }
+`;
+
+export const CREATE_USED_ITEM_QUESTION = gql`
+  mutation createUseditemQuestion(
+    $createUseditemQuestionInput: CreateUseditemQuestionInput!
+    $useditemId: ID!
+  ) {
+    createUseditemQuestion(
+      createUseditemQuestionInput: $createUseditemQuestionInput
+      useditemId: $useditemId
+    ) {
+      _id
+    }
+  }
+`;

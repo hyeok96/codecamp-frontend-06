@@ -81,13 +81,19 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
         </s.Body>
       </s.Wrapper>
       <s.UpdateMain>
-        <s.UpdateBox>목록으로</s.UpdateBox>
+        <s.UpdateBox onClick={onClickMoveToPage(`/market`)}>
+          목록으로
+        </s.UpdateBox>
         <s.UpdateBox
           onClick={onClickMoveToPage(`/market/${router.query.id}/edit`)}
         >
           수정하기
         </s.UpdateBox>
-        <s.UpdateBox>삭제하기</s.UpdateBox>
+        <s.UpdateBox
+          onClick={props.onClickDeleteUseditem(props.data?.fetchUseditem._id)}
+        >
+          삭제하기
+        </s.UpdateBox>
       </s.UpdateMain>
     </>
   );

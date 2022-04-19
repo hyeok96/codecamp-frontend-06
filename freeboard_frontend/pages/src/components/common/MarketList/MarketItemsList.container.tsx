@@ -3,11 +3,13 @@ import { useQuery } from "@apollo/client";
 import {
   IQuery,
   IQueryFetchUseditemsArgs,
+  IUseditem,
 } from "../../../common/types/generated/types";
 import { FETCH_USED_ITEMS } from "../../market/MarketQurey";
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent } from "react";
 import { useRouter } from "next/router";
 import _ from "lodash";
+import { useMoveToPage } from "../../../common/utils/moveToPage";
 
 export default function MarketItemsContainerPage() {
   const router = useRouter();
@@ -15,6 +17,8 @@ export default function MarketItemsContainerPage() {
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS);
+
+  const { onClickMoveToPage } = useMoveToPage();
 
   const loadFunc = () => {
     if (!data) return;
@@ -38,8 +42,18 @@ export default function MarketItemsContainerPage() {
     });
   };
 
-  const onClickMoveDetailPage = (e: MouseEvent<HTMLDivElement>) => {
-    router.push(`/market/${(e.currentTarget as HTMLDivElement).id}`);
+  const onClickMoveDetailPage = (el: IUseditem) => () => {
+    const baskets = JSON.parse(localStorage.getItem("baskets") || "[]");
+    const temp = baskets.filter((basketEl: any) => basketEl._id === el._id);
+    if (temp.length === 1) {
+      router.push(`/market/${el._id}`);
+      return;
+    }
+
+    const { __typename, ...rest } = el;
+    baskets.push(rest);
+    localStorage.setItem("baskets", JSON.stringify(baskets));
+    router.push(`/market/${el._id}`);
   };
 
   const onClickMoveProductNewPage = () => {
@@ -61,6 +75,7 @@ export default function MarketItemsContainerPage() {
       onClickMoveDetailPage={onClickMoveDetailPage}
       onClickMoveProductNewPage={onClickMoveProductNewPage}
       onChangeSearchUseditems={onChangeSearchUseditems}
+      onClickMoveToPage={onClickMoveToPage}
     />
   );
 }

@@ -108,11 +108,12 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
               <s.UploadImg src={`https://storage.googleapis.com/${el}`} />
             </>
           ))}
-          {props.data?.fetchUseditem.images.map((el: any) => (
-            <>
-              <s.UploadImg src={`https://storage.googleapis.com/${el}`} />
-            </>
-          ))}
+          {props.imgUrl.length === 0 &&
+            props.data?.fetchUseditem.images.map((el: any) => (
+              <>
+                <s.UploadImg src={`https://storage.googleapis.com/${el}`} />
+              </>
+            ))}
         </s.Div2>
         <s.Div5>
           <s.Btn3>{props.isEdit ? "수정하기" : "등록하기"}</s.Btn3>

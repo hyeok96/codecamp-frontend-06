@@ -89,26 +89,43 @@ export default function MarketNewContainerpage(
     }
   };
 
-  // const onClickUpdateUseditem = async(data: any) => {
-  //   const { price, addressDetail, ...rest } = data;
-  //   const myVariables: IMutationUpdateUseditemArgs = {
-  //     useditemId: String(router.query.id),
-  //     updateUseditemInput: {}
-  //   }
+  const onClickUpdateUseditem = async (data: any) => {
+    const { price, addressDetail, ...rest } = data;
+    const myVariables: IMutationUpdateUseditemArgs = {
+      useditemId: String(router.query.id),
+      updateUseditemInput: {},
+    };
 
-  //   if(rest.name !== "") myVariables.updateUseditemInput.name = rest.name
-  //   if(rest.remarks !== "") myVariables.updateUseditemInput.remarks = rest.remarks
-  //   if(price !== "") myVariables.updateUseditemInput.price = Number(price)
-  //   if(rest.contents !== "") myVariables.updateUseditemInput.contents = rest.contents
-  //   if(address !== "" || addressDetail !== "") myVariables.updateUseditemInput.useditemAddress = {}
-  //   if(address !== "") myVariables.updateUseditemInput.useditemAddress.address = address
-  //   if(addressDetail !== "") myVariables.updateUseditemInput.useditemAddress.addressDetail = addressDetail
-  //   if()
+    const currentImage = JSON.stringify(imgUrl);
+    const defaultImage = JSON.stringify(props.data?.fetchUseditem.images);
+    const isChangeImage = currentImage !== defaultImage;
 
-  //   const result = await updateUseditem({
-  //     variables:
-  //   })
-  // };
+    if (rest.name !== "") myVariables.updateUseditemInput.name = rest.name;
+    if (rest.remarks !== "")
+      myVariables.updateUseditemInput.remarks = rest.remarks;
+    if (price !== "") myVariables.updateUseditemInput.price = Number(price);
+    if (rest.contents !== "")
+      myVariables.updateUseditemInput.contents = rest.contents;
+    if (address !== "" || addressDetail !== "")
+      myVariables.updateUseditemInput.useditemAddress = {};
+    if (address !== "")
+      myVariables.updateUseditemInput.useditemAddress.address = address;
+    if (addressDetail !== "")
+      myVariables.updateUseditemInput.useditemAddress.addressDetail =
+        addressDetail;
+    if (isChangeImage && imgUrl.length >= 1) {
+      myVariables.updateUseditemInput.images = imgUrl;
+    }
+
+    try {
+      const result = await updateUseditem({
+        variables: myVariables,
+      });
+      router.push(`/market/${router.query.id}`);
+    } catch (error) {
+      Modal.error({ content: error.message });
+    }
+  };
 
   return (
     <MarketPresenterPage
@@ -121,7 +138,7 @@ export default function MarketNewContainerpage(
       onChangeImg={onChangeImg}
       imgUrl={imgUrl}
       address={address}
-      // onClickUpdateUseditem={onClickUpdateUseditem}
+      onClickUpdateUseditem={onClickUpdateUseditem}
     />
   );
 }

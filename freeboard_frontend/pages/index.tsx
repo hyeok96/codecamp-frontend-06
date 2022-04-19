@@ -7,10 +7,10 @@ export default function Home() {
   const router = useRouter();
 
   const meun = [
-    { name: "축구순위", url: "MyApi" },
-    { name: "자유게시판", url: "boards" },
-    { name: "중고마켓", url: "market" },
-    { name: "로그인", url: "login" },
+    { name: "축구순위", url: "/MyApi" },
+    { name: "자유게시판", url: "/boards" },
+    { name: "중고마켓", url: "/market" },
+    { name: "로그인", url: "/login" },
   ];
 
   const onClickMove = (page: string) => {
