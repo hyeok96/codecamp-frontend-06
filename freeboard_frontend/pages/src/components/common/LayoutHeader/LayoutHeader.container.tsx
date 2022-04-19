@@ -8,8 +8,7 @@ import { IQuery, IUser } from "../../../common/types/generated/types";
 export default function HeaderContiner() {
   const [showProfile, setShowProfile] = useState(false);
   const router = useRouter();
-  const { data } =
-    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
+  const { data } = useQuery(FETCH_USER_LOGGED_IN);
   console.log(data);
 
   const onClickMoveHome = () => {

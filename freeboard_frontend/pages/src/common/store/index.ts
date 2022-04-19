@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { IQuery } from "../types/generated/types";
 
 export const ProductInputState = atom({
   key: "ProductInputState",
@@ -25,16 +26,6 @@ export const LoginInputState = atom({
   },
 });
 
-export const LoginErrorState = atom({
-  key: "LoginErrorState",
-  default: {
-    emailerror: "",
-    nameerror: "",
-    passworderror: "",
-    checkpassworderror: "",
-  },
-});
-
 export const ActiveBtnState = atom({
   key: "ActiveBtnState",
   default: false,
@@ -51,5 +42,10 @@ export const SignUpInputState = atom({
 
 export const AccessToken = atom({
   key: "AccessToken",
+  default: "",
+});
+
+export const PrevPageState = atom({
+  key: "PrevPageState",
   default: "",
 });

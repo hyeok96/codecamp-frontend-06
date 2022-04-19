@@ -1,17 +1,24 @@
 import { ChangeEvent } from "react";
+import { IQuery } from "../../../common/types/generated/types";
 
 export interface IMarketNewPresenterProps {
-  onChangeProcutInput?: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  onChangeProductAddress?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeProductTag?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeProductImage?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onClickCreateUseditem?: () => void;
-  onChangeUseditemImage?: (e: ChangeEvent<HTMLInputElement>) => void;
-  activeBtn: boolean;
+  isEdit?: boolean;
+  data?: Pick<IQuery, "fetchUseditem">;
+  isModalVisible?: boolean;
+  showModal?: () => void;
+  handleComplete?: (data: any) => void;
+  onClickCreateUsedItem?: (data: any) => void;
+  onChangeImg?: (e: ChangeEvent<HTMLInputElement>) => void;
+  imgUrl: any;
+  address: string;
+  onClickUpdateUseditem?: (data: any) => void;
 }
 
 export interface IMarketStyleProps {
   activeBtn?: boolean;
+}
+
+export interface IMarketNewContainerProps {
+  data?: Pick<IQuery, "fetchUseditem">;
+  isEdit?: boolean;
 }

@@ -27,8 +27,12 @@ export const FETCH_USED_ITEM = gql`
         name
         picture
       }
-
       images
+      useditemAddress {
+        address
+        addressDetail
+      }
+      remarks
     }
   }
 `;
@@ -68,6 +72,20 @@ export const FETCH_USED_ITEMS = gql`
         _id
         name
       }
+    }
+  }
+`;
+
+export const UPDATE_USED_ITEM = gql`
+  mutation updateUseditem(
+    $updateUseditemInput: UpdateUseditemInput!
+    $useditemId: ID!
+  ) {
+    updateUseditem(
+      updateUseditemInput: $updateUseditemInput
+      useditemId: $useditemId
+    ) {
+      _id
     }
   }
 `;

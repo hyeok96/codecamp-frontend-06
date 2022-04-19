@@ -109,6 +109,9 @@ export const ListBody = styled.div`
   border-top: 1px solid #bdbdbd;
   border-bottom: 1px solid #bdbdbd;
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ListBox = styled.div`

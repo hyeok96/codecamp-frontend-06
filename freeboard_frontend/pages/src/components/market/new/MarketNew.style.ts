@@ -50,8 +50,26 @@ export const InnerDiv2 = styled.div`
 `;
 
 export const UploadDiv = styled.div`
-  width: 78px;
-  height: 78px;
+  width: 180px;
+  height: 180px;
+  background-color: #bdbdbd;
+  color: #4f4f4f;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24px;
+  font-family: "Noto Sans CJK KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+`;
+
+export const UploadImg = styled.img`
+  width: 180px;
+  height: 180px;
   background-color: #bdbdbd;
   color: #4f4f4f;
   display: flex;
@@ -170,4 +188,16 @@ export const ProductText = styled.textarea`
   border: 1px solid #bdbdbd;
   padding-left: 10px;
   padding-top: 14px;
+`;
+
+export const AddressBtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 16px;
+  width: 124px;
+  height: 52px;
+  background: #000000;
+  color: #ffffff;
 `;

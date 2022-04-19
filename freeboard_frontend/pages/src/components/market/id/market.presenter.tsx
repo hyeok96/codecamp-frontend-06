@@ -3,17 +3,28 @@ import { IMarketIdPresenterProps } from "./market.type";
 import { v4 as uuidv4 } from "uuid";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useMoveToPage } from "../../../common/utils/moveToPage";
+import { useRouter } from "next/router";
+import { Tooltip } from "antd";
 
 export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
-  console.log(props.data);
+  const router = useRouter();
+  const { onClickMoveToPage } = useMoveToPage();
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  const text = (
+    <span>
+      {props.data?.fetchUseditem.useditemAddress?.address}
+      {props.data?.fetchUseditem.useditemAddress?.addressDetail}
+    </span>
+  );
+
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  // };
 
   return (
     <>
@@ -34,9 +45,11 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
             <s.HeadIcon>
               <img src="/borad/file.png" />
             </s.HeadIcon>
-            <s.HeadIcon>
-              <img src="/borad/map.png" />
-            </s.HeadIcon>
+            <Tooltip placement="top" title={text}>
+              <s.HeadIcon>
+                <img src="/borad/map.png" />
+              </s.HeadIcon>
+            </Tooltip>
           </s.HeadBox>
         </s.Head>
         <s.Body>
@@ -54,9 +67,7 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
             {/* </s.Slider1> */}
             {props.data?.fetchUseditem.images?.map((el: string) => (
               <s.ImageBox key={el}>
-                <s.Img
-                  src={`https://storage.googleapis.com/${props.data?.fetchUseditem.images[0]}`}
-                />
+                <s.Img src={`https://storage.googleapis.com/${el}`} />
               </s.ImageBox>
             ))}
           </s.BodyImage>
@@ -71,7 +82,12 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
       </s.Wrapper>
       <s.UpdateMain>
         <s.UpdateBox>목록으로</s.UpdateBox>
-        <s.UpdateBox>수정하기</s.UpdateBox>
+        <s.UpdateBox
+          onClick={onClickMoveToPage(`/market/${router.query.id}/edit`)}
+        >
+          수정하기
+        </s.UpdateBox>
+        <s.UpdateBox>삭제하기</s.UpdateBox>
       </s.UpdateMain>
     </>
   );

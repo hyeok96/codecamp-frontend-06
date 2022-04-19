@@ -3,94 +3,79 @@ import MarketPresenterPage from "./MarketNew.Presenter";
 import { useRecoilState } from "recoil";
 import { ActiveBtnState, ProductInputState } from "../../../common/store";
 import { useMutation } from "@apollo/client";
-import { CREATE_USEDITEM, UPLOAD_FILE } from "../MarketQurey/index";
+import {
+  CREATE_USEDITEM,
+  UPDATE_USED_ITEM,
+  UPLOAD_FILE,
+} from "../MarketQurey/index";
 import {
   IMutation,
   IMutationCreateUseditemArgs,
+  IMutationUpdateUseditemArgs,
   IMutationUploadFileArgs,
 } from "../../../common/types/generated/types";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { IMarketNewContainerProps } from "./MarketNew.type";
 
-export default function MarketNewContainerpage() {
+export default function MarketNewContainerpage(
+  props: IMarketNewContainerProps
+) {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
-  const [productInput, setProductInput] = useRecoilState(ProductInputState);
+  // const [productInput, setProductInput] = useRecoilState(ProductInputState);
   const [activeBtn, setActiveBtn] = useState(false);
-
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
-
-  const onChangeProcutInput = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    if (e.target.name === "price") {
-      setProductInput({
-        ...productInput,
-        [e.target.name]: Number(e.target.value),
-      });
-    } else {
-      setProductInput({
-        ...productInput,
-        [e.target.name]: e.target.value,
-      });
-    }
-
-    if (e.target.value !== "" && e.target.name === "name") {
-      setActiveBtn(true);
-    } else if (e.target.value === "" && e.target.name === "name") {
-      setActiveBtn(false);
-    }
-  };
-
-  const onChangeProductAddress = (e: ChangeEvent<HTMLInputElement>) => {
-    setProductInput((prve) => ({
-      ...prve,
-      useditemAddress: {
-        ...prve.useditemAddress,
-        [e.target.name]: e.target.value,
-      },
-    }));
-  };
-
-  const onChangeProductTag = (e: ChangeEvent<HTMLInputElement>) => {
-    setProductInput((prve) => ({
-      ...prve,
-      tags: [...prve.tags, e.target.value],
-    }));
-  };
-
-  const onChangeProductImage = (e: ChangeEvent<HTMLInputElement>) => {
-    setProductInput((prve) => ({
-      ...prve,
-      images: [...prve.images, e.target.value],
-    }));
-  };
+  const [imgUrl, setImgUrl] = useState([]);
+  const [address, setAddress] = useState("");
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs
   >(CREATE_USEDITEM);
 
-  const onClickCreateUseditem = async () => {
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
+
+  const [updateUseditem] = useMutation<
+    Pick<IMutation, "updateUseditem">,
+    IMutationUpdateUseditemArgs
+  >(UPDATE_USED_ITEM);
+
+  const onClickCreateUsedItem = async (data: any) => {
+    const { price, addressDetail, ...rest } = data;
     try {
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
-            ...productInput,
+            price: Number(price),
+            ...rest,
+            images: [...imgUrl],
+            useditemAddress: {
+              address,
+              addressDetail,
+            },
           },
         },
       });
+      setAddress("");
       router.push(`/market/${result.data.createUseditem._id}`);
     } catch (error) {
-      Modal.error({
-        content: error.message,
-      });
+      Modal.error({ content: error.message });
     }
   };
 
-  const onChangeUseditemImage = async (e: ChangeEvent<HTMLInputElement>) => {
+  const showModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const handleComplete = (data: any) => {
+    showModal();
+    setAddress(data.address);
+  };
+
+  const onChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
     try {
@@ -98,24 +83,45 @@ export default function MarketNewContainerpage() {
         variables: { file },
       });
 
-      setProductInput((prev) => ({
-        ...prev,
-        images: [...prev.images, result.data.uploadFile.url],
-      }));
+      setImgUrl((prev) => [...prev, result.data.uploadFile.url]);
     } catch (error) {
       Modal.error({ content: error.message });
     }
   };
 
+  // const onClickUpdateUseditem = async(data: any) => {
+  //   const { price, addressDetail, ...rest } = data;
+  //   const myVariables: IMutationUpdateUseditemArgs = {
+  //     useditemId: String(router.query.id),
+  //     updateUseditemInput: {}
+  //   }
+
+  //   if(rest.name !== "") myVariables.updateUseditemInput.name = rest.name
+  //   if(rest.remarks !== "") myVariables.updateUseditemInput.remarks = rest.remarks
+  //   if(price !== "") myVariables.updateUseditemInput.price = Number(price)
+  //   if(rest.contents !== "") myVariables.updateUseditemInput.contents = rest.contents
+  //   if(address !== "" || addressDetail !== "") myVariables.updateUseditemInput.useditemAddress = {}
+  //   if(address !== "") myVariables.updateUseditemInput.useditemAddress.address = address
+  //   if(addressDetail !== "") myVariables.updateUseditemInput.useditemAddress.addressDetail = addressDetail
+  //   if()
+
+  //   const result = await updateUseditem({
+  //     variables:
+  //   })
+  // };
+
   return (
     <MarketPresenterPage
-      onChangeProcutInput={onChangeProcutInput}
-      onChangeProductAddress={onChangeProductAddress}
-      onChangeProductTag={onChangeProductTag}
-      onChangeProductImage={onChangeProductImage}
-      onClickCreateUseditem={onClickCreateUseditem}
-      onChangeUseditemImage={onChangeUseditemImage}
-      activeBtn={activeBtn}
+      isEdit={props.isEdit}
+      data={props.data}
+      isModalVisible={isModalVisible}
+      showModal={showModal}
+      handleComplete={handleComplete}
+      onClickCreateUsedItem={onClickCreateUsedItem}
+      onChangeImg={onChangeImg}
+      imgUrl={imgUrl}
+      address={address}
+      // onClickUpdateUseditem={onClickUpdateUseditem}
     />
   );
 }

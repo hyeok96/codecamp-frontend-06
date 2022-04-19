@@ -1,7 +1,13 @@
 import { ChangeEvent } from "react";
 
 export interface ISigUpPresenterProps {
-  onChangeSingUpInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  onClickSignUpBtn: () => void;
-  onChangeCheckedPw: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClickSignUpBtn: (data: IHookFormProps) => void;
+  schema: any;
+}
+
+export interface IHookFormProps {
+  email: string;
+  password: string;
+  checkPassword?: string;
+  name: string;
 }

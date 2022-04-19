@@ -21,7 +21,7 @@ export default function ImagePresenterPage(props: IImageProps) {
           <s.Input
             type="file"
             ref={imgRef}
-            onChange={props.onChangeImg}
+            onChange={props.onChangeUseditemImage}
             multiple
           />
           <s.UploadDiv onClick={onClickMoveImg}>
@@ -31,8 +31,7 @@ export default function ImagePresenterPage(props: IImageProps) {
         </s.Div1>
       </s.Div2>
       {props.isEdit &&
-        props.isShowImage &&
-        props.data?.fetchBoard.images.map((el: any) => (
+        props.data?.fetchUseditem.images.map((el: any) => (
           <>
             <s.ImageBox>
               <s.Img
@@ -41,12 +40,9 @@ export default function ImagePresenterPage(props: IImageProps) {
                 id={el}
               />
             </s.ImageBox>
-            <s.DeleteBtn id={el} onClick={props.onClickDeleteImg}>
-              삭제
-            </s.DeleteBtn>
           </>
         ))}
-      {props.imgUrl?.map((el: any) => (
+      {productInput.images?.map((el: string) => (
         <>
           <s.ImageBox>
             <s.Img src={`https://storage.googleapis.com/${el}`} />

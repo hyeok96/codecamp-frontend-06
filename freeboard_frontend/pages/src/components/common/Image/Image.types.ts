@@ -7,6 +7,4 @@ export interface IImageProps {
   data?: any;
   onClickDeleteImg?: (e: MouseEvent<HTMLButtonElement>) => void;
   isShowImage?: boolean;
-  isUseditem?: boolean;
-  onChangeUseditemImage?: (e: ChangeEvent<HTMLInputElement>) => void;
 }

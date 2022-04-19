@@ -28,15 +28,10 @@ export default function LoginContainerPage() {
   };
 
   const onClickBtn = async (data: IHookFormProps) => {
-    setLoginInput((prev) => ({
-      ...prev,
-      ...data,
-    }));
-
     try {
       const result = await loginUser({
         variables: {
-          ...loginInput,
+          ...data,
         },
       });
       console.log(result);
