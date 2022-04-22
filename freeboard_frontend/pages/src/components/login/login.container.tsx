@@ -20,7 +20,7 @@ export default function LoginContainerPage() {
       .string()
       .email("형식을 맞쳐주세요")
       .required("이메일은 필수 입력입니다."),
-    password: yup.string().required("이메일은 필수 입력입니다."),
+    password: yup.string().required("비밀번호은 필수 입력입니다."),
   });
 
   const onClickMoveSignUpPage = () => {

@@ -1,7 +1,5 @@
 import { ChangeEvent, useState } from "react";
 import MarketPresenterPage from "./MarketNew.Presenter";
-import { useRecoilState } from "recoil";
-import { ActiveBtnState, ProductInputState } from "../../../common/store";
 import { useMutation } from "@apollo/client";
 import {
   CREATE_USEDITEM,
@@ -24,7 +22,7 @@ export default function MarketNewContainerpage(
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
   // const [productInput, setProductInput] = useRecoilState(ProductInputState);
-  const [activeBtn, setActiveBtn] = useState(false);
+
   const [imgUrl, setImgUrl] = useState([]);
   const [address, setAddress] = useState("");
 

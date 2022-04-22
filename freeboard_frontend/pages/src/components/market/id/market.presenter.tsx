@@ -18,14 +18,6 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
     </span>
   );
 
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
-
   return (
     <>
       <s.Wrapper>
@@ -56,15 +48,6 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
           <s.BodyTitle>{props.data?.fetchUseditem.name}</s.BodyTitle>
           <s.BodyPrice>{props.data?.fetchUseditem.price}</s.BodyPrice>
           <s.BodyImage>
-            {/* <s.Slider1 {...settings}> */}
-            {/* {props.data?.fetchUseditem.images?.map((el: any) => (
-                <>
-                  <div key={el}>
-                    <s.Img src={`https://storage.googleapis.com/${el}`} />
-                  </div>
-                </>
-              ))} */}
-            {/* </s.Slider1> */}
             {props.data?.fetchUseditem.images?.map((el: string) => (
               <s.ImageBox key={el}>
                 <s.Img src={`https://storage.googleapis.com/${el}`} />
@@ -80,21 +63,37 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
           <s.BodyMap></s.BodyMap>
         </s.Body>
       </s.Wrapper>
-      <s.UpdateMain>
-        <s.UpdateBox onClick={onClickMoveToPage(`/market`)}>
-          목록으로
-        </s.UpdateBox>
-        <s.UpdateBox
-          onClick={onClickMoveToPage(`/market/${router.query.id}/edit`)}
-        >
-          수정하기
-        </s.UpdateBox>
-        <s.UpdateBox
-          onClick={props.onClickDeleteUseditem(props.data?.fetchUseditem._id)}
-        >
-          삭제하기
-        </s.UpdateBox>
-      </s.UpdateMain>
+      {props.data?.fetchUseditem.seller._id ===
+        props.loginData?.fetchUserLoggedIn._id && (
+        <s.UpdateMain>
+          <s.UpdateBox onClick={onClickMoveToPage(`/market`)}>
+            목록으로
+          </s.UpdateBox>
+          <s.UpdateBox
+            onClick={onClickMoveToPage(`/market/${router.query.id}/edit`)}
+          >
+            수정하기
+          </s.UpdateBox>
+          <s.UpdateBox
+            onClick={props.onClickDeleteUseditem(props.data?.fetchUseditem._id)}
+          >
+            삭제하기
+          </s.UpdateBox>
+        </s.UpdateMain>
+      )}
+      {props.data?.fetchUseditem.seller._id !==
+        props.loginData?.fetchUserLoggedIn._id && (
+        <s.UpdateMain>
+          <s.UpdateBox onClick={onClickMoveToPage(`/market`)}>
+            목록으로
+          </s.UpdateBox>
+          <s.UpdateBox
+            onClick={props.onClickBuyUseditem(props.data?.fetchUseditem._id)}
+          >
+            구매하기
+          </s.UpdateBox>
+        </s.UpdateMain>
+      )}
     </>
   );
 }

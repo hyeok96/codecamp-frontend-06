@@ -1,7 +1,11 @@
 import * as s from "./LayoutHeader.styled";
 import { ILayoutHeaderProps } from "./LayoutHeader.types";
+import { useMoveToPage } from "../../../common/utils/moveToPage";
 
 export default function HeaderPresenter(props: ILayoutHeaderProps) {
+  const { onClickMoveToPage } = useMoveToPage();
+  console.log(props.data);
+
   return (
     <s.Wrapper>
       <s.Box>
@@ -28,10 +32,14 @@ export default function HeaderPresenter(props: ILayoutHeaderProps) {
                   <s.TolTipInfoName>
                     {props.data?.fetchUserLoggedIn.name}
                   </s.TolTipInfoName>
-                  <s.TolTipInfoMoney>1000000</s.TolTipInfoMoney>
+                  <s.TolTipInfoMoney>
+                    {props.data?.fetchUserLoggedIn.userPoint.amount}
+                  </s.TolTipInfoMoney>
                 </s.TolTipInfoNameBox>
               </s.TolTipInfo>
-              <s.TolTipCharging>충전하기</s.TolTipCharging>
+              <s.TolTipCharging onClick={onClickMoveToPage("/charging")}>
+                충전하기
+              </s.TolTipCharging>
               <s.TolTipLogout>로그아웃</s.TolTipLogout>
             </s.TolTip>
           )}

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { IBoard } from "../../../src/commons/types/generated/types";
+import DOMPurify from "dompurify";
 
 const MyRow = styled.div`
   display: flex;

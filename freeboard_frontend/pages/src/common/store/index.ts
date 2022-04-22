@@ -1,22 +1,4 @@
 import { atom } from "recoil";
-import { IQuery } from "../types/generated/types";
-
-export const ProductInputState = atom({
-  key: "ProductInputState",
-  default: {
-    name: "",
-    remarks: "",
-    contents: "",
-    price: 0,
-    tags: [],
-    useditemAddress: {
-      zipcode: "",
-      address: "",
-      addressDetail: "",
-    },
-    images: [],
-  },
-});
 
 export const LoginInputState = atom({
   key: "LoginInputState",
@@ -48,4 +30,14 @@ export const AccessToken = atom({
 export const PrevPageState = atom({
   key: "PrevPageState",
   default: "",
+});
+
+export const QuestionState = atom({
+  key: "QuestionState",
+  default: false,
+});
+
+export const RecommendUpdate = atom({
+  key: "RecommendUpdate",
+  default: false,
 });

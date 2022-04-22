@@ -1,10 +1,7 @@
-import ImagePresenterPage from "../../common/UseditemsImg/Image.presenter";
 import * as s from "./MarketNew.style";
 import { Modal } from "antd";
 import { IMarketNewPresenterProps } from "./MarketNew.type";
 import DaumPostcode from "react-daum-postcode";
-import { useRecoilState } from "recoil";
-import { ProductInputState } from "../../../common/store";
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 

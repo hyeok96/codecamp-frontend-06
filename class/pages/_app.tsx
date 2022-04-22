@@ -1,4 +1,5 @@
 import "antd/dist/antd.css";
+import Head from "next/head";
 // import "../styles/globals.css";
 
 import { AppProps } from "next/app";
@@ -25,14 +26,23 @@ export const firebaseApp = initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <RecoilRoot>
-      <ApolloSetting>
-        <Global styles={globalStyles} />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ApolloSetting>
-    </RecoilRoot>
+    <>
+      {/*  자동은 가능하나 별로 안 좋다. 모든 페이지에서 맵을 다운 받아서 비효율적 */}
+      {/* <Head>
+        <script
+          type="text/javascript"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c45b57c60e36a494c3491eb508bb9172"
+        ></script>
+      </Head> */}
+      <RecoilRoot>
+        <ApolloSetting>
+          <Global styles={globalStyles} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ApolloSetting>
+      </RecoilRoot>
+    </>
   );
 }
 

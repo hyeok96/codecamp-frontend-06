@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { FETCH_USER_LOGGED_IN } from "./LayoutHeader.Query";
-import { IQuery, IUser } from "../../../common/types/generated/types";
 
 export default function HeaderContiner() {
   const [showProfile, setShowProfile] = useState(false);

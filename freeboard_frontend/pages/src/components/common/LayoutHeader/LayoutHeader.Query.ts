@@ -5,6 +5,11 @@ export const FETCH_USER_LOGGED_IN = gql`
     fetchUserLoggedIn {
       name
       email
+      _id
+      userPoint {
+        _id
+        amount
+      }
     }
   }
 `;

@@ -1,40 +1,74 @@
 import * as s from "./askList.style";
-import { Rate } from "antd";
+import { IAskListPresenterProps } from "./askList.type";
+import AskRecommendContainerPage from "../askRecommend/askRecommend.container";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import AskUpdateConainerPage from "../askUpdate/askUpdate.conatiner";
+import { useRecoilState } from "recoil";
+import { QuestionState } from "../../../common/store";
 
-export default function AskListPresenterPage() {
+export default function AskListPresenterPage(props: IAskListPresenterProps) {
+  const [isEidt, setIsEidt] = useState(false);
+  // const [count, setCount] = useState([]);
+
+  const onClickShowUpdateComment = () => {
+    setIsEidt(true);
+  };
+
+  const [isShowRecommend, setIsShowRecommend] = useState(false);
+
+  const onClickShowRecommend = () => {
+    setIsShowRecommend(true);
+  };
   return (
-    <s.Comment>
-      <s.CommentFooter>
-        <s.CommentFooterBox>
-          <s.CommentFooterProfileBox>
-            <s.CommentFooterProfile>
-              <img src="/borad/Vector.png" />
-            </s.CommentFooterProfile>
-          </s.CommentFooterProfileBox>
-          <s.CommentFooterMultiBox>
-            <s.CommentFooterNameBox>
-              <s.CommentFooterNameRating>
-                <s.CommentFooterNameRatingName>
-                  노원두
-                </s.CommentFooterNameRatingName>
-                <s.CommentFooterNameRatingBox>
-                  <Rate />
-                </s.CommentFooterNameRatingBox>
-              </s.CommentFooterNameRating>
-              <s.CommentFooterNameUpdate>
-                <s.CommentFooterNameUpdateIcon>
-                  <img src="/borad/update.png" />
-                </s.CommentFooterNameUpdateIcon>
-                <s.CommentFooterNameDeleteIcon>
-                  <img src="/borad/delete.png" />
-                </s.CommentFooterNameDeleteIcon>
-              </s.CommentFooterNameUpdate>
-            </s.CommentFooterNameBox>
-            <s.CommentFooterText>asdasdadadasdasdadasd</s.CommentFooterText>
-            <s.CommentFooterDate>2002.02.20</s.CommentFooterDate>
-          </s.CommentFooterMultiBox>
-        </s.CommentFooterBox>
-      </s.CommentFooter>
-    </s.Comment>
+    <>
+      {!isEidt && (
+        <s.Comment key={props.el?._id}>
+          <s.CommentFooter>
+            <s.CommentFooterBox>
+              <s.CommentFooterProfileBox>
+                <s.CommentFooterProfile>
+                  <img src="/borad/Vector.png" />
+                </s.CommentFooterProfile>
+              </s.CommentFooterProfileBox>
+              <s.CommentFooterMultiBox>
+                <s.CommentFooterNameBox>
+                  <s.CommentFooterNameRating>
+                    <s.CommentFooterNameRatingName>
+                      {props.el?.user.name}
+                    </s.CommentFooterNameRatingName>
+                  </s.CommentFooterNameRating>
+                  <s.CommentFooterNameUpdate>
+                    <s.CommentFooterNameUpdateIcon
+                      onClick={onClickShowRecommend}
+                    >
+                      <img src="/askList/recomment.png" />
+                    </s.CommentFooterNameUpdateIcon>
+                    <s.CommentFooterNameUpdateIcon
+                      onClick={onClickShowUpdateComment}
+                    >
+                      <img src="/borad/update.png" />
+                    </s.CommentFooterNameUpdateIcon>
+                    <s.CommentFooterNameDeleteIcon
+                      onClick={props.onClickDeleteUseditmeQusetion(
+                        props.el?._id
+                      )}
+                    >
+                      <img src="/borad/delete.png" />
+                    </s.CommentFooterNameDeleteIcon>
+                  </s.CommentFooterNameUpdate>
+                </s.CommentFooterNameBox>
+                <s.CommentFooterText>{props.el?.contents}</s.CommentFooterText>
+                <s.CommentFooterDate>
+                  {props.el?.createdAt.slice(0, 10)}
+                </s.CommentFooterDate>
+              </s.CommentFooterMultiBox>
+            </s.CommentFooterBox>
+          </s.CommentFooter>
+        </s.Comment>
+      )}
+      {isEidt && <AskUpdateConainerPage el={props.el} />}
+      {isShowRecommend && <AskRecommendContainerPage el={props.el._id} />}
+    </>
   );
 }
