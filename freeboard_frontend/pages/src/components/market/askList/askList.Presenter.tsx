@@ -4,9 +4,6 @@ import AskRecommendContainerPage from "../askRecommend/askRecommend.container";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import AskUpdateConainerPage from "../askUpdate/askUpdate.conatiner";
-import { useRecoilState } from "recoil";
-import { QuestionState } from "../../../common/store";
-
 export default function AskListPresenterPage(props: IAskListPresenterProps) {
   const [isEidt, setIsEidt] = useState(false);
   // const [count, setCount] = useState([]);
@@ -18,7 +15,7 @@ export default function AskListPresenterPage(props: IAskListPresenterProps) {
   const [isShowRecommend, setIsShowRecommend] = useState(false);
 
   const onClickShowRecommend = () => {
-    setIsShowRecommend(true);
+    setIsShowRecommend(!isShowRecommend);
   };
   return (
     <>
@@ -67,7 +64,7 @@ export default function AskListPresenterPage(props: IAskListPresenterProps) {
           </s.CommentFooter>
         </s.Comment>
       )}
-      {isEidt && <AskUpdateConainerPage el={props.el} />}
+      {isEidt && <AskUpdateConainerPage el={props.el} setIsEidt={setIsEidt} />}
       {isShowRecommend && <AskRecommendContainerPage el={props.el._id} />}
     </>
   );

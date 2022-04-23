@@ -14,4 +14,5 @@ export interface IAskUpdatePresenterPageProps {
 
 export interface IAskUpdateContainerPageProps {
   el: IUseditemQuestion;
+  setIsEidt: any;
 }

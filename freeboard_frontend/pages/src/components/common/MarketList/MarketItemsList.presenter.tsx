@@ -1,6 +1,7 @@
 import * as s from "./MarketItemsList.style";
 import { IMarketItemsListPresenterProps } from "./MarketItemsList.type";
 import InfiniteScroll from "react-infinite-scroller";
+import { imageError } from "../../../common/utils/utils";
 
 export default function MarketItemsListPresenterPage(
   props: IMarketItemsListPresenterProps
@@ -37,6 +38,7 @@ export default function MarketItemsListPresenterPage(
               <s.ListImageBox>
                 <s.ProductImage
                   src={`https://storage.googleapis.com/${el.images?.[0]}`}
+                  onError={imageError}
                 />
               </s.ListImageBox>
               <s.ListInfoBox>

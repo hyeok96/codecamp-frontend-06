@@ -6,3 +6,7 @@ export function getDate(date) {
 
   return `${yyyy}-${mm}-${dd}`;
 }
+
+export const imageError = (e: any) => {
+  e.target.src = "/noimage.jpeg";
+};

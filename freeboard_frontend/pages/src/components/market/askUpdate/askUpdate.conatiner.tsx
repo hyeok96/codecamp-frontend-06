@@ -20,7 +20,6 @@ export default function AskUpdateConainerPage(
   const { register, handleSubmit, setValue } = useForm();
   const router = useRouter();
   const [updateUseditemQuestion] = useMutation(UPDATE_USED_ITEM_QUESTION);
-  const [, setIsEdit] = useRecoilState(QuestionState);
 
   const onSubmitUpdateUseditemQuestion = async (data: IAskWriteFormProps) => {
     const { contents } = data;
@@ -42,11 +41,11 @@ export default function AskUpdateConainerPage(
           },
         ],
       });
-      setIsEdit(false);
+      props.setIsEidt(false);
       alert("댓글이 수정 되었습니다");
     } catch (error) {
       Modal.error({ content: error.message });
-      setIsEdit(false);
+      props.setIsEidt(false);
     }
   };
 

@@ -1,6 +1,7 @@
 import * as s from "./MarketList.style";
 import { HeartFilled } from "@ant-design/icons";
 import { IMarketListPresneterProps } from "./MarketList.type";
+import { imageError } from "../../../common/utils/utils";
 
 export default function MarketListPresenterPage(
   props: IMarketListPresneterProps
@@ -15,6 +16,7 @@ export default function MarketListPresenterPage(
               <s.BoardListBoxProductImage>
                 <s.Image
                   src={`https://storage.googleapis.com/${el.images?.[0]}`}
+                  onError={imageError}
                 />
               </s.BoardListBoxProductImage>
               <s.BoardListBoxProductName>{el.name}</s.BoardListBoxProductName>
