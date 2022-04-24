@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useMoveToPage } from "../../../common/utils/moveToPage";
 import { useRouter } from "next/router";
 import { Tooltip } from "antd";
+import { imageError } from "../../../common/utils/utils";
 
 export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
   const router = useRouter();
@@ -17,6 +18,14 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
       {props.data?.fetchUseditem.useditemAddress?.addressDetail}
     </span>
   );
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   return (
     <>
@@ -47,12 +56,23 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
         <s.Body>
           <s.BodyTitle>{props.data?.fetchUseditem.name}</s.BodyTitle>
           <s.BodyPrice>{props.data?.fetchUseditem.price}</s.BodyPrice>
+
           <s.BodyImage>
-            {props.data?.fetchUseditem.images?.map((el: string) => (
+            {/* {props.data?.fetchUseditem.images?.map((el: string) => (
               <s.ImageBox key={el}>
                 <s.Img src={`https://storage.googleapis.com/${el}`} />
               </s.ImageBox>
-            ))}
+            ))} */}
+            <s.Slider1 {...settings}>
+              {props.data?.fetchUseditem.images?.map((el: string) => (
+                <s.Div key={uuidv4()}>
+                  <s.Img
+                    src={`https://storage.googleapis.com/${el}`}
+                    onError={imageError}
+                  />
+                </s.Div>
+              ))}
+            </s.Slider1>
           </s.BodyImage>
           <s.BodyText>{props.data?.fetchUseditem.contents}</s.BodyText>
           <s.BodyTag>

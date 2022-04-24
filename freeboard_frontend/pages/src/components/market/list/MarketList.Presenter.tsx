@@ -1,5 +1,4 @@
 import * as s from "./MarketList.style";
-import { HeartFilled } from "@ant-design/icons";
 import { IMarketListPresneterProps } from "./MarketList.type";
 import { imageError } from "../../../common/utils/utils";
 

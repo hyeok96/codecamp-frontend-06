@@ -12,6 +12,8 @@ export interface IMarketNewPresenterProps {
   imgUrl: any;
   address: string;
   onClickUpdateUseditem?: (data: any) => void;
+  // latitude: number;
+  // longitude: number;
 }
 
 export interface IMarketStyleProps {

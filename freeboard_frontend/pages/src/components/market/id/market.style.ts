@@ -227,13 +227,18 @@ export const UpdateBox = styled.div`
 `;
 
 export const Slider1 = styled(Slider)`
+  width: 100%;
+  height: 100%;
+`;
+
+export const Div = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  width: 100%;
-  height: 100%;
+  margin: 0 auto;
+  width: 300px;
+  height: 300px;
 `;
 
 export const ImageBox = styled.div`

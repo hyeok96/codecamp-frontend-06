@@ -5,7 +5,7 @@ export default function NavigationPresenter() {
   const router = useRouter();
 
   const onClickMovePage = (page: string) => {
-    router.push(`/${page}`);
+    router.push(`${page}`);
   };
 
   const name = [

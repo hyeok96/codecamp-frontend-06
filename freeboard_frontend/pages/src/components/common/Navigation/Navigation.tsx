@@ -1,6 +1,7 @@
 import { useState, MouseEvent } from "react";
 import * as s from "./Navigation.style";
 import { INavigationPros } from "../../board/list/BoardList.types";
+import { v4 as uuidv4 } from "uuid";
 
 export default function NavigationPage(props: INavigationPros) {
   const [startPage, setStartPage] = useState(1);
@@ -39,15 +40,14 @@ export default function NavigationPage(props: INavigationPros) {
       {new Array(5).fill(1).map(
         (_, index) =>
           index + startPage <= props.lastPage && (
-            <>
-              <s.Span
-                onClick={onClickPage}
-                id={String(index + startPage)}
-                current={Number(current)}
-              >
-                {startPage + index}
-              </s.Span>
-            </>
+            <s.Span
+              onClick={onClickPage}
+              id={String(index + startPage)}
+              current={Number(current)}
+              key={uuidv4()}
+            >
+              {startPage + index}
+            </s.Span>
           )
       )}
 

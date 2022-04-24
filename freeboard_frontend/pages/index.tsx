@@ -2,6 +2,7 @@ import * as s from "./styles";
 import { useRouter } from "next/router";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
   const router = useRouter();
@@ -13,8 +14,8 @@ export default function Home() {
     { name: "로그인", url: "/login" },
   ];
 
-  const onClickMove = (page: string) => {
-    router.push(`/${page}`);
+  const onClickMove = (page: string) => () => {
+    router.push(`${page}`);
   };
 
   const imgRef = useRef(null);
@@ -71,9 +72,9 @@ export default function Home() {
       <s.Div>
         <s.ButtonBox ref={btnRef}>
           {meun.map((el) => (
-            <>
-              <s.Button onClick={() => onClickMove(el.url)}>{el.name}</s.Button>
-            </>
+            <s.Button onClick={onClickMove(el.url)} key={uuidv4()}>
+              {el.name}
+            </s.Button>
           ))}
         </s.ButtonBox>
       </s.Div>

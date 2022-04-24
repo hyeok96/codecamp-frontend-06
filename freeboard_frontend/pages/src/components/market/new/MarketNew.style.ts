@@ -88,7 +88,6 @@ export const UploadImg = styled.img`
 export const MapDiv = styled.div`
   width: 384px;
   height: 252px;
-  background-color: #bdbdbd;
   margin-right: 24px;
 `;
 

@@ -2,6 +2,7 @@ import * as s from "./MarketItemsList.style";
 import { IMarketItemsListPresenterProps } from "./MarketItemsList.type";
 import InfiniteScroll from "react-infinite-scroller";
 import { imageError } from "../../../common/utils/utils";
+import { v4 as uuid4 } from "uuid";
 
 export default function MarketItemsListPresenterPage(
   props: IMarketItemsListPresenterProps
@@ -31,7 +32,7 @@ export default function MarketItemsListPresenterPage(
         >
           {props.data?.fetchUseditems.map((el: any) => (
             <s.ListBox
-              key={el._id}
+              key={uuid4()}
               id={el._id}
               onClick={props.onClickMoveDetailPage(el)}
             >
@@ -47,7 +48,7 @@ export default function MarketItemsListPresenterPage(
                   <s.InfoProductRemakes>{el.remarks}</s.InfoProductRemakes>
                   <s.InfoProductTags>
                     {el.tags?.map((el: string) => (
-                      <span key={el}>{el}</span>
+                      <span key={uuid4()}>{el}</span>
                     ))}
                   </s.InfoProductTags>
                   <s.InfoSellerBox>

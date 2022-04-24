@@ -17,21 +17,19 @@ export default function MyApiPresenterPage(props: IMyApiProps) {
             <s.TeamPoint>승점</s.TeamPoint>
           </s.TemaBox>
           {props.footBall?.standings?.map((el: any, index: number) => (
-            <>
-              <s.TemaBox key={el.team?.id}>
-                <s.TeamRank>{index + 1}</s.TeamRank>
-                <s.TeamNameLogoBox>
-                  <s.TeamLogo>
-                    <s.Img src={el.team?.logos[0]?.href} />
-                  </s.TeamLogo>
-                  <s.TeamName>{el.team?.name}</s.TeamName>
-                </s.TeamNameLogoBox>
-                <s.TeamWine>{el.stats[0]?.value}</s.TeamWine>
-                <s.TeamDraw>{el.stats[1]?.value}</s.TeamDraw>
-                <s.TeamLoss>{el.stats[2]?.value}</s.TeamLoss>
-                <s.TeamPoint>{el.stats[6]?.value}</s.TeamPoint>
-              </s.TemaBox>
-            </>
+            <s.TemaBox key={el.team?.id}>
+              <s.TeamRank>{index + 1}</s.TeamRank>
+              <s.TeamNameLogoBox>
+                <s.TeamLogo>
+                  <s.Img src={el.team?.logos[0]?.href} />
+                </s.TeamLogo>
+                <s.TeamName>{el.team?.name}</s.TeamName>
+              </s.TeamNameLogoBox>
+              <s.TeamWine>{el.stats[0]?.value}</s.TeamWine>
+              <s.TeamDraw>{el.stats[1]?.value}</s.TeamDraw>
+              <s.TeamLoss>{el.stats[2]?.value}</s.TeamLoss>
+              <s.TeamPoint>{el.stats[6]?.value}</s.TeamPoint>
+            </s.TemaBox>
           ))}
         </s.LeageStanding>
       </s.Wrapper>

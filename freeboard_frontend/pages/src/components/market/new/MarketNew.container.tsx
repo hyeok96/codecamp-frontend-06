@@ -21,7 +21,8 @@ export default function MarketNewContainerpage(
 ) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
-  // const [productInput, setProductInput] = useRecoilState(ProductInputState);
+  // const [latitude, setLatitude] = useState(33.450701); // 위도
+  // const [longitude, setLongitude] = useState(126.570667); // 경도
 
   const [imgUrl, setImgUrl] = useState([]);
   const [address, setAddress] = useState("");
@@ -71,6 +72,7 @@ export default function MarketNewContainerpage(
   const handleComplete = (data: any) => {
     showModal();
     setAddress(data.address);
+    console.log(data);
   };
 
   const onChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -124,6 +126,7 @@ export default function MarketNewContainerpage(
       Modal.error({ content: error.message });
     }
   };
+  console.log(address);
 
   return (
     <MarketPresenterPage
@@ -137,6 +140,8 @@ export default function MarketNewContainerpage(
       imgUrl={imgUrl}
       address={address}
       onClickUpdateUseditem={onClickUpdateUseditem}
+      // latitude={latitude}
+      // longitude={longitude}
     />
   );
 }
