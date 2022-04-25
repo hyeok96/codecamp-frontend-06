@@ -5,6 +5,7 @@ import Layout from "./src/components/common/layout";
 import { initializeApp } from "firebase/app";
 import { RecoilRoot } from "recoil";
 import ApolloPage from "./src/common/apollo";
+import Head from "next/head";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCnQufwMKna4tDIG7b7k49Nq2BftnPfpZw",

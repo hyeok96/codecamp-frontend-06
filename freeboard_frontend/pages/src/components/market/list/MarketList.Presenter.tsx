@@ -1,6 +1,7 @@
 import * as s from "./MarketList.style";
 import { IMarketListPresneterProps } from "./MarketList.type";
 import { imageError } from "../../../common/utils/utils";
+import { v4 as uuid4 } from "uuid";
 
 export default function MarketListPresenterPage(
   props: IMarketListPresneterProps
@@ -11,7 +12,7 @@ export default function MarketListPresenterPage(
         <s.BestTilte>베스트 상품</s.BestTilte>
         <s.BestList>
           {props.data?.fetchUseditemsOfTheBest.map((el: any) => (
-            <s.BestListBox key={el._id}>
+            <s.BestListBox key={uuid4()}>
               <s.BoardListBoxProductImage>
                 <s.Image
                   src={`https://storage.googleapis.com/${el.images?.[0]}`}

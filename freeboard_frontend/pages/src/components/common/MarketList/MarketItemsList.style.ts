@@ -268,3 +268,31 @@ export const ProductImage = styled.img`
   width: 160px;
   height: 160px;
 `;
+
+export const SelectBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Selleing = styled.div`
+  /* padding-right: 5px; */
+  width: 83px;
+  height: 27px;
+  font-family: "Noto Sans CJK KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  border-right: 1px solid #0d1c4a;
+`;
+
+export const Selled = styled.div`
+  margin-left: 5px;
+  width: 83px;
+  height: 27px;
+  font-family: "Noto Sans CJK KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+`;
