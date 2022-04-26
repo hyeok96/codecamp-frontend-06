@@ -8,6 +8,7 @@ export const CREATE_USEDITEM = gql`
       remarks
       contents
       price
+      tags
     }
   }
 `;

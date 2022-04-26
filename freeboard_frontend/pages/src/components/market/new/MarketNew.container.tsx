@@ -21,8 +21,6 @@ export default function MarketNewContainerpage(
 ) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
-  // const [latitude, setLatitude] = useState(33.450701); // 위도
-  // const [longitude, setLongitude] = useState(126.570667); // 경도
 
   const [imgUrl, setImgUrl] = useState([]);
   const [address, setAddress] = useState("");
@@ -43,7 +41,11 @@ export default function MarketNewContainerpage(
   >(UPDATE_USED_ITEM);
 
   const onClickCreateUsedItem = async (data: any) => {
-    const { price, addressDetail, ...rest } = data;
+    const { price, addressDetail, tag, ...rest } = data;
+    const tag1 = tag.split("#");
+    const tags = tag1
+      .filter((el: string, index: number) => index !== 0)
+      .map((el: string) => "#" + el);
     try {
       const result = await createUseditem({
         variables: {
@@ -55,11 +57,13 @@ export default function MarketNewContainerpage(
               address,
               addressDetail,
             },
+            tags,
           },
         },
       });
       setAddress("");
       router.push(`/market/${result.data.createUseditem._id}`);
+      console.log(result.data?.createUseditem.tags);
     } catch (error) {
       Modal.error({ content: error.message });
     }

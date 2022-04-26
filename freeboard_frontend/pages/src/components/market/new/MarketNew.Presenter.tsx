@@ -108,7 +108,7 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
         </s.Div2>
         <s.Div2>
           <s.MenuTitle>태그</s.MenuTitle>
-          <s.ProductInput />
+          <s.ProductInput {...register("tag")} />
         </s.Div2>
         <s.Div2>
           <s.MenuTitle>거래위치</s.MenuTitle>

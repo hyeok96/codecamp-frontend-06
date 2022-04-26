@@ -2,11 +2,11 @@ import * as s from "./Image.style";
 import { useRef } from "react";
 import { IImageProps } from "./Image.types";
 import { useRecoilState } from "recoil";
-import { ProductInputState } from "../../../common/store";
+// import { ProductInputState } from "../../../common/store";
 // import { v4 as uuid } from "uuid";
 
 export default function ImagePresenterPage(props: IImageProps) {
-  const [productInput] = useRecoilState(ProductInputState);
+  // const [productInput] = useRecoilState(ProductInputState);
   const imgRef = useRef<HTMLInputElement>(null);
 
   const onClickMoveImg = () => {

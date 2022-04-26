@@ -38,7 +38,7 @@ export default function LoginContainerPage() {
       const loginToken = result.data.loginUser.accessToken;
       console.log(loginToken);
       setAccessToken(loginToken);
-      localStorage.setItem("accessToken", loginToken);
+      // localStorage.setItem("accessToken", loginToken);
 
       router.push("/boards");
     } catch (error) {
