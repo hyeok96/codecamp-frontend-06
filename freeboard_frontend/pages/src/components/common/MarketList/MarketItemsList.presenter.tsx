@@ -24,50 +24,52 @@ export default function MarketItemsListPresenterPage(
         <s.SearchBtn>검색하기</s.SearchBtn>
       </s.Search>
       <s.ListBody>
-        <InfiniteScroll
-          pageStart={0}
-          loadMore={props.loadFunc}
-          hasMore={true}
-          useWindow={false}
-        >
-          {props.data?.fetchUseditems.map((el: any) => (
-            <s.ListBox
-              key={uuid4()}
-              id={el._id}
-              onClick={props.onClickMoveDetailPage(el)}
-            >
-              <s.ListImageBox>
-                <s.ProductImage
-                  src={`https://storage.googleapis.com/${el.images?.[0]}`}
-                  onError={imageError}
-                />
-              </s.ListImageBox>
-              <s.ListInfoBox>
-                <s.ListInfoMainBox>
-                  <s.InfoProductName>{el.name}</s.InfoProductName>
-                  <s.InfoProductRemakes>{el.remarks}</s.InfoProductRemakes>
-                  <s.InfoProductTags>
-                    {el.tags?.map((el: string) => (
-                      <span key={uuid4()}>{el}</span>
-                    ))}
-                  </s.InfoProductTags>
-                  <s.InfoSellerBox>
-                    <s.InfoSellerIcon>
-                      <s.Img src="/Layout/Vector.png" />
-                    </s.InfoSellerIcon>
-                    <s.InfoSellerName>{el.seller?.name}</s.InfoSellerName>
-                    <s.Heart />
-                    <s.PickedCount>{el.pickedCount}</s.PickedCount>
-                  </s.InfoSellerBox>
-                </s.ListInfoMainBox>
-                <s.ListInfoPriceBox>
-                  <s.ListInfoPriceIcon>₩</s.ListInfoPriceIcon>
-                  <s.ListInfoPrice>{el.price}</s.ListInfoPrice>
-                </s.ListInfoPriceBox>
-              </s.ListInfoBox>
-            </s.ListBox>
-          ))}
-        </InfiniteScroll>
+        {props.data && (
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={props.loadFunc}
+            hasMore={true}
+            useWindow={false}
+          >
+            {props.data?.fetchUseditems.map((el: any) => (
+              <s.ListBox
+                key={uuid4()}
+                id={el._id}
+                onClick={props.onClickMoveDetailPage(el)}
+              >
+                <s.ListImageBox>
+                  <s.ProductImage
+                    src={`https://storage.googleapis.com/${el.images?.[0]}`}
+                    onError={imageError}
+                  />
+                </s.ListImageBox>
+                <s.ListInfoBox>
+                  <s.ListInfoMainBox>
+                    <s.InfoProductName>{el.name}</s.InfoProductName>
+                    <s.InfoProductRemakes>{el.remarks}</s.InfoProductRemakes>
+                    <s.InfoProductTags>
+                      {el.tags?.map((el: string) => (
+                        <span key={uuid4()}>{el}</span>
+                      ))}
+                    </s.InfoProductTags>
+                    <s.InfoSellerBox>
+                      <s.InfoSellerIcon>
+                        <s.Img src="/Layout/Vector.png" />
+                      </s.InfoSellerIcon>
+                      <s.InfoSellerName>{el.seller?.name}</s.InfoSellerName>
+                      <s.Heart />
+                      <s.PickedCount>{el.pickedCount}</s.PickedCount>
+                    </s.InfoSellerBox>
+                  </s.ListInfoMainBox>
+                  <s.ListInfoPriceBox>
+                    <s.ListInfoPriceIcon>₩</s.ListInfoPriceIcon>
+                    <s.ListInfoPrice>{el.price}</s.ListInfoPrice>
+                  </s.ListInfoPriceBox>
+                </s.ListInfoBox>
+              </s.ListBox>
+            ))}
+          </InfiniteScroll>
+        )}
       </s.ListBody>
       <s.RegisteBtn onClick={props.onClickMoveProductNewPage}>
         <img src="/list/register.png" />

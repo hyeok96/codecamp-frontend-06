@@ -4,7 +4,6 @@ import { useMoveToPage } from "../../../common/utils/moveToPage";
 
 export default function HeaderPresenter(props: ILayoutHeaderProps) {
   const { onClickMoveToPage } = useMoveToPage();
-  console.log(props.data);
 
   return (
     <s.Wrapper>
@@ -40,7 +39,9 @@ export default function HeaderPresenter(props: ILayoutHeaderProps) {
               <s.TolTipCharging onClick={onClickMoveToPage("/charging")}>
                 충전하기
               </s.TolTipCharging>
-              <s.TolTipLogout>로그아웃</s.TolTipLogout>
+              <s.TolTipLogout onClick={props.onClickLogout}>
+                로그아웃
+              </s.TolTipLogout>
             </s.TolTip>
           )}
         </s.ProfileWrapper>

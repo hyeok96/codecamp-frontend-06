@@ -1,11 +1,13 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { async } from "@firebase/util";
 import { Modal } from "antd";
+import { query } from "firebase/firestore/lite";
 import { useRouter } from "next/router";
 import {
   IMutation,
   IMutationCreatePointTransactionOfBuyingAndSellingArgs,
   IMutationDeleteUseditemArgs,
+  IMutationToggleUseditemPickArgs,
   IQuery,
   IQueryFetchUseditemArgs,
   IUseditem,
@@ -15,6 +17,7 @@ import {
   CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING,
   DELETE_USED_ITEM,
   FETCH_USED_ITEM,
+  TOGGLE_USED_ITEM_PICK,
 } from "../MarketQurey";
 import MarketIdPresenterrPage from "./market.presenter";
 
@@ -41,6 +44,11 @@ export default function MarketIdContainerPage() {
     Pick<IMutation, "deleteUseditem">,
     IMutationDeleteUseditemArgs
   >(DELETE_USED_ITEM);
+
+  const [toggleUseditemPick] = useMutation<
+    Pick<IMutation, "toggleUseditemPick">,
+    IMutationToggleUseditemPickArgs
+  >(TOGGLE_USED_ITEM_PICK);
 
   const onClickDeleteUseditem = (el: string) => async () => {
     try {
@@ -77,6 +85,24 @@ export default function MarketIdContainerPage() {
     }
   };
 
+  const onClcikToogleUseditemPick = async () => {
+    try {
+      await toggleUseditemPick({
+        variables: { useditemId: String(router.query.id) },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM,
+            variables: {
+              useditemId: String(router.query.id),
+            },
+          },
+        ],
+      });
+    } catch (error) {
+      Modal.error({ content: error.message });
+    }
+  };
+
   return (
     <>
       <MarketIdPresenterrPage
@@ -84,6 +110,7 @@ export default function MarketIdContainerPage() {
         onClickDeleteUseditem={onClickDeleteUseditem}
         loginData={loginData}
         onClickBuyUseditem={onClickBuyUseditem}
+        onClcikToogleUseditemPick={onClcikToogleUseditemPick}
       />
     </>
   );

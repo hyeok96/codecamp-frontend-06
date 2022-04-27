@@ -5,4 +5,5 @@ export interface ILayoutHeaderProps {
   data: any;
   showProfile: boolean;
   onClickShowProfile: () => void;
+  onClickLogout: () => void;
 }

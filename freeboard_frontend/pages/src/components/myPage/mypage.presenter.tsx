@@ -1,8 +1,10 @@
 import { useState } from "react";
 import * as s from "./mypage.stlye";
 import { IMyPagePresenterProps } from "./mypage.type";
+import MyProfileCanterPage from "./myProfile/myProfile.container";
 
 export default function MyPagePresenter(props: IMyPagePresenterProps) {
+  console.log(props.isShowProfile);
   return (
     <s.Wrapper>
       <s.ProfileWrapper>
@@ -29,13 +31,14 @@ export default function MyPagePresenter(props: IMyPagePresenterProps) {
           </s.PointIcon>
           <s.Point>내 포인트</s.Point>
         </s.PointBox>
-        <s.ProfieBox>
-          <s.ProIcon onClick={props.onClickShowProfile}>
+        <s.ProfieBox onClick={props.onClickShowProfile}>
+          <s.ProIcon>
             <s.Img2 src="/mypage.png" />
           </s.ProIcon>
           <s.Profie>내 프로필</s.Profie>
         </s.ProfieBox>
       </s.ProfileWrapper>
+      {props.isShowProfile && <MyProfileCanterPage />}
     </s.Wrapper>
   );
 }

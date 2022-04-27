@@ -24,6 +24,7 @@ export default function MarketNewContainerpage(
 
   const [imgUrl, setImgUrl] = useState([]);
   const [address, setAddress] = useState("");
+  const [isChange, setIsChange] = useState(false);
 
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
@@ -63,7 +64,6 @@ export default function MarketNewContainerpage(
       });
       setAddress("");
       router.push(`/market/${result.data.createUseditem._id}`);
-      console.log(result.data?.createUseditem.tags);
     } catch (error) {
       Modal.error({ content: error.message });
     }
@@ -76,7 +76,7 @@ export default function MarketNewContainerpage(
   const handleComplete = (data: any) => {
     showModal();
     setAddress(data.address);
-    console.log(data);
+    setIsChange(true);
   };
 
   const onChangeImg = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -130,7 +130,6 @@ export default function MarketNewContainerpage(
       Modal.error({ content: error.message });
     }
   };
-  console.log(address);
 
   return (
     <MarketPresenterPage
@@ -144,8 +143,7 @@ export default function MarketNewContainerpage(
       imgUrl={imgUrl}
       address={address}
       onClickUpdateUseditem={onClickUpdateUseditem}
-      // latitude={latitude}
-      // longitude={longitude}
+      isChange={isChange}
     />
   );
 }

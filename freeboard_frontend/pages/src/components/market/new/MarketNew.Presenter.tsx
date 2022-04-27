@@ -4,13 +4,31 @@ import { IMarketNewPresenterProps } from "./MarketNew.type";
 import DaumPostcode from "react-daum-postcode";
 import { useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+import { useRecoilState } from "recoil";
+import { FetchAddress } from "../../../common/store";
 
 declare const window: typeof globalThis & {
   kakao: any;
 };
 
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
 export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue, trigger, reset, getValues } =
+    useForm();
+  const [center] = useRecoilState(FetchAddress);
+
+  useEffect(() => {
+    reset({ contents: props.data?.fetchUseditem.contents });
+  }, [props.data]);
+
+  const onChangeContent = (value: string) => {
+    setValue("contents", value === "<p><br><p>" ? "" : value);
+
+    trigger("contents");
+  };
 
   const imgRef = useRef(null);
   const onClickIng = () => {
@@ -27,7 +45,10 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
       window.kakao.maps.load(function () {
         const mapContainer = document.getElementById("map"); // 지도를 표시할 div
         const mapOption = {
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          center: new window.kakao.maps.LatLng(
+            props.isEdit ? center.getLat : 33.450701,
+            props.isEdit ? center.getLng : 126.570667
+          ), // 지도의 중심좌표
           level: 3, // 지도의 확대 레벨
         };
 
@@ -37,10 +58,14 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
         // 주소-좌표 변환 객체를 생성합니다
         const geocoder = new window.kakao.maps.services.Geocoder();
 
+        console.log(props.isChange);
+
         // 주소로 좌표를 검색합니다
         geocoder.addressSearch(
           props.isEdit
-            ? props.data?.fetchUseditem.useditemAddress?.address
+            ? props.isChange
+              ? props.address
+              : props.data?.fetchUseditem.useditemAddress?.address
             : props.address,
           function (result: any, status: any) {
             // 정상적으로 검색이 완료됐으면
@@ -58,7 +83,13 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
 
               // 인포윈도우로 장소에 대한 설명을 표시합니다
               const infowindow = new window.kakao.maps.InfoWindow({
-                content: `<div style="width:150px;text-align:center;padding:6px 0;">${props.address}</div>`,
+                content: `<div style="width:150px;text-align:center;padding:6px 0;">${
+                  props.isEdit
+                    ? props.isChange
+                      ? props.address
+                      : props.data?.fetchUseditem.useditemAddress?.address
+                    : props.address
+                }</div>`,
               });
               infowindow.open(map, marker);
 
@@ -94,9 +125,9 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
         </s.Div2>
         <s.Div2>
           <s.MenuTitle>상품설명</s.MenuTitle>
-          <s.ProductText
-            {...register("contents")}
-            defaultValue={props.data?.fetchUseditem.contents || ""}
+          <ReactQuill
+            onChange={onChangeContent}
+            value={getValues("contents") || ""}
           />
         </s.Div2>
         <s.Div2>

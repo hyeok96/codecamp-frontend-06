@@ -3,4 +3,5 @@ export interface IMarketIdPresenterProps {
   onClickDeleteUseditem: (el: string) => () => void;
   loginData: any;
   onClickBuyUseditem?: (id: string) => () => void;
+  onClcikToogleUseditemPick?: () => void;
 }

@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, Fragment } from "react";
 import * as s from "./Navigation.style";
 import { INavigationPros } from "../../board/list/BoardList.types";
 import { v4 as uuidv4 } from "uuid";
@@ -40,14 +40,16 @@ export default function NavigationPage(props: INavigationPros) {
       {new Array(5).fill(1).map(
         (_, index) =>
           index + startPage <= props.lastPage && (
-            <s.Span
-              onClick={onClickPage}
-              id={String(index + startPage)}
-              current={Number(current)}
-              key={uuidv4()}
-            >
-              {startPage + index}
-            </s.Span>
+            <Fragment key={index + startPage}>
+              <s.Span
+                onClick={onClickPage}
+                id={String(index + startPage)}
+                current={Number(current)}
+                // key={index + startPage}
+              >
+                {startPage + index}
+              </s.Span>
+            </Fragment>
           )
       )}
 

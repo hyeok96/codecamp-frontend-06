@@ -8,12 +8,16 @@ import { useRouter } from "next/router";
 import { Tooltip } from "antd";
 import { imageError } from "../../../common/utils/utils";
 import { useEffect } from "react";
+import DOMPurify from "dompurify";
+import { useRecoilState } from "recoil";
+import { FetchAddress } from "../../../common/store";
 
 declare const window: typeof globalThis & {
   kakao: any;
 };
 
 export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
+  const [center, setCenter] = useRecoilState(FetchAddress);
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -77,6 +81,12 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
 
               // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
               map.setCenter(coords);
+              const center = map.getCenter();
+              setCenter((prev) => ({
+                ...prev,
+                getLat: center.getLat(),
+                getLng: center.getLng(),
+              }));
             }
           }
         );
@@ -111,7 +121,17 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
           </s.HeadBox>
         </s.Head>
         <s.Body>
-          <s.BodyTitle>{props.data?.fetchUseditem.name}</s.BodyTitle>
+          <s.BodyTitle>
+            <s.BodyTitleText>{props.data?.fetchUseditem.name}</s.BodyTitleText>
+            <s.PickBox>
+              <s.PickIcon onClick={props.onClcikToogleUseditemPick}>
+                <img src="/pick.png" />
+              </s.PickIcon>
+              <s.PickNumber>
+                {props.data?.fetchUseditem.pickedCount}
+              </s.PickNumber>
+            </s.PickBox>
+          </s.BodyTitle>
           <s.BodyPrice>{props.data?.fetchUseditem.price}</s.BodyPrice>
           <s.BodyImage>
             <s.Slider1 {...settings}>
@@ -125,7 +145,13 @@ export default function MarketIdPresenterrPage(props: IMarketIdPresenterProps) {
               ))}
             </s.Slider1>
           </s.BodyImage>
-          <s.BodyText>{props.data?.fetchUseditem.contents}</s.BodyText>
+          {typeof window !== "undefined" && (
+            <s.BodyText
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(props.data?.fetchUseditem.contents),
+              }}
+            ></s.BodyText>
+          )}
           <s.BodyTag>
             {props.data?.fetchUseditem.tags.map((el: string) => (
               <s.TagSpan key={uuidv4()}>{el}</s.TagSpan>

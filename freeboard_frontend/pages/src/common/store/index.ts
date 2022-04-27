@@ -41,3 +41,11 @@ export const RecommendUpdate = atom({
   key: "RecommendUpdate",
   default: false,
 });
+
+export const FetchAddress = atom({
+  key: "FetchAddress",
+  default: {
+    getLat: 0,
+    getLng: 0,
+  },
+});

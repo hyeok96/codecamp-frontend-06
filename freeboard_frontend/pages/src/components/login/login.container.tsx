@@ -12,7 +12,6 @@ export default function LoginContainerPage() {
   const router = useRouter();
 
   const [loginUser] = useMutation(LOGIN_USER);
-  const [loginInput, setLoginInput] = useRecoilState(LoginInputState);
   const [, setAccessToken] = useRecoilState(AccessToken);
 
   const schema = yup.object({
@@ -34,12 +33,8 @@ export default function LoginContainerPage() {
           ...data,
         },
       });
-      console.log(result);
-      const loginToken = result.data.loginUser.accessToken;
-      console.log(loginToken);
+      const loginToken = result.data?.loginUser.accessToken;
       setAccessToken(loginToken);
-      // localStorage.setItem("accessToken", loginToken);
-
       router.push("/boards");
     } catch (error) {
       Modal.error({ content: error.message });

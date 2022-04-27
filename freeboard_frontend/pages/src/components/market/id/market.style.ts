@@ -73,11 +73,46 @@ export const Body = styled.div`
 `;
 
 export const BodyTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const BodyTitleText = styled.div`
   font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
   color: #000000;
+`;
+
+export const PickBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PickIcon = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+`;
+
+export const PickNumber = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  font-family: "Noto Sans CJK KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
 `;
 
 export const BodyPrice = styled.div`

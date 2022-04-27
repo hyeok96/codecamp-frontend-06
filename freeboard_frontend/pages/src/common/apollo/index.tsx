@@ -16,10 +16,10 @@ import { getAccessToken } from "../utils/getAccessToken";
 export default function ApolloPage(props: IApolloProps) {
   const [accessToken, setAccessToken] = useRecoilState(AccessToken);
 
-  // useEffect(() => {
-  //   const loginToken = localStorage.getItem("accessToken");
-  //   setAccessToken(loginToken || "");
-  // }, []);
+  useEffect(() => {
+    // const loginToken = localStorage.getItem("accessToken");
+    // setAccessToken(loginToken || "");
+  }, []);
 
   const errorLink = onError(({ graphQLErrors, forward, operation }) => {
     if (graphQLErrors) {

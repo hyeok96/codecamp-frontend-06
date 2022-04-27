@@ -14,6 +14,7 @@ export const ProfileWrapper = styled.div`
   align-items: center;
   padding-right: 75px;
   margin-right: 40px;
+  border-right: 1px solid #f2f2f2;
 `;
 
 export const ProfileTitle = styled.div`
