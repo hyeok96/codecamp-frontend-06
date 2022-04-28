@@ -79,7 +79,7 @@ export default function MarketIdContainerPage() {
         refetchQueries: [{ query: FETCH_USER_LOGGED_IN }],
       });
       alert("정상적으로 구매되었습니다!");
-      console.log(result);
+      router.push("/market");
     } catch (error) {
       Modal.error({ content: error.message });
     }

@@ -13,10 +13,6 @@ export const withAuth = (Component) => (props: any) => {
   console.log(accessToken);
 
   useEffect(() => {
-    // if (!localStorage.getItem("accessToken")) {
-    //   Modal.error({ content: "로그인 후 이용하세요" });
-    //   router.push("/");
-    // }
     async function aaa() {
       if (!accessToken) {
         const newAccessToken = await getAccessToken();

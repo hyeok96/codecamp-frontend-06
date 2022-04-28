@@ -20,6 +20,7 @@ export default function HeaderContiner() {
 
   const onClickLogout = async () => {
     await logoutUser();
+    location.reload();
     router.push("/");
   };
 
