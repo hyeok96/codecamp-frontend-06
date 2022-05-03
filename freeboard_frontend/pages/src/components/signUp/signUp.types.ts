@@ -11,3 +11,7 @@ export interface IHookFormProps {
   checkPassword?: string;
   name: string;
 }
+
+export interface IStyleProps {
+  isActive: boolean;
+}

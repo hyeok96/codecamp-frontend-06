@@ -18,10 +18,10 @@ export const InnerWrraper = styled.div`
 `;
 
 export const Logo = styled.div`
-  margin-bottom: 80px;
+  /* margin-bottom: 80px;
   width: 100%;
   height: 45px;
-  background-color: aqua;
+  background-color: aqua; */
 `;
 
 export const InputBox = styled.div`
@@ -38,7 +38,7 @@ export const Input = styled.input`
   margin-bottom: 20px;
   width: 384px;
   height: 64px;
-  background: rgba(255, 255, 255, 0.05);
+  background: white;
   border: 1px solid #ffffff;
   box-sizing: border-box;
   border-radius: 16px;
@@ -73,6 +73,7 @@ export const LoginBtn = styled.button`
   border-radius: 16px;
   background-color: ${(props: ILoginStyleProps) =>
     props.isActive ? "#0d1c4a" : "none"};
+  color: ${(props: ILoginStyleProps) => (props.isActive ? "white" : "none")};
 `;
 
 export const LoginSubBox = styled.div`

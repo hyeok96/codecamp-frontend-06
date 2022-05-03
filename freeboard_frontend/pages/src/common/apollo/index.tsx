@@ -6,19 +6,23 @@ import {
   NetworkStatus,
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { IApolloProps } from "./apollo.type";
-import { AccessToken } from "../store/index";
+import { AccessToken, restoreAccessTokenLoadable } from "../store/index";
 import { useEffect } from "react";
 import { onError } from "@apollo/client/link/error";
 import { getAccessToken } from "../utils/getAccessToken";
 
 export default function ApolloPage(props: IApolloProps) {
   const [accessToken, setAccessToken] = useRecoilState(AccessToken);
+  const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
   useEffect(() => {
     // const loginToken = localStorage.getItem("accessToken");
     // setAccessToken(loginToken || "");
+    restoreAccessToken.toPromise().then((newAccessToken) => {
+      setAccessToken(newAccessToken);
+    });
   }, []);
 
   const errorLink = onError(({ graphQLErrors, forward, operation }) => {

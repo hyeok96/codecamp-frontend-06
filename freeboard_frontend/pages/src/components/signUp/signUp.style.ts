@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
+import { IStyleProps } from "./signUp.types";
 
 export const Wrapper = styled.div`
   padding-top: 240px;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: #c92a1f;
 `;
 
@@ -63,6 +64,9 @@ export const SingUpBtn = styled.button`
   height: 64px;
   background: #4f4f4f;
   border-radius: 16px;
+  background-color: ${(props: IStyleProps) =>
+    props.isActive ? "#0d1c4a" : "none"};
+  color: ${(props: IStyleProps) => (props.isActive ? "white" : "none")};
 `;
 
 export const SignUpError = styled.div`

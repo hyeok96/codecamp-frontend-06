@@ -55,6 +55,13 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
         // 지도를 생성합니다
         const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
+        const marker = new window.kakao.maps.Marker({
+          // 지도 중심좌표에 마커를 생성합니다
+          position: map.getCenter(),
+        });
+        // 지도에 마커를 표시합니다
+        marker.setMap(map);
+
         // 주소-좌표 변환 객체를 생성합니다
         const geocoder = new window.kakao.maps.services.Geocoder();
 
@@ -62,11 +69,7 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
 
         // 주소로 좌표를 검색합니다
         geocoder.addressSearch(
-          props.isEdit
-            ? props.isChange
-              ? props.address
-              : props.data?.fetchUseditem.useditemAddress?.address
-            : props.address,
+          props.address,
           function (result: any, status: any) {
             // 정상적으로 검색이 완료됐으면
             if (status === window.kakao.maps.services.Status.OK) {
@@ -83,13 +86,7 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
 
               // 인포윈도우로 장소에 대한 설명을 표시합니다
               const infowindow = new window.kakao.maps.InfoWindow({
-                content: `<div style="width:150px;text-align:center;padding:6px 0;">${
-                  props.isEdit
-                    ? props.isChange
-                      ? props.address
-                      : props.data?.fetchUseditem.useditemAddress?.address
-                    : props.address
-                }</div>`,
+                content: `<div style="width:150px;text-align:center;padding:6px 0;">${props.address}</div>`,
               });
               infowindow.open(map, marker);
 

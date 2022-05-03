@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function LoginPresenterPage(props: ILoginPresenterProps) {
   const { register, formState, handleSubmit } = useForm({
     resolver: yupResolver(props.schema),
+    mode: "onChange",
   });
 
   return (
@@ -20,10 +21,6 @@ export default function LoginPresenterPage(props: ILoginPresenterProps) {
               <s.LoginError>{formState.errors.email?.message}</s.LoginError>
               <s.Input type="password" {...register("password")} />
               <s.LoginError>{formState.errors.password?.message}</s.LoginError>
-              <s.LoginState>
-                <s.LoginStateIcon></s.LoginStateIcon>
-                <s.LoginStateText>로그인 상태 유지</s.LoginStateText>
-              </s.LoginState>
               <s.LoginBtn isActive={formState.isValid}>로그인하기</s.LoginBtn>
             </s.InputBox>
             <s.LoginSubBox>

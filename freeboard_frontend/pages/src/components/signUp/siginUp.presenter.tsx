@@ -36,7 +36,7 @@ export default function SignUpPresenterPage(props: ISigUpPresenterProps) {
               {formState.errors.checkedPassword?.message}
             </s.SignUpError>
           </s.InputBox>
-          <s.SingUpBtn>회원가입하기</s.SingUpBtn>
+          <s.SingUpBtn isActive={formState.isValid}>회원가입하기</s.SingUpBtn>
         </s.InnerWrraper>
       </s.Wrapper>
     </form>
