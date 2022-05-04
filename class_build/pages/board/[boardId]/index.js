@@ -23,7 +23,7 @@ export default function BoardDetailPage() {
 
 const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
-    fetchBoard(boardID: $boardId) {
+    fetchBoard(boardId: $boardId) {
       title
       contents
       images
