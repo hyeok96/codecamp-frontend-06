@@ -65,8 +65,6 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
         // 주소-좌표 변환 객체를 생성합니다
         const geocoder = new window.kakao.maps.services.Geocoder();
 
-        console.log(props.isChange);
-
         // 주소로 좌표를 검색합니다
         geocoder.addressSearch(
           props.address,
@@ -125,6 +123,7 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
           <ReactQuill
             onChange={onChangeContent}
             value={getValues("contents") || ""}
+            style={{ height: "500px", marginBottom: "40px" }}
           />
         </s.Div2>
         <s.Div2>

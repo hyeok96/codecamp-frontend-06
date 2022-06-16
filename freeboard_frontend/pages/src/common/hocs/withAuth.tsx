@@ -11,8 +11,6 @@ export const withAuth = (Component) => (props: any) => {
   const [accessToken] = useRecoilState(AccessToken);
   const restoreAcessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
-  console.log(accessToken);
-
   useEffect(() => {
     // async function aaa() {
     //   if (!accessToken) {
@@ -27,8 +25,8 @@ export const withAuth = (Component) => (props: any) => {
     if (!accessToken) {
       restoreAcessToken.toPromise().then((newAccessToken) => {
         if (!newAccessToken) {
-          alert("로그인 후 이용 가능합니다!!!");
           router.push("/login");
+          alert("로그인 후 이용 가능합니다!!!");
         }
       });
     }

@@ -17,13 +17,13 @@ export default function ApolloPage(props: IApolloProps) {
   const [accessToken, setAccessToken] = useRecoilState(AccessToken);
   const restoreAccessToken = useRecoilValueLoadable(restoreAccessTokenLoadable);
 
-  useEffect(() => {
-    // const loginToken = localStorage.getItem("accessToken");
-    // setAccessToken(loginToken || "");
-    restoreAccessToken.toPromise().then((newAccessToken) => {
-      setAccessToken(newAccessToken);
-    });
-  }, []);
+  // useEffect(() => {
+  //   // const loginToken = localStorage.getItem("accessToken");
+  //   // setAccessToken(loginToken || "");
+  //   restoreAccessToken.toPromise().then((newAccessToken) => {
+  //     setAccessToken(newAccessToken);
+  //   });
+  // }, []);
 
   const errorLink = onError(({ graphQLErrors, forward, operation }) => {
     if (graphQLErrors) {
