@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FETCH_USER_LOGGED_IN } from "../LayoutHeader/LayoutHeader.Query";
 import ChargingPresenterPage from "./charging.presenter";
 import Head from "next/head";
@@ -13,7 +13,9 @@ declare const window: typeof globalThis & {
   IMP: any;
 };
 
-export default function ChargingContainerPage() {
+export default function ChargingContainerPage(props: {
+  setModal: Dispatch<SetStateAction<boolean>>;
+}) {
   const [createPointCharging] = useMutation<
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs
@@ -45,13 +47,13 @@ export default function ChargingContainerPage() {
           // 백엔드에 결제 관련 데이터 넘겨주기 뮤테이션 실행하기 createPointTransactionOfLoading 포인트 충전하기
           await createPointCharging({
             variables: {
-              impUid: rsp.imp_uid,
+              impUid: String(rsp.imp_uid),
             },
-            refetchQueries: [
-              {
-                query: FETCH_USER_LOGGED_IN,
-              },
-            ],
+            // refetchQueries: [
+            //   {
+            //     query: FETCH_USER_LOGGED_IN,
+            //   },
+            // ],
           });
           console.log(rsp);
           alert("결제가 성공적으로 완료되었습니다.");
@@ -74,7 +76,10 @@ export default function ChargingContainerPage() {
           src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"
         ></script>
       </Head>
-      <ChargingPresenterPage requestPay={requestPay} />
+      <ChargingPresenterPage
+        requestPay={requestPay}
+        setModal={props.setModal}
+      />
     </>
   );
 }

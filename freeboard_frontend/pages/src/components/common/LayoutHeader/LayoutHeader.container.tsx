@@ -9,6 +9,7 @@ export default function HeaderContiner() {
   const router = useRouter();
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
   const [logoutUser] = useMutation(LOGOUT_USER);
+  const [Modal, setModal] = useState(false);
 
   const onClickMoveHome = () => {
     router.push("/");
@@ -24,6 +25,11 @@ export default function HeaderContiner() {
     router.push("/");
   };
 
+  const onClickModal = () => {
+    setModal(true);
+    // setShowProfile(false);
+  };
+
   return (
     <HeaderPresenter
       onClickMoveHome={onClickMoveHome}
@@ -31,6 +37,9 @@ export default function HeaderContiner() {
       showProfile={showProfile}
       onClickShowProfile={onClickShowProfile}
       onClickLogout={onClickLogout}
+      onClickModal={onClickModal}
+      Modal={Modal}
+      setModal={setModal}
     />
   );
 }

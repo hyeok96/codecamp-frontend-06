@@ -176,9 +176,9 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
             </s.AddressDiv>
           </s.Div3>
         </s.Div2>
-        <s.Div2>
+        <s.Div3>
           <>
-            <s.UploadDiv onClick={onClickIng}></s.UploadDiv>
+            <s.UploadDiv onClick={onClickIng}>+</s.UploadDiv>
             <input
               type="file"
               style={{ display: "none" }}
@@ -198,7 +198,7 @@ export default function MarketPresenterPage(props: IMarketNewPresenterProps) {
                 <s.UploadImg src={`https://storage.googleapis.com/${el}`} />
               </>
             ))}
-        </s.Div2>
+        </s.Div3>
         <s.Div5>
           <s.Btn3>{props.isEdit ? "수정하기" : "등록하기"}</s.Btn3>
         </s.Div5>

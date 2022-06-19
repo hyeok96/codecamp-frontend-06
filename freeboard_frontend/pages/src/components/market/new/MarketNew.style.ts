@@ -62,7 +62,7 @@ export const UploadDiv = styled.div`
   font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 50px;
   line-height: 18px;
   text-align: center;
 `;
@@ -80,7 +80,7 @@ export const UploadImg = styled.img`
   font-family: "Noto Sans CJK KR";
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 24px;
   line-height: 18px;
   text-align: center;
 `;

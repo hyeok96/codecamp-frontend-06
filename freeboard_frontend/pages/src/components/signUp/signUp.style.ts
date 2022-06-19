@@ -4,7 +4,7 @@ import { IStyleProps } from "./signUp.types";
 export const Wrapper = styled.div`
   padding-top: 240px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: #c92a1f;
 `;
 
@@ -46,13 +46,14 @@ export const InputTitle = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  color: white;
 `;
 
 export const Input = styled.input`
   margin-bottom: 20px;
   width: 384px;
   height: 64px;
-  background: rgba(255, 255, 255, 0.05);
+  background: white;
   border: 1px solid #ffffff;
   box-sizing: border-box;
   border-radius: 16px;

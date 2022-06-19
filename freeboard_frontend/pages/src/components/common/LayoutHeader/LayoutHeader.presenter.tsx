@@ -1,10 +1,8 @@
 import * as s from "./LayoutHeader.styled";
 import { ILayoutHeaderProps } from "./LayoutHeader.types";
-import { useMoveToPage } from "../../../common/utils/moveToPage";
+import ChargingContainerPage from "../Charging/charging.container";
 
 export default function HeaderPresenter(props: ILayoutHeaderProps) {
-  const { onClickMoveToPage } = useMoveToPage();
-
   return (
     <s.Wrapper>
       <s.Box>
@@ -26,7 +24,7 @@ export default function HeaderPresenter(props: ILayoutHeaderProps) {
           {props.showProfile && (
             <s.TolTip>
               <s.TolTipInfo>
-                <s.TolTipInfoIcon></s.TolTipInfoIcon>
+                {/* <s.TolTipInfoIcon></s.TolTipInfoIcon> */}
                 <s.TolTipInfoNameBox>
                   <s.TolTipInfoName>
                     {props.data?.fetchUserLoggedIn.name}
@@ -36,9 +34,12 @@ export default function HeaderPresenter(props: ILayoutHeaderProps) {
                   </s.TolTipInfoMoney>
                 </s.TolTipInfoNameBox>
               </s.TolTipInfo>
-              <s.TolTipCharging onClick={onClickMoveToPage("/charging")}>
+              <s.TolTipCharging onClick={props.onClickModal}>
                 충전하기
               </s.TolTipCharging>
+              {props.Modal && (
+                <ChargingContainerPage setModal={props.setModal} />
+              )}
               <s.TolTipLogout onClick={props.onClickLogout}>
                 로그아웃
               </s.TolTipLogout>

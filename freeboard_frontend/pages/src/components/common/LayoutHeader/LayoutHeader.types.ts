@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { IUser } from "../../../common/types/generated/types";
 
 export interface ILayoutHeaderProps {
@@ -6,4 +7,7 @@ export interface ILayoutHeaderProps {
   showProfile: boolean;
   onClickShowProfile: () => void;
   onClickLogout: () => void;
+  onClickModal: () => void;
+  Modal: boolean;
+  setModal: Dispatch<SetStateAction<boolean>>;
 }

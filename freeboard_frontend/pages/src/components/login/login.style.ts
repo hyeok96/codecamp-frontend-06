@@ -31,7 +31,7 @@ export const InputBox = styled.div`
   align-items: center;
   margin-bottom: 30px;
   padding-bottom: 40px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
 `;
 
 export const Input = styled.input`
@@ -70,6 +70,7 @@ export const LoginStateText = styled.div`
 export const LoginBtn = styled.button`
   width: 384px;
   height: 64px;
+  background: #4f4f4f;
   border-radius: 16px;
   background-color: ${(props: ILoginStyleProps) =>
     props.isActive ? "#0d1c4a" : "none"};
@@ -94,6 +95,7 @@ export const LoginSubBtn = styled.div`
   font-size: 14px;
   line-height: 20px;
   text-align: center;
+  color: white;
 `;
 
 export const LoginError = styled.div`
